@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/actionbarheight"
+            android:background="?attr/colorPrimary"
+            android:fitsSystemWindows="false"
+            app:navigationIcon="@drawable/ic_close"
+            android:transitionName="@string/item_toolbar_name"
+            app:titleTextAppearance="@style/Toolbar.TitleText"
+            app:subtitleTextAppearance="@style/Toolbar.SubTitleText"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:theme="@style/Toolbar">
+
+            <!--<TextView-->
+                <!--android:id="@+id/title"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:gravity="center|left"-->
+                <!--android:text="@string/main_devices_"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:textSize="16sp" />-->
+        </android.support.v7.widget.Toolbar>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/bgcolor">
+
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/refreshlayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </android.support.v7.widget.RecyclerView>
+            </android.support.v4.widget.SwipeRefreshLayout>
+        </RelativeLayout>
+    </LinearLayout>
+</layout>

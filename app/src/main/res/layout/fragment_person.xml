@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="user"
+            type="net.suntrans.suntranssmarthome.homepage.personal.UserInfo.User" />
+
+        <variable
+            name="actionHandler"
+            type="net.suntrans.suntranssmarthome.homepage.personal.PersonalContract.Presenter" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/status_bar_fix"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#00000000" />
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/actionbarheight"
+                android:background="?attr/colorPrimary"
+                android:fitsSystemWindows="false"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:theme="@style/Toolbar">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center|left"
+                    android:text="@string/main_mine_"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.AppBarLayout>
+
+        <View style="@style/line_below_navigation_bar" />
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/root"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/bgcolor">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@color/white"
+                android:fitsSystemWindows="true"
+                android:orientation="vertical">
+
+
+                <RelativeLayout
+                    android:id="@id/setting_about_rl"
+                    android:layout_width="fill_parent"
+                    android:layout_height="59.0dip"
+                    android:background="?attr/selectableItemBackground"
+                    android:onClick="@{() -> actionHandler.openUserinfoPage()}">
+
+                    <ImageView
+                        android:id="@id/setting_about_photo"
+                        android:layout_width="48.0dip"
+                        android:layout_height="48.0dip"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="16.0dip"
+                        android:src="@drawable/kw_img_head" />
+
+                    <TextView
+                        android:id="@id/setting_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10.0dip"
+                        android:layout_toRightOf="@id/setting_about_photo"
+                        android:text="@{user.nickname}"
+                        android:textColor="#ff000000"
+                        android:textSize="16.0sp" />
+
+                    <TextView
+                        android:id="@id/setting_email"
+                        style="@style/setting_about_item_text0"
+                        android:layout_below="@id/setting_info"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="8.0dip"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:text="emial地址"
+                        android:textSize="13.0dip"
+                        android:visibility="gone" />
+
+
+                    <ImageView
+                        android:id="@id/setting_person_btn"
+                        style="@style/setting_about_item_right_image"
+                        android:layout_width="42.659973dip"
+                        android:layout_height="42.659973dip"
+                        android:background="@drawable/icon_list_arrow" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <ImageView
+                        style="@style/line_horizontal_middle_gray"
+                        android:layout_marginLeft="13.0dip"
+                        android:layout_marginRight="13.0dip" />
+
+                    <RelativeLayout
+                        android:id="@id/setting_problems_and_suggestions"
+
+                        android:layout_width="fill_parent"
+                        android:layout_height="59.0dip"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:gravity="center_vertical"
+                        android:onClick="@{() -> actionHandler.openSuggestionsPage()}"
+                        android:visibility="visible">
+
+                        <ImageView
+                            android:id="@id/aa1"
+                            android:layout_width="15.299988dip"
+                            android:layout_height="15.299988dip"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="16.0dip"
+                            android:src="@drawable/ic_presonal_list_suggest" />
+
+                        <TextView
+                            style="@style/setting_about_item_text"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10.0dip"
+                            android:layout_toRightOf="@id/aa1"
+                            android:text="@string/problems_and_suggestions" />
+
+                        <ImageView
+                            android:id="@id/setting_about_info_rightImage1"
+                            style="@style/setting_about_item_right_image"
+                            android:layout_width="42.659973dip"
+                            android:layout_height="42.659973dip"
+                            android:background="@drawable/icon_list_arrow"
+                            android:visibility="visible" />
+                    </RelativeLayout>
+
+                    <ImageView
+                        style="@style/line_horizontal_middle_gray"
+                        android:layout_marginLeft="13.0dip"
+                        android:layout_marginRight="13.0dip" />
+
+
+                    <RelativeLayout
+                        android:id="@id/setting_about_device"
+                        android:layout_width="fill_parent"
+
+                        android:layout_height="59.0dip"
+                        android:layout_gravity="center_vertical"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:onClick="@{() -> actionHandler.openUpdatePage()}">
+
+                        <ImageView
+                            android:id="@id/cc"
+                            android:layout_width="15.299988dip"
+                            android:layout_height="15.299988dip"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="16.0dip"
+                            android:src="@drawable/ic_set_checkupdate" />
+
+                        <TextView
+                            android:id="@id/setting_about_item_text"
+                            style="@style/setting_about_item_text"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10.0dip"
+                            android:layout_toRightOf="@id/cc"
+                            android:text="@string/modify_password" />
+
+
+                        <ImageView
+                            android:id="@id/setting_device_btn"
+                            style="@style/setting_about_item_right_image"
+                            android:layout_width="42.659973dip"
+                            android:layout_height="42.659973dip"
+                            android:background="@drawable/icon_list_arrow" />
+                    </RelativeLayout>
+
+                    <ImageView
+                        style="@style/line_horizontal_middle_gray"
+                        android:layout_marginLeft="13.0dip"
+                        android:layout_marginRight="13.0dip" />
+
+                    <RelativeLayout
+                        android:id="@id/setting_about_info"
+                        android:layout_width="fill_parent"
+
+                        android:layout_height="59.0dip"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:gravity="center_vertical"
+                        android:onClick="@{() -> actionHandler.openAboutPage()}"
+                        android:visibility="visible">
+
+                        <ImageView
+                            android:id="@id/aa"
+                            android:layout_width="15.299988dip"
+                            android:layout_height="15.299988dip"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="16.0dip"
+                            android:src="@drawable/icon_setting_about" />
+
+                        <TextView
+                            style="@style/setting_about_item_text"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10.0dip"
+                            android:layout_toRightOf="@id/aa"
+                            android:text="@string/settings_about" />
+
+                        <ImageView
+                            android:id="@id/setting_about_info_rightImage"
+                            style="@style/setting_about_item_right_image"
+                            android:layout_width="42.659973dip"
+                            android:layout_height="42.659973dip"
+                            android:background="@drawable/icon_list_arrow"
+                            android:visibility="visible" />
+                    </RelativeLayout>
+
+                    <ImageView
+                        style="@style/line_horizontal_middle_gray"
+                        android:layout_marginLeft="13.0dip"
+                        android:layout_marginRight="13.0dip" />
+
+                    <RelativeLayout
+                        android:id="@id/rl_faq"
+                        android:layout_width="fill_parent"
+
+                        android:layout_height="59.0dip"
+                        android:background="?attr/selectableItemBackground"
+                        android:gravity="center_vertical"
+                        android:onClick="@{() -> actionHandler.openHelpPage()}"
+                        android:visibility="visible">
+
+                        <ImageView
+                            android:id="@id/bb"
+                            android:layout_width="15.299988dip"
+                            android:layout_height="15.299988dip"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="16.0dip"
+                            android:src="@drawable/icon_setting_about" />
+
+                        <TextView
+                            style="@style/setting_about_item_text"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10.0dip"
+                            android:layout_toRightOf="@id/bb"
+                            android:text="@string/settings_faq" />
+
+                        <ImageView
+                            android:id="@id/setting_faq_info_rightImage"
+                            style="@style/setting_about_item_right_image"
+                            android:layout_width="42.659973dip"
+                            android:layout_height="42.659973dip"
+                            android:background="@drawable/icon_list_arrow"
+                            android:visibility="visible" />
+                    </RelativeLayout>
+
+                    <ImageView
+                        style="@style/line_horizontal_middle_gray"
+                        android:layout_marginLeft="13.0dip"
+                        android:layout_marginRight="13.0dip" />
+
+                    <RelativeLayout
+
+                        android:id="@id/personal_setting_item"
+                        android:layout_width="fill_parent"
+                        android:layout_height="59.0dip"
+                        android:background="?attr/selectableItemBackground"
+                        android:gravity="center_vertical"
+                        android:onClick="@{() -> actionHandler.openSettingPage()}"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:id="@id/personal_setting_item_img"
+                            android:layout_width="15.299988dip"
+                            android:layout_height="15.299988dip"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="16.0dip"
+                            android:src="@drawable/icon_setting_about" />
+
+                        <TextView
+                            style="@style/setting_about_item_text"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10.0dip"
+                            android:layout_toRightOf="@id/personal_setting_item_img"
+                            android:text="@string/settings" />
+
+                        <ImageView
+                            android:id="@id/personal_setting_item_rightImage"
+                            style="@style/setting_about_item_right_image"
+                            android:layout_width="42.659973dip"
+                            android:layout_height="42.659973dip"
+                            android:background="@drawable/icon_list_arrow"
+                            android:visibility="visible" />
+                    </RelativeLayout>
+
+                    <!--<ImageView-->
+                        <!--style="@style/line_horizontal_middle_gray"-->
+                        <!--android:layout_marginLeft="13.0dip"-->
+                        <!--android:layout_marginRight="13.0dip" />-->
+                </LinearLayout>
+
+                <View
+                    android:background="@color/bgcolor"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:onClick="@{() -> actionHandler.onLoginOut()}"
+                    android:text="@string/login_out">
+
+                </Button>
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </LinearLayout>
+</layout>

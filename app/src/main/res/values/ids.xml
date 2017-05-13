@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="main_tabLayout" type="id"/>
+    <item name="my_content_view" type="id"/>
+    <item name="tab_buttom_tx" type="id"/>
+    <item name="viewPager" type="id" />
+    <item name="home_tab_buttom_tx" type="id" />
+    <item name="tv_tab" type="id" />
+    <item name="img_tab" type="id" />
+    <item name="devices_tv_title" type="id" />
+    <item name="setting_about_photo" type="id" />
+    <item name="setting_about_rl" type="id" />
+    <item name="setting_info" type="id" />
+    <item name="setting_email" type="id" />
+    <item name="setting_btn" type="id" />
+    <item name="setting_person_btn" type="id" />
+    <item name="setting_about" type="id" />
+    <item name="setting_problems_and_suggestions" type="id" />
+    <item name="aa1" type="id" />
+    <item name="setting_about_info_rightImage1" type="id" />
+    <item name="setting_about_device" type="id" />
+    <item name="cc" type="id" />
+    <item name="setting_about_item_text" type="id" />
+    <item name="setting_about_device_item_tips" type="id" />
+    <item name="setting_device_btn" type="id" />
+    <item name="setting_about_info" type="id" />
+    <item name="rl_faq" type="id" />
+    <item name="aa" type="id" />
+    <item name="bb" type="id" />
+    <item name="personal_setting_item" type="id" />
+    <item name="personal_setting_item_img" type="id" />
+    <item name="personal_setting_item_rightImage" type="id" />
+    <item name="setting_about_info_rightImage" type="id" />
+    <item name="setting_faq_info_rightImage" type="id" />
+    <item name="base_scene_sll" type="id" />
+    <item name="appbar" type="id" />
+    <item name="collapsing_toolbar" type="id" />
+    <item name="base_scene_head_bg" type="id" />
+    <item name="toolbar" type="id" />
+    <item name="base_iv_scene_back" type="id" />
+    <item name="base_tv_scene_title" type="id" />
+    <item name="base_iv_more_action" type="id" />
+    <item name="scene_ns_view" type="id" />
+    <item name="base_et_" type="id" />
+    <item name="base_et_scene_name" type="id" />
+    <item name="rl_base_device_list" type="id" />
+    <item name="base_view_halving_line_2" type="id" />
+    <item name="rl_base_recommend_device_list" type="id" />
+    <item name="gradient_background" type="id" />
+    <item name="bottom_btn_wraper_1" type="id" />
+    <item name="bt_save_scene" type="id" />
+    <item name="bt_base_scene" type="id" />
+    <item name="bottom_btn_wraper_2" type="id" />
+    <item name="bt_create_scene" type="id" />
+    <item name="tx_pic" type="id" />
+    <item name="mode_name" type="id" />
+    <item name="mode_img" type="id" />
+</resources>

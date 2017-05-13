@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="NewSwitchButton">
+        <attr name="bottomDrawable" format="integer"/>
+        <attr name="thumbDrawable" format="integer"/>
+        <attr name="margin" format="dimension"/>
+        <attr name="checkedColor" format="color"/>
+    </declare-styleable>
+</resources>

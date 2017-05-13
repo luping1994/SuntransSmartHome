@@ -1,0 +1,91 @@
+<resources>
+    <string name="app_name">三川智能家居系统</string>
+
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="account">账号</string>
+    <string name="password">密码</string>
+    <string name="stay_password">记住密码</string>
+    <string name="forgot_password">忘记密码?</string>
+    <string name="login">登录</string>
+    <string name="create_account">注册账户</string>
+    <string name="nav_myhome">我家</string>
+    <string name="nav_device">设备</string>
+    <string name="nav_find">商城</string>
+    <string name="nav_user">我的</string>
+    <string name="main_mine_">我的</string>
+    <string name="problems_and_suggestions">问题与建议</string>
+    <string name="settings_device_updata_manager">升级管理</string>
+    <string name="settings_about">关于</string>
+    <string name="settings_faq">使用帮助</string>
+    <string name="settings">设置</string>
+    <string name="title_suggestion">问题与建议</string>
+    <string name="title_about">关于</string>
+    <string name="title_helpactivity">使用帮助</string>
+    <string name="title_updateactivity">升级管理</string>
+    <string name="title_setting_activity">设置</string>
+    <string name="myhome">我的家</string>
+
+    <string name="tips_empty_account">请输入账号。</string>
+    <string name="tips_empty_password">请输入密码。</string>
+    <string name="tips_login_failed">登录失败,请检查你的网络连接。</string>
+    <string name="main_devices_">设备</string>
+
+    <string name="alert_netconfig">wifi信息发送中,请按下设备复位按钮,配置过程大概需要30s</string>
+    <string name="canshupeizhi">参数配置</string>
+    <string name="commit">提交</string>
+    <string name="net_config">网络相关参数设置</string>
+    <string name="scaning">正在扫描局域网内的设备</string>
+    <string name="noscanresult">没有发现设备</string>
+    <string name="hasscanresult">共发现设备%1$d台</string>
+
+    <string name="tips_check_power">1.设备是否已接通电源</string>
+    <string name="tips_please_check">请检查:</string>
+    <string name="tips_choose_wlan">点击选择WLAN网络</string>
+    <string name="tips_is_network_vailable">2.WLAN网络是否连接</string>
+    <string name="tips_scan_aglin">重新扫描</string>
+    <string name="tips_add_handler">手动添加</string>
+    <string name="tips_reset_devices">3.检查完毕还是无法添加,请尝试重置设备</string>
+
+
+    <string name="st_slc_10">十通道智能继电器负荷控制器</string>
+    <string name="st_slc_6">六通道智能继电器负荷控制器</string>
+    <string name="st_slc_2_3">双路智能三相电源切换器</string>
+    <string name="sensor_des">可燃气体及烟雾浓度监测预警、建筑的震动与姿态监测、TVOC(甲醛)/空气质量监测、人体感应、语音辨别、红外家电、无线远程控制。</string>
+    <string name="st_slc10_des">交流电过零投切、过压/欠压/过流保护、本次/远程测控、信号输入/输出可编程接口、在线APP编程/超低功耗、RS485/WIFI通讯</string>
+    <string name="st_slc6_des">交流电过零投切、过压/欠压/过流保护、本次/远程测控、信号输入/输出可编程接口、在线APP编程/超低功耗、RS485/WIFI通讯</string>
+    <string name="st_slc_2_3_des">交流电过零投切、过压/欠压/过流保护、本次/远程测控、信号输入/输出可编程接口、在线APP编程/超低功耗、RS485/WIFI通讯</string>
+    <string name="six_sensor">第六感官</string>
+    <string name="sub_title_haven_device">已有设备</string>
+
+    <string name="text_hint_add">为这个模式取个名字吧！</string>
+    <string name="model_button_create">创建</string>
+    <string name="setting">设置</string>
+    <string name="item_toolbar_name">item_toolbar_transitionname</string>
+    <string name="modify_password">修改密码</string>
+    <string name="camera">拍照</string>
+    <string name="error_gif">长宽不小于 %1$dpx，且大小不超过 %2$sM。</string>
+    <string name="choose_model_pic">点击上传一张图片</string>
+    <string name="tips_no_room">您还有没添加房间~点击右上角添加房间吧</string>
+    <string name="tips_no_model">您还有没添加模式~点击右上角添加模式吧</string>
+    <string name="tips_no_best">您还有没添加常用设备~点击右上角添加吧</string>
+    <string name="text_more">更多</string>
+    <string name="item_header_best">常用</string>
+    <string name="edit_mode_button_save">保存</string>
+    <string name="edit_mode_button_execute">执行</string>
+    <string name="tips_request_failed">请求失败,请稍后再试</string>
+    <string name="title_modify_channelname">修改通道名称</string>
+    <string name="queding">确定</string>
+    <string name="qvxiao">取消</string>
+    <string name="tips_warning_network_not_avariable">当前网络不可用,请检查你的网络设置</string>
+    <string name="tips_upload_failed">图片上传失败!</string>
+    <string name="tips_name_empty">请输入名称</string>
+    <string name="dialog_tips_creating">正在创建...</string>
+    <string name="title_add_room">房间添加</string>
+    <string name="title_add_sence">场景添加</string>
+    <string name="tips_uploading">正在上传图片,请稍后...</string>
+    <string name="login_out">注销</string>
+    <string name="delete_room">删除房间</string>
+    <string name="delete_scene">删除</string>
+    <string name="tips_hit_again">再按一次退出</string>
+</resources>

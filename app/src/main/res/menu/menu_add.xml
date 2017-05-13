@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        app:showAsAction="always"
+        android:id="@+id/sense"
+        android:title="添加场景" />
+    <item
+        android:id="@+id/room"
+        android:title="添加房间"
+        app:showAsAction="always" />
+
+</menu>

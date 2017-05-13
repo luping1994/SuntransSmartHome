@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="info"
+            type="net.suntrans.suntranssmarthome.homepage.device.sensus.SensusResult.Sensus" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/actionbarheight"
+
+            android:background="?attr/colorPrimary"
+            android:fitsSystemWindows="false"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:theme="@style/Toolbar">
+
+            <TextView
+                android:transitionName="@string/item_toolbar_name"
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center|left"
+                android:text="@string/main_devices_"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+        </android.support.v7.widget.Toolbar>
+
+
+        <net.suntrans.suntranssmarthome.widget.ScrollChildSwipeRefreshLayout
+           android:id="@+id/refreshlayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.v4.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/bgcolor">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="40dp"
+                        android:background="@color/white"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dip"
+                            android:layout_height="24dip"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="15dip"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_launcher" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="45dip"
+                            android:layout_marginLeft="10dip"
+                            android:gravity="center|left"
+                            android:text="最后更新时间"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="0dip"
+                            android:layout_height="fill_parent"
+                            android:layout_marginRight="15dip"
+                            android:layout_weight="1"
+                            android:gravity="center|right"
+                            android:maxLines="1"
+                            android:text="@{info.created_at}"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        style="@style/line_horizontal_middle_gray"
+                        android:layout_marginLeft="13.0dip"
+                        android:layout_marginRight="13.0dip" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="40dp"
+                        android:background="@color/white"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dip"
+                            android:layout_height="24dip"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="15dip"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_launcher" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="45dip"
+                            android:layout_marginLeft="10dip"
+                            android:gravity="center|left"
+                            android:text="PM1"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="0dip"
+                            android:layout_height="fill_parent"
+                            android:layout_marginRight="15dip"
+                            android:layout_weight="1"
+                            android:gravity="center|right"
+                            android:maxLines="1"
+                            android:text="@{info.pm1}"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        style="@style/line_horizontal_middle_gray"
+                        android:layout_marginLeft="13.0dip"
+                        android:layout_marginRight="13.0dip" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@color/white"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dip"
+                            android:layout_height="24dip"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="15dip"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_launcher" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="45dip"
+                            android:layout_marginLeft="10dip"
+                            android:gravity="center|left"
+                            android:text="PM10"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="0dip"
+                            android:layout_height="fill_parent"
+                            android:layout_marginRight="15dip"
+                            android:layout_weight="1"
+                            android:gravity="center|right"
+                            android:maxLines="1"
+                            android:text="@{info.pm10}"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        style="@style/line_horizontal_middle_gray"
+                        android:layout_marginLeft="13.0dip"
+                        android:layout_marginRight="13.0dip" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@color/white"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dip"
+                            android:layout_height="24dip"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="15dip"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_launcher" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="45dip"
+                            android:layout_marginLeft="10dip"
+                            android:gravity="center|left"
+                            android:text="PM25"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="0dip"
+                            android:layout_height="fill_parent"
+                            android:layout_marginRight="15dip"
+                            android:layout_weight="1"
+                            android:gravity="center|right"
+                            android:maxLines="1"
+                            android:text="@{info.pm25}"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        style="@style/line_horizontal_middle_gray"
+                        android:layout_marginLeft="13.0dip"
+                        android:layout_marginRight="13.0dip" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="40dp"
+                        android:background="@color/white"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dip"
+                            android:layout_height="24dip"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="15dip"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_launcher" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="45dip"
+                            android:layout_marginLeft="10dip"
+                            android:gravity="center|left"
+                            android:text="甲醛"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="0dip"
+                            android:layout_height="fill_parent"
+                            android:layout_marginRight="15dip"
+                            android:layout_weight="1"
+                            android:gravity="center|right"
+                            android:maxLines="1"
+                            android:text="@{info.jiaquan}"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        style="@style/line_horizontal_middle_gray"
+                        android:layout_marginLeft="13.0dip"
+                        android:layout_marginRight="13.0dip" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@color/white"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dip"
+                            android:layout_height="24dip"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="15dip"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_launcher" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="45dip"
+                            android:layout_marginLeft="10dip"
+                            android:gravity="center|left"
+                            android:text="烟雾"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="0dip"
+                            android:layout_height="fill_parent"
+                            android:layout_marginRight="15dip"
+                            android:layout_weight="1"
+                            android:gravity="center|right"
+                            android:maxLines="1"
+                            android:text="@{info.yanwu}"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        style="@style/line_horizontal_middle_gray"
+                        android:layout_marginLeft="13.0dip"
+                        android:layout_marginRight="13.0dip" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@color/white"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dip"
+                            android:layout_height="24dip"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="15dip"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_launcher" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="45dip"
+                            android:layout_marginLeft="10dip"
+                            android:gravity="center|left"
+                            android:text="温度"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="0dip"
+                            android:layout_height="fill_parent"
+                            android:layout_marginRight="15dip"
+                            android:layout_weight="1"
+                            android:gravity="center|right"
+                            android:maxLines="1"
+                            android:text='@{info.wendu}'
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        style="@style/line_horizontal_middle_gray"
+                        android:layout_marginLeft="13.0dip"
+                        android:layout_marginRight="13.0dip" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@color/white"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dip"
+                            android:layout_height="24dip"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="15dip"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_launcher" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="45dip"
+                            android:layout_marginLeft="10dip"
+                            android:gravity="center|left"
+                            android:text="湿度"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="0dip"
+                            android:layout_height="fill_parent"
+                            android:layout_marginRight="15dip"
+                            android:layout_weight="1"
+                            android:gravity="center|right"
+                            android:maxLines="1"
+                            android:text='@{info.shidu}'
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        style="@style/line_horizontal_middle_gray"
+                        android:layout_marginLeft="13.0dip"
+                        android:layout_marginRight="13.0dip" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@color/white"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dip"
+                            android:layout_height="24dip"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="15dip"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_launcher" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="45dip"
+                            android:layout_marginLeft="10dip"
+                            android:gravity="center|left"
+                            android:text="人员"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="0dip"
+                            android:layout_height="fill_parent"
+                            android:layout_marginRight="15dip"
+                            android:layout_weight="1"
+                            android:gravity="center|right"
+                            android:maxLines="1"
+                            android:text='@{info.renyuan}'
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        style="@style/line_horizontal_middle_gray"
+                        android:layout_marginLeft="13.0dip"
+                        android:layout_marginRight="13.0dip" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="40dp"
+                        android:background="@color/white"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dip"
+                            android:layout_height="24dip"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="15dip"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_launcher" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="45dip"
+                            android:layout_marginLeft="10dip"
+                            android:gravity="center|left"
+                            android:text="X轴倾斜角"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="0dip"
+                            android:layout_height="fill_parent"
+                            android:layout_marginRight="15dip"
+                            android:layout_weight="1"
+                            android:gravity="center|right"
+                            android:maxLines="1"
+                            android:text="@{info.x_zhou}"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        style="@style/line_horizontal_middle_gray"
+                        android:layout_marginLeft="13.0dip"
+                        android:layout_marginRight="13.0dip" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@color/white"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dip"
+                            android:layout_height="24dip"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="15dip"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_launcher" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="45dip"
+                            android:layout_marginLeft="10dip"
+                            android:gravity="center|left"
+                            android:text="Y轴倾斜角"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="0dip"
+                            android:layout_height="fill_parent"
+                            android:layout_marginRight="15dip"
+                            android:layout_weight="1"
+                            android:gravity="center|right"
+                            android:maxLines="1"
+                            android:text="@{info.y_zhou}"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        style="@style/line_horizontal_middle_gray"
+                        android:layout_marginLeft="13.0dip"
+                        android:layout_marginRight="13.0dip" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@color/white"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dip"
+                            android:layout_height="24dip"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="15dip"
+                            android:scaleType="fitCenter"
+                            android:src="@mipmap/ic_launcher" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="45dip"
+                            android:layout_marginLeft="10dip"
+                            android:gravity="center|left"
+                            android:text="Z轴倾斜角"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="0dip"
+                            android:layout_height="fill_parent"
+                            android:layout_marginRight="15dip"
+                            android:layout_weight="1"
+                            android:gravity="center|right"
+                            android:maxLines="1"
+                            android:text="@{info.z_zhou}"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        style="@style/line_horizontal_middle_gray"
+                        android:layout_marginLeft="13.0dip"
+                        android:layout_marginRight="13.0dip" />
+                </LinearLayout>
+            </android.support.v4.widget.NestedScrollView>
+        </net.suntrans.suntranssmarthome.widget.ScrollChildSwipeRefreshLayout>
+    </LinearLayout>
+</layout>
