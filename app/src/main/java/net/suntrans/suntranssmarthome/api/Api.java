@@ -1,9 +1,6 @@
 package net.suntrans.suntranssmarthome.api;
 
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.FormUrlEncoded;
 
 import retrofit2.http.Field;
@@ -18,8 +15,8 @@ import rx.Observable;
 import net.suntrans.suntranssmarthome.homepage.device.DeviceInfoResult;
 import net.suntrans.suntranssmarthome.homepage.device.switchs.ChannelResult;
 import net.suntrans.suntranssmarthome.homepage.device.sensus.SensusResult;
-import net.suntrans.suntranssmarthome.homepage.myhome.HomeRoomResult;
-import net.suntrans.suntranssmarthome.homepage.myhome.HomeSceneResult;
+import net.suntrans.suntranssmarthome.homepage.myhome.bean.HomeRoomResult;
+import net.suntrans.suntranssmarthome.homepage.myhome.bean.HomeSceneResult;
 import net.suntrans.suntranssmarthome.homepage.myhome.add.CreateModelResult;
 import net.suntrans.suntranssmarthome.homepage.myhome.add.UpLoadImageMessage;
 import net.suntrans.suntranssmarthome.homepage.personal.UserInfo;
@@ -99,6 +96,7 @@ public interface Api {
     Observable<CreateModelResult> updateScene(@Field("name") String name,@Field("scene_id") String scene_id,
                                            @Field("img_id") String img_id);
 
+
     @FormUrlEncoded
     @POST("house/update")
     Observable<CreateModelResult> updateRoom(@Field("name") String name, @Field("house_id") String scene_id,
@@ -115,4 +113,10 @@ public interface Api {
     @FormUrlEncoded
     @POST("scene/delete")
     Observable<CreateModelResult> deleteScene(@Field("house_id") String id);
+
+    @FormUrlEncoded
+    @POST("user/editpassword")
+    Observable<CreateModelResult> modifyPass(@Field("oldpassword ") String oldpassword,
+                                             @Field("newpassword ") String newpassword,
+                                             @Field("repassword  ") String repassword );
 }

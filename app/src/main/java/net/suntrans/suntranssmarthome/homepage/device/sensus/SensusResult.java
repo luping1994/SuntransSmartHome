@@ -2,6 +2,8 @@ package net.suntrans.suntranssmarthome.homepage.device.sensus;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * Created by Looney on 2017/4/24.
@@ -15,7 +17,7 @@ public class SensusResult {
         public Sensus row;
     }
 
-    public static class Sensus extends BaseObservable {
+    public static class Sensus extends BaseObservable implements Parcelable {
         private String id;
         @Bindable
         private String created_at;
@@ -199,5 +201,66 @@ public class SensusResult {
         public void setDaqiya(String daqiya) {
             this.daqiya = daqiya;
         }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(this.id);
+            dest.writeString(this.created_at);
+            dest.writeString(this.dev_id);
+            dest.writeString(this.pm1);
+            dest.writeString(this.pm10);
+            dest.writeString(this.pm25);
+            dest.writeString(this.jiaquan);
+            dest.writeString(this.yanwu);
+            dest.writeString(this.wendu);
+            dest.writeString(this.shidu);
+            dest.writeString(this.renyuan);
+            dest.writeString(this.x_zhou);
+            dest.writeString(this.y_zhou);
+            dest.writeString(this.z_zhou);
+            dest.writeString(this.zhendong);
+            dest.writeString(this.guangzhao);
+            dest.writeString(this.daqiya);
+        }
+
+        public Sensus() {
+        }
+
+        protected Sensus(Parcel in) {
+            this.id = in.readString();
+            this.created_at = in.readString();
+            this.dev_id = in.readString();
+            this.pm1 = in.readString();
+            this.pm10 = in.readString();
+            this.pm25 = in.readString();
+            this.jiaquan = in.readString();
+            this.yanwu = in.readString();
+            this.wendu = in.readString();
+            this.shidu = in.readString();
+            this.renyuan = in.readString();
+            this.x_zhou = in.readString();
+            this.y_zhou = in.readString();
+            this.z_zhou = in.readString();
+            this.zhendong = in.readString();
+            this.guangzhao = in.readString();
+            this.daqiya = in.readString();
+        }
+
+        public static final Parcelable.Creator<Sensus> CREATOR = new Parcelable.Creator<Sensus>() {
+            @Override
+            public Sensus createFromParcel(Parcel source) {
+                return new Sensus(source);
+            }
+
+            @Override
+            public Sensus[] newArray(int size) {
+                return new Sensus[size];
+            }
+        };
     }
 }

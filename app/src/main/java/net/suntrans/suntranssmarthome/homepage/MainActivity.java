@@ -3,12 +3,17 @@ package net.suntrans.suntranssmarthome.homepage;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.PopupMenuCompat;
+import android.support.v7.widget.PopupMenu;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +24,7 @@ import android.widget.TextView;
 import net.suntrans.suntranssmarthome.R;
 import net.suntrans.suntranssmarthome.base.BasedActivity;
 import net.suntrans.suntranssmarthome.homepage.device.DevicesFragment;
+import net.suntrans.suntranssmarthome.homepage.devicemain.DeviceMainFragment;
 import net.suntrans.suntranssmarthome.homepage.myhome.MyHomeFragment;
 import net.suntrans.suntranssmarthome.homepage.myhome.MyHomeFragment2;
 import net.suntrans.suntranssmarthome.homepage.personal.PersonalFragment;
@@ -87,7 +93,7 @@ public class MainActivity extends BasedActivity {
         fragment = PersonalFragment.newInstance();
         new PersonalPresenter(fragment, this);
         MyHomeFragment2 myHomeFragment= MyHomeFragment2.newInstance();
-        DevicesFragment devicesFragment = DevicesFragment.newInstance();
+        DeviceMainFragment devicesFragment = DeviceMainFragment.newInstance();
         ShopFragment shopFragment = ShopFragment.newInstance();
         fragments = new Fragment[]{
                 myHomeFragment, devicesFragment,shopFragment,fragment
@@ -179,5 +185,9 @@ public class MainActivity extends BasedActivity {
 
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    public static void main(String[] args){
+
     }
 }

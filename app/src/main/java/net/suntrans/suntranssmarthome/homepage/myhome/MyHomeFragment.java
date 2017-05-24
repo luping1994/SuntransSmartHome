@@ -24,6 +24,8 @@ import net.suntrans.suntranssmarthome.api.RetrofitHelper;
 import net.suntrans.suntranssmarthome.databinding.FragmentMyhomeBinding;
 import net.suntrans.suntranssmarthome.homepage.device.sensus.SensusResult;
 import net.suntrans.suntranssmarthome.homepage.myhome.add.AddModelActivity;
+import net.suntrans.suntranssmarthome.homepage.myhome.bean.HomeRoomResult;
+import net.suntrans.suntranssmarthome.homepage.myhome.bean.HomeSceneResult;
 import net.suntrans.suntranssmarthome.homepage.myhome.detail.RoomDetailActivity;
 import net.suntrans.suntranssmarthome.homepage.myhome.edit.EditSenceActivity;
 import net.suntrans.suntranssmarthome.utils.LogUtil;

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<net.suntrans.suntranssmarthome.widget.MyRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="64dp"
+    android:background="@drawable/item_selector"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:transitionName="@string/item_toolbar_name"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin">
+
+
+        <ImageView
+            android:background="#38ac69"
+            android:src="@drawable/icon_light"
+            android:layout_centerVertical="true"
+            android:id="@+id/imageView"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:scaleType="fitXY" />
+
+        <LinearLayout
+            android:layout_toRightOf="@+id/imageView"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="插座"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/area"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="厨房"
+                android:textColor="@color/scan_sencond_text_color"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <android.support.v7.widget.AppCompatCheckBox
+            style="@style/CustomCheckBoxTheme_2"
+            android:id="@+id/checkbox"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </net.suntrans.suntranssmarthome.widget.MyRelativeLayout>

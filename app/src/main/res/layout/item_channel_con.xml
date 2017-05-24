@@ -19,17 +19,46 @@
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:layout_width="match_parent"
-            android:layout_height="45dp">
+            android:layout_height="64dp">
 
-            <TextView
-                android:layout_marginRight="50dp"
+            <ImageView
+                android:background="#94c9d6"
+                android:src="@drawable/icon_light"
+                android:layout_centerVertical="true"
+                android:id="@+id/imageView"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:scaleType="fitXY" />
+
+            <LinearLayout
                 android:background="?attr/selectableItemBackground"
-                android:id="@+id/channelName"
+                android:id="@+id/root"
+                android:layout_toRightOf="@+id/imageView"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_centerVertical="true"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center|left"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/channelName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text=""
+                    android:textColor="@color/scan_sencond_text_color"
+                    android:textSize="14sp" />
+            </LinearLayout>
 
             <net.suntrans.suntranssmarthome.widget.SwitchButton
                 app:kswThumbDrawable="@drawable/switch_top_circle"

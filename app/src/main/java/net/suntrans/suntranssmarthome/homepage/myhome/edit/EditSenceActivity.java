@@ -53,7 +53,7 @@ public class EditSenceActivity extends BasedActivity implements View.OnClickList
 
         delete.setOnClickListener(this);
         findViewById(R.id.ll).setOnClickListener(this);
-        findViewById(R.id.dingshi).setOnClickListener(this);
+        findViewById(R.id.liandong).setOnClickListener(this);
         findViewById(R.id.shebei).setOnClickListener(this);
         findViewById(R.id.rizhi).setOnClickListener(this);
 
@@ -90,6 +90,16 @@ public class EditSenceActivity extends BasedActivity implements View.OnClickList
                             delete(id);
                         }
                     }).create().show();
+        }
+        if (v.getId() == R.id.shebei){
+            Intent intent = new Intent();
+            intent.setClass(this, SenceDevGroupActivity.class);
+            startActivity(intent);
+        }
+        if (v.getId() == R.id.liandong){
+            Intent intent = new Intent();
+            intent.setClass(this, LinkageGroupActivity.class);
+            startActivity(intent);
         }
     }
 

@@ -22,8 +22,8 @@ import com.trello.rxlifecycle.components.support.RxFragment;
 
 import net.suntrans.suntranssmarthome.R;
 import net.suntrans.suntranssmarthome.api.RetrofitHelper;
+import net.suntrans.suntranssmarthome.homepage.myhome.bean.HomeSceneResult;
 import net.suntrans.suntranssmarthome.homepage.myhome.detail.SenceDetailActivity;
-import net.suntrans.suntranssmarthome.homepage.myhome.edit.EditRoomActivity;
 import net.suntrans.suntranssmarthome.homepage.myhome.edit.EditSenceActivity;
 
 import java.util.ArrayList;

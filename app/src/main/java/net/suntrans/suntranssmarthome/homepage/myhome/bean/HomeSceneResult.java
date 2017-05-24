@@ -1,4 +1,4 @@
-package net.suntrans.suntranssmarthome.homepage.myhome;
+package net.suntrans.suntranssmarthome.homepage.myhome.bean;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;

@@ -7,21 +7,7 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/actionbarheight"
-            android:background="?attr/colorPrimary"
-            app:navigationIcon="@drawable/back_selector_new"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-        </android.support.v7.widget.Toolbar>
-    </android.support.design.widget.AppBarLayout>
+    <include layout="@layout/toolbar" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,10 +32,10 @@
                 android:src="@drawable/icon_bubb" />
 
             <TextView
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:layout_toRightOf="@+id/touxiang"
                 android:gravity="center"
@@ -68,7 +54,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/dingshi"
+            android:id="@+id/liandong"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
@@ -90,7 +76,7 @@
                 android:layout_marginTop="1px"
                 android:layout_toRightOf="@+id/image1"
                 android:gravity="center|left"
-                android:text="定时"
+                android:text="联动组合"
                 android:textColor="@color/black" />
 
             <TextView
@@ -190,13 +176,13 @@
                 android:textColor="@color/black" />
 
             <TextView
-                android:visibility="invisible"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@+id/indicator4"
                 android:gravity="center"
-                android:text="7个" />
+                android:text="7个"
+                android:visibility="invisible" />
 
             <ImageView
                 android:id="@+id/indicator4"

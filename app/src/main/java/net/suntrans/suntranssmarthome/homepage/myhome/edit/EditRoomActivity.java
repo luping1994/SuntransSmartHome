@@ -73,10 +73,10 @@ public class EditRoomActivity extends BasedActivity implements View.OnClickListe
         if (v.getId() == R.id.ll) {
             Intent intent = new Intent();
             intent.setClass(this, ModifyINActivity.class);
-            intent.putExtra("name",name.getText().toString());
-            intent.putExtra("type","room");
-            intent.putExtra("imgurl",getIntent().getStringExtra("imgurl"));
-            intent.putExtra("id",getIntent().getStringExtra("id"));
+            intent.putExtra("name", name.getText().toString());
+            intent.putExtra("type", "room");
+            intent.putExtra("imgurl", getIntent().getStringExtra("imgurl"));
+            intent.putExtra("id", getIntent().getStringExtra("id"));
             startActivity(intent);
         }
         if (v.getId() == R.id.delete) {
@@ -88,6 +88,10 @@ public class EditRoomActivity extends BasedActivity implements View.OnClickListe
                             delete(id);
                         }
                     }).create().show();
+        }
+        if (v.getId() == R.id.shebei) {
+            Intent intent = new Intent(this, RoomDevGroupActivity.class);
+            startActivity(intent);
         }
     }
 
@@ -109,9 +113,9 @@ public class EditRoomActivity extends BasedActivity implements View.OnClickListe
 
                     @Override
                     public void onNext(CreateModelResult result) {
-                        if(result!=null){
+                        if (result != null) {
                             UiUtils.showToast(result.msg);
-                        }else {
+                        } else {
                             UiUtils.showToast("删除失败");
                         }
                     }

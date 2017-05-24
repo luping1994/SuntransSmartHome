@@ -24,6 +24,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.trello.rxlifecycle.android.ActivityEvent;
 
 import net.suntrans.suntranssmarthome.R;
@@ -95,16 +96,20 @@ public class RoomDetailActivity extends BasedActivity implements SenderWebSocket
         house_id = getIntent().getStringExtra("house_id");
         name = getIntent().getStringExtra("name");
         subname = getIntent().getStringExtra("subname");
-        binding.toolbar.setTitle(name);
+        String url = getIntent().getStringExtra("imgurl");
+        Glide.with(this)
+                .load(url)
+                .placeholder(R.drawable.img_homepage)
+                .centerCrop()
+                .into(binding.bg);
+//        binding.toolbar.setTitle(name);
 //        binding.toolbar.setSubtitle(subname);
 
         setSupportActionBar(binding.toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowTitleEnabled(true);
-
-        ;
-//        binding.title.setText(name);
+        binding.collapsingToolbar.setTitle(name);
         recyclerView = binding.recyclerview;
         refreshLayout = binding.refreshlayout;
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -257,11 +262,11 @@ public class RoomDetailActivity extends BasedActivity implements SenderWebSocket
 
             public void setBind(final ItemChannelConBinding bind) {
                 this.bind = bind;
-                bind.channelName.setOnClickListener(new View.OnClickListener() {
+                bind.root.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if (listener != null) {
-                            listener.onChannelClickListener(getAdapterPosition(), (TextView) v);
+                            listener.onChannelClickListener(getAdapterPosition(), bind.channelName);
                         }
                     }
                 });
@@ -276,8 +281,8 @@ public class RoomDetailActivity extends BasedActivity implements SenderWebSocket
 
             public void setData(int position) {
                 bind.switchButton.setCheckedImmediately(datas.get(position).getStatus().equals("1") ? true : false);
-                bind.channelName.setText(datas.get(position).getName() == null ? "未命名" : datas.get(position).getName());
-
+                bind.name.setText(datas.get(position).getName() == null ? "未命名" : datas.get(position).getName());
+                bind.channelName.setText("通道"+(position+1));
                 bind.switchButton.setOnCheckedChangeListener(null);
                 bind.switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override

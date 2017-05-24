@@ -1,26 +1,31 @@
 package net.suntrans.suntranssmarthome.homepage.myhome.detail;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetDialog;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
 import net.suntrans.suntranssmarthome.R;
 import net.suntrans.suntranssmarthome.api.RetrofitHelper;
 import net.suntrans.suntranssmarthome.base.BasedActivity;
-import net.suntrans.suntranssmarthome.homepage.myhome.add.AddModelActivity;
 import net.suntrans.suntranssmarthome.homepage.myhome.add.CreateModelResult;
 import net.suntrans.suntranssmarthome.homepage.myhome.add.UpLoadImageMessage;
 import net.suntrans.suntranssmarthome.utils.LogUtil;
@@ -31,26 +36,29 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.AppSettingsDialog;
+import pub.devrel.easypermissions.EasyPermissions;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-import static net.suntrans.suntranssmarthome.R.id.imageView;
-
 /**
  * Created by Looney on 2017/4/29.
  */
 
-public class ModifyINActivity extends BasedActivity implements View.OnClickListener {
+public class ModifyINActivity extends BasedActivity implements View.OnClickListener, EasyPermissions.PermissionCallbacks {
 
     private static final int REQUEST_CODE_CHOOSE = 101;
     private static final int CAPTURE_RESULT = 102;
     private static final int CUT_OK = 103;
+    private static final String TAG = "ModifyINActivity";
 
 
     private LoadingDialog dialog;
@@ -72,15 +80,16 @@ public class ModifyINActivity extends BasedActivity implements View.OnClickListe
         id = getIntent().getStringExtra("id");
         type = getIntent().getStringExtra("type");
 
-        TextView choose = (TextView) findViewById(R.id.choose);
+
         imageView = (ImageView) findViewById(R.id.touxiang);
         Glide.with(this)
                 .load(getIntent().getStringExtra("imgurl"))
+                .placeholder(R.drawable.pic_myhome_model_read)
                 .centerCrop()
                 .into(imageView);
         editText = (EditText) findViewById(R.id.name);
         editText.setText(getIntent().getStringExtra("name"));
-        choose.setOnClickListener(this);
+        findViewById(R.id.root).setOnClickListener(this);
         findViewById(R.id.commit).setOnClickListener(this);
     }
 
@@ -97,7 +106,7 @@ public class ModifyINActivity extends BasedActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        if (v.getId() ==R.id.commit){
+        if (v.getId() == R.id.commit) {
             final String name = editText.getText().toString();
 
             if (TextUtils.isEmpty(name)) {
@@ -106,52 +115,61 @@ public class ModifyINActivity extends BasedActivity implements View.OnClickListe
             }
             dialog.show();
             if (imageUri == null) {
-                updateModel(name, "1",id);
+                updateModel(name, "1", id);
             } else {
                 upLoad(name);
             }
         }
-        if (v.getId() == R.id.choose) {
-            final BottomSheetDialog dialog = new BottomSheetDialog(this);
-            View view = getLayoutInflater().inflate(R.layout.dialog_choose_pic, null, false);
-            dialog.setContentView(view);
-            view.findViewById(R.id.paizhao).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivityForResult(intent, CAPTURE_RESULT);
-                    dialog.dismiss();
-                }
-            });
-            view.findViewById(R.id.tuku).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //打开图库
-                    Intent intent = new Intent(
-                            Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    startActivityForResult(intent, REQUEST_CODE_CHOOSE);
-                    dialog.dismiss();
-                }
-            });
-
-            view.findViewById(R.id.canel).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialog.dismiss();
-                }
-            });
-            dialog.show();
+        if (v.getId() == R.id.root) {
+            camaraAndStrogetask();
         }
+    }
+
+    private void openBottomDialog() {
+        final BottomSheetDialog dialog = new BottomSheetDialog(this);
+        View view = getLayoutInflater().inflate(R.layout.dialog_choose_pic, null, false);
+        dialog.setContentView(view);
+        view.findViewById(R.id.paizhao).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, CAPTURE_RESULT);
+                dialog.dismiss();
+            }
+        });
+        view.findViewById(R.id.tuku).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //打开图库
+                Intent intent = new Intent(
+                        Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, REQUEST_CODE_CHOOSE);
+                dialog.dismiss();
+            }
+        });
+
+        view.findViewById(R.id.canel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 
     private void updateModel(String name, String imgId, String id) {
         Observable<CreateModelResult> observable = null;
         if (type.equals("sence")) {
-            observable = RetrofitHelper.getApi().updateScene(name, id,imgId);
+            observable = RetrofitHelper.getApi().updateScene(name, id, imgId);
 
-        } else {
-            observable = RetrofitHelper.getApi().updateRoom(name, id,imgId);
+        } else if (type.equals("room")){
+            observable = RetrofitHelper.getApi().updateRoom(name, id, imgId);
+        }
+
+        if (observable==null){
+            dialog.dismiss();
+            return;
         }
 
         observable.compose(ModifyINActivity.this.<CreateModelResult>bindToLifecycle())
@@ -168,11 +186,14 @@ public class ModifyINActivity extends BasedActivity implements View.OnClickListe
                         e.printStackTrace();
                         UiUtils.showToast("创建失败!");
                         dialog.dismiss();
+                        LogUtil.i("执行 onError");
+
 
                     }
 
                     @Override
                     public void onNext(CreateModelResult result) {
+                        LogUtil.i("执行 onnext");
                         if (result != null)
                             UiUtils.showToast(result.msg);
                         dialog.dismiss();
@@ -181,7 +202,7 @@ public class ModifyINActivity extends BasedActivity implements View.OnClickListe
     }
 
     private void upLoad(final String name) {
-        String path = UiUtils.getRealFilePath(this, imageUri);
+        String path = Environment.getExternalStorageDirectory() + "/suntrans/temp.jpg";
         File file = new File(path);
         RequestBody imageBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         MultipartBody.Part imageBodyPart = MultipartBody.Part.createFormData("imgfile", file.getName(), imageBody);
@@ -201,6 +222,7 @@ public class ModifyINActivity extends BasedActivity implements View.OnClickListe
                     public void onError(Throwable e) {
                         e.printStackTrace();
                         UiUtils.showToast(getString(R.string.tips_upload_failed));
+                        dialog.dismiss();
                     }
 
                     @Override
@@ -208,7 +230,7 @@ public class ModifyINActivity extends BasedActivity implements View.OnClickListe
                         if (info != null) {
                             if (info.error.equals("0")) {
                                 LogUtil.i("图片上传成功！id为：" + info.id);
-                                updateModel(name,info.id,id);
+                                updateModel(name, info.id, id);
                             } else {
                                 UiUtils.showToast(getString(R.string.tips_upload_failed));
                             }
@@ -289,7 +311,11 @@ public class ModifyINActivity extends BasedActivity implements View.OnClickListe
                             e.printStackTrace();
                         }
                     }
-                    uri = Uri.fromFile(tempFile);
+                    if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.N){
+                        uri = FileProvider.getUriForFile(getApplicationContext(), "net.suntrans.suntranssmarthome.fileProvider",tempFile);
+                    }else {
+                        uri = Uri.fromFile(tempFile);
+                    }
                 } else {
                     UiUtils.showToast("没有储存卡");
                 }
@@ -310,13 +336,6 @@ public class ModifyINActivity extends BasedActivity implements View.OnClickListe
             } catch (IOException e) {
                 e.printStackTrace();
             }
-//            Glide.with(AddModelActivity.this)
-//                    .load(uri)
-//                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-//                    .skipMemoryCache(false)
-//                    .centerCrop()
-//                    .override(1080, 696)
-//                    .into(imageView);
         } else if (requestCode == CUT_OK && resultCode != RESULT_OK) {
             LogUtil.i("裁剪失败");
             imageUri = null;
@@ -336,7 +355,7 @@ public class ModifyINActivity extends BasedActivity implements View.OnClickListe
 
         intent.putExtra("crop", "true");
 
-        intent.putExtra("aspectX", 2);
+        intent.putExtra("aspectX", 1);
 
         intent.putExtra("aspectY", 1);
 
@@ -366,12 +385,63 @@ public class ModifyINActivity extends BasedActivity implements View.OnClickListe
 //            e.printStackTrace();
 //        }
         imageUri = null;
-        imageUri = Uri.fromFile(file);
+        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.N){
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            imageUri = FileProvider.getUriForFile(getApplicationContext(), "net.suntrans.suntranssmarthome.fileProvider",file);
+        }else {
+            imageUri = Uri.fromFile(file);
+        }
+        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.N) {
+            List<ResolveInfo> resInfoList = getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+            for (ResolveInfo resolveInfo : resInfoList) {
+                String packageName = resolveInfo.activityInfo.packageName;
+                grantUriPermission(packageName, imageUri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            }
+        }
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
 //        intent.putExtra("noFaceDetection", true); // no face detection
 
         startActivityForResult(intent, requestCode);
 
+    }
+
+
+    private static final int RC_CAMARE_STORAGE_PERM = 124;
+
+    @AfterPermissionGranted(RC_CAMARE_STORAGE_PERM)
+    public void camaraAndStrogetask() {
+        String[] perms = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
+        if (EasyPermissions.hasPermissions(this, perms)) {
+            openBottomDialog();
+        } else {
+            // Ask for both permissions
+            EasyPermissions.requestPermissions(this, getString(R.string.rationale_camera),
+                    RC_CAMARE_STORAGE_PERM, perms);
+        }
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+        LogUtil.i(TAG, "onPermissionsGranted:" + requestCode + ":" + perms.size());
+
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+        UiUtils.showToast("无法获取相机和存储权限");
+        // (Optional) Check whether the user denied any permissions and checked "NEVER ASK AGAIN."
+        // This will display a dialog directing them to enable the permission in app settings.
+        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+            new AppSettingsDialog.Builder(this).build().show();
+        }
     }
 
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.databinding.Bindable;
 import android.databinding.DataBindingUtil;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,6 +18,10 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnticipateInterpolator;
+import android.view.animation.Interpolator;
+import android.view.animation.LinearInterpolator;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -105,6 +110,7 @@ public class SwitchControlActivity extends BasedActivity implements SenderWebSoc
                         jsonObject.put("device", "slc");
                         jsonObject.put("action", "switch");
                         jsonObject.put("channel_id", Integer.valueOf(datas.get(position).getId()));
+//                        jsonObject.put("channel_id", "234");
                         jsonObject.put("command", isChecked ? 1 : 0);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -153,7 +159,7 @@ public class SwitchControlActivity extends BasedActivity implements SenderWebSoc
         builder.setNegativeButton(R.string.qvxiao,null);
         builder.setTitle(R.string.title_modify_channelname);
         builder.setView(view);
-        builder.create().show();;
+        builder.create().show();
     }
 
     @Override
@@ -184,6 +190,9 @@ public class SwitchControlActivity extends BasedActivity implements SenderWebSoc
                 }
 
             } else if (code.equals("404")) {
+                handler.removeMessages(MSG_CON_FAILED);
+                handler.sendMessage(Message.obtain(handler, MSG_CON_FAILED, msg));
+            }else if (code.equals("101")){
                 handler.removeMessages(MSG_CON_FAILED);
                 handler.sendMessage(Message.obtain(handler, MSG_CON_FAILED, msg));
             }
@@ -239,11 +248,12 @@ public class SwitchControlActivity extends BasedActivity implements SenderWebSoc
 
             public void setBind(final ItemChannelConBinding bind) {
                 this.bind = bind;
-                bind.channelName.setOnClickListener(new View.OnClickListener() {
+                bind.root.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        LogUtil.i("我被点击了");
                         if (listener != null) {
-                            listener.onChannelClickListener(getAdapterPosition(), (TextView) v);
+                            listener.onChannelClickListener(getAdapterPosition(), bind.channelName);
                         }
                     }
                 });
@@ -258,8 +268,8 @@ public class SwitchControlActivity extends BasedActivity implements SenderWebSoc
 
             public void setData(int position) {
                 bind.switchButton.setCheckedImmediately(datas.get(position).getStatus().equals("1") ? true : false);
-                bind.channelName.setText(datas.get(position).getName() == null ? "未命名" : datas.get(position).getName());
-
+                bind.name.setText(datas.get(position).getName() == null ? "未命名" : datas.get(position).getName());
+                bind.channelName.setText("通道"+(position+1));
                 bind.switchButton.setOnCheckedChangeListener(null);
                 bind.switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
@@ -325,7 +335,7 @@ public class SwitchControlActivity extends BasedActivity implements SenderWebSoc
     private static final int MSG_START = 0;
     private static final int MSG_CON_SUCCESS = 1;
     private static final int MSG_CON_FAILED = 2;
-    Handler handler = new Handler() {
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {

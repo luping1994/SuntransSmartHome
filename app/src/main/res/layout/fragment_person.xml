@@ -198,6 +198,8 @@
                             android:background="@drawable/icon_list_arrow" />
                     </RelativeLayout>
 
+
+
                     <ImageView
                         style="@style/line_horizontal_middle_gray"
                         android:layout_marginLeft="13.0dip"
@@ -206,12 +208,11 @@
                     <RelativeLayout
                         android:id="@id/setting_about_info"
                         android:layout_width="fill_parent"
-
+                        android:onClick="@{() -> actionHandler.openDeviceManagerPage()}"
                         android:layout_height="59.0dip"
                         android:background="?attr/selectableItemBackground"
                         android:clickable="true"
                         android:gravity="center_vertical"
-                        android:onClick="@{() -> actionHandler.openAboutPage()}"
                         android:visibility="visible">
 
                         <ImageView
@@ -227,7 +228,7 @@
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="10.0dip"
                             android:layout_toRightOf="@id/aa"
-                            android:text="@string/settings_about" />
+                            android:text="@string/settings_device" />
 
                         <ImageView
                             android:id="@id/setting_about_info_rightImage"
@@ -276,7 +277,45 @@
                             android:background="@drawable/icon_list_arrow"
                             android:visibility="visible" />
                     </RelativeLayout>
+                    <ImageView
+                        style="@style/line_horizontal_middle_gray"
+                        android:layout_marginLeft="13.0dip"
+                        android:layout_marginRight="13.0dip" />
 
+                    <RelativeLayout
+                        android:id="@id/setting_about_info"
+                        android:layout_width="fill_parent"
+
+                        android:layout_height="59.0dip"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:gravity="center_vertical"
+                        android:onClick="@{() -> actionHandler.openAboutPage()}"
+                        android:visibility="visible">
+
+                        <ImageView
+                            android:id="@id/aa"
+                            android:layout_width="15.299988dip"
+                            android:layout_height="15.299988dip"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="16.0dip"
+                            android:src="@drawable/icon_setting_about" />
+
+                        <TextView
+                            style="@style/setting_about_item_text"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10.0dip"
+                            android:layout_toRightOf="@id/aa"
+                            android:text="@string/settings_about" />
+
+                        <ImageView
+                            android:id="@id/setting_about_info_rightImage"
+                            style="@style/setting_about_item_right_image"
+                            android:layout_width="42.659973dip"
+                            android:layout_height="42.659973dip"
+                            android:background="@drawable/icon_list_arrow"
+                            android:visibility="visible" />
+                    </RelativeLayout>
                     <ImageView
                         style="@style/line_horizontal_middle_gray"
                         android:layout_marginLeft="13.0dip"

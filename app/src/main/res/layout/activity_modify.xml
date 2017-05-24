@@ -14,16 +14,16 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            app:contentInsetLeft="0.0dip"
-            app:contentInsetStart="0.0dip"
             android:layout_height="@dimen/actionbarheight"
             android:background="?attr/colorPrimary"
+            app:contentInsetLeft="0.0dip"
+            app:contentInsetStart="0.0dip"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="48.0dip"
-                android:layout_marginTop="3.0dip">
+                android:layout_height="48.0dip">
 
                 <ImageView
                     android:id="@id/base_iv_scene_back"
@@ -41,7 +41,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="18.0dip"
                     android:layout_toRightOf="@id/base_iv_scene_back"
-                    android:text="编辑"
+                    android:text="选择图片及名称"
                     android:textColor="@color/white"
                     android:textSize="18.0sp" />
 
@@ -68,48 +68,64 @@
         android:orientation="vertical">
 
         <RelativeLayout
+            android:id="@+id/root"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="25dp"
-            android:background="@color/white">
+            android:layout_height="80dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/item_selector">
+
+            <TextView
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="图标" />
 
             <ImageView
                 android:id="@+id/touxiang"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:scaleType="fitXY"
-               />
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:background="#38ac69"
+                android:scaleType="fitXY" />
 
-            <TextView
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_toRightOf="@id/touxiang"
-                android:layout_toLeftOf="@+id/indicator"
-                android:id="@+id/choose"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="点击选择图片"
-                android:textColor="@color/colorPrimary" />
+
         </RelativeLayout>
 
-        <LinearLayout
+     >
+
+        <RelativeLayout
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="20dp"
             android:background="@color/white">
+            <TextView
+                android:textColor="@color/black"
+                android:id="@+id/names"
+                android:gravity="center|left"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:text="名称："
+                android:textSize="14sp" />
             <EditText
-                android:textSize="14sp"
-                android:hint="请输入名称"
+
+                android:layout_toRightOf="@+id/names"
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="?android:attr/selectableItemBackground"
-                android:gravity="center"
+                android:background="@color/white"
+                android:gravity="center|left"
+                android:hint="请输入名称"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
-                android:textColor="@color/black" />
-        </LinearLayout>
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+        </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

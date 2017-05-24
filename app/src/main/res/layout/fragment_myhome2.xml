@@ -11,27 +11,26 @@
 
     <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@id/base_scene_sll"
+        android:id="@+id/base_scene_sll"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:fitsSystemWindows="true">
 
         <android.support.design.widget.AppBarLayout
-            android:id="@id/appbar"
+            android:id="@+id/appbar"
             android:layout_width="match_parent"
             android:layout_height="216.0dip"
             android:fitsSystemWindows="true"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
             <android.support.design.widget.CollapsingToolbarLayout
-                android:id="@id/collapsing_toolbar"
+                android:id="@+id/collapsing_toolbar"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:fitsSystemWindows="true"
                 app:contentScrim="?colorPrimary"
-                app:expandedTitleMarginEnd="64.0dip"
-                app:expandedTitleMarginStart="48.0dip"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+                app:expandedTitleMarginBottom="40dp"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap|enterAlwaysCollapsed">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -46,17 +45,23 @@
                         android:layout_height="fill_parent"
                         android:fitsSystemWindows="true"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/img_original_bg_custom" />
-
+                        android:src="@drawable/img_homepage" />
+                    <TextView
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:layout_above="@+id/wendu_ll"
+                        android:text="ST HOME"
+                        android:textSize="30sp"
+                        android:textColor="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
                     <LinearLayout
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
                         android:id="@+id/wendu_ll"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="40dp"
                         android:layout_alignParentBottom="true"
-                        >
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
 
                         <ImageView
@@ -85,7 +90,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                            android:layout_marginLeft="@dimen/myhome2_env_margin"
                             android:src="@drawable/image_sd" />
 
                         <TextView
@@ -99,7 +104,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                            android:layout_marginLeft="@dimen/myhome2_env_margin"
                             android:gravity="center_vertical"
                             android:text='PM:'
                             android:textColor="@color/white"
@@ -114,40 +119,41 @@
                             android:textSize="16sp" />
 
                         <!--<TextView-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="match_parent"-->
-                            <!--android:layout_marginLeft="@dimen/activity_horizontal_margin"-->
-                            <!--android:gravity="center_vertical"-->
-                            <!--android:text='PM10:'-->
-                            <!--android:textColor="@color/white"-->
-                            <!--android:textSize="16sp" />-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:layout_marginLeft="@dimen/activity_horizontal_margin"-->
+                        <!--android:gravity="center_vertical"-->
+                        <!--android:text='PM10:'-->
+                        <!--android:textColor="@color/white"-->
+                        <!--android:textSize="16sp" />-->
 
                         <!--<TextView-->
-                            <!---->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="match_parent"-->
-                            <!--android:gravity="center_vertical"-->
-                            <!--android:text='@{info.pm10}'-->
-                            <!--android:textColor="@color/white"-->
-                            <!--android:textSize="16sp" />-->
+                        <!---->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:gravity="center_vertical"-->
+                        <!--android:text='@{info.pm10}'-->
+                        <!--android:textColor="@color/white"-->
+                        <!--android:textSize="16sp" />-->
 
                     </LinearLayout>
 
                 </RelativeLayout>
 
                 <android.support.v7.widget.Toolbar
-                    android:id="@id/toolbar"
-                    android:layout_width="fill_parent"
+
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
                     android:layout_height="@dimen/actionbarheight"
                     app:contentInsetLeft="0.0dip"
                     app:contentInsetStart="0.0dip"
                     app:layout_collapseMode="pin"
-                    app:popupTheme="@style/Scene_Pop_AppTheme">
+                    app:popupTheme="@style/Scene_Pop_AppTheme"
+                    app:theme="@style/ToolBarTheme">
 
                     <RelativeLayout
                         android:layout_width="fill_parent"
-                        android:layout_height="48.0dip"
-                        android:layout_marginTop="3.0dip">
+                        android:layout_height="48.0dip">
 
                         <ImageView
                             android:id="@id/base_iv_scene_back"
@@ -158,24 +164,29 @@
                             android:src="@drawable/back_selector_new"
                             android:visibility="gone" />
 
+
                         <TextView
-                            android:id="@id/base_tv_scene_title"
+                            android:id="@+id/title"
+                            android:alpha="0"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
+                            android:layout_centerInParent="true"
                             android:layout_marginLeft="18.0dip"
                             android:layout_toRightOf="@id/base_iv_scene_back"
-                            android:text="@string/myhome"
+                            android:text="ST HOME"
                             android:textColor="@color/white"
-                            android:textSize="16.0sp" />
+                            android:textSize="16.0sp"
+                            android:visibility="visible" />
+
                         <ImageView
-                            android:layout_marginRight="@dimen/activity_horizontal_margin"
                             android:id="@+id/image_add"
-                            android:src="@drawable/ic_add_black_24dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_marginRight="@dimen/activity_horizontal_margin"
+                            android:src="@drawable/ic_add_black_24dp"
+                            android:visibility="gone" />
                     </RelativeLayout>
                 </android.support.v7.widget.Toolbar>
             </android.support.design.widget.CollapsingToolbarLayout>
@@ -187,31 +198,33 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <android.support.design.widget.TabLayout
-                app:tabSelectedTextColor="@color/colorPrimary"
-                app:tabTextColor="@android:color/darker_gray"
-                app:tabIndicatorColor="@color/colorPrimary"
                 android:id="@+id/tablayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:tabIndicatorColor="@color/colorPrimary"
+                app:tabSelectedTextColor="@color/colorPrimary"
+                app:tabTextColor="@android:color/darker_gray">
 
             </android.support.design.widget.TabLayout>
+
             <TextView
-                android:visibility="gone"
-                android:gravity="center"
-                android:textColor="@color/black"
                 android:id="@+id/txWarning"
-                android:text="@string/tips_warning_network_not_avariable"
-                android:textSize="14sp"
-                android:background="#FFDADA"
                 android:layout_width="match_parent"
-                android:layout_height="50dp">
+                android:layout_height="50dp"
+                android:background="#FFDADA"
+                android:gravity="center"
+                android:text="@string/tips_warning_network_not_avariable"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:visibility="gone">
 
             </TextView>
+
             <android.support.v4.view.ViewPager
-                android:layout_below="@+id/tablayout"
                 android:id="@+id/viewpager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_below="@+id/tablayout"
                 android:layout_weight="1">
 
             </android.support.v4.view.ViewPager>

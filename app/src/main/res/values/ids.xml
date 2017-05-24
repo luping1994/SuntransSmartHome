@@ -55,4 +55,5 @@
     <item name="tx_pic" type="id" />
     <item name="mode_name" type="id" />
     <item name="mode_img" type="id" />
+    <item name="gradientDrawble" type="id" />
 </resources>

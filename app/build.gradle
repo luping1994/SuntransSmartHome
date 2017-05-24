@@ -11,6 +11,8 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true//这行
+
 //        ndk {
 //            //设置支持的SO库架构
 //            abiFilters 'armeabi' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
@@ -40,6 +42,15 @@ android {
         exclude 'META-INF/BenchmarkList'
         exclude 'META-INF/io.netty.versions.properties'
         exclude 'META-INF/CompilerHints'
+    }
+
+    android {
+        lintOptions {
+            checkReleaseBuilds false
+            // Or, if you prefer, you can continue to check for errors in release builds,
+            // but continue the build even when errors are found:
+            abortOnError false
+        }
     }
 }
 
@@ -74,8 +85,11 @@ dependencies {
     compile 'com.zhihu.android:matisse:0.4.3'
     compile 'com.android.support:palette-v7:25.1.1'
     compile 'com.alibaba:fastjson:1.1.56.android'
-//    compile 'in.srain.cube:ultra-ptr:1.0.11'
+    //    compile 'in.srain.cube:ultra-ptr:1.0.11'
     compile 'pub.devrel:easypermissions:0.4.0'
+    compile project(':zxing-android-embedded')
+    compile 'com.android.support:multidex:1.0.0'
+    compile 'com.contrarywind:Android-PickerView:3.2.5'
 }
 repositories {
     mavenCentral()

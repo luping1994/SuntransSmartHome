@@ -34,6 +34,7 @@ public interface PersonalContract {
         void openHelpUI();
         void openSettingUI();
         void onLoginOut();
+        void openDeviceManagerUI();
     }
 
     interface Presenter extends BasePresenter {
@@ -44,5 +45,6 @@ public interface PersonalContract {
         void openHelpPage();
         void openSettingPage();
         void onLoginOut();
+        void openDeviceManagerPage();
     }
 }

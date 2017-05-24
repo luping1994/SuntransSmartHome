@@ -9,4 +9,10 @@
     <declare-styleable name="ColorFilterImage">
         <attr name="ColorFilter1" format="color"/>
     </declare-styleable>
+
+    <declare-styleable name="CircleTextProgressbar">
+        <attr name="in_circle_color" format="color" />
+        <attr name="maxValue" format="integer"/>
+        <attr name="outLineColor" format="color"/>
+    </declare-styleable>
 </resources>

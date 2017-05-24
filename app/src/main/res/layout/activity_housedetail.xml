@@ -24,7 +24,7 @@
                 app:contentScrim="?colorPrimary"
                 app:expandedTitleMarginEnd="64.0dip"
                 app:expandedTitleMarginStart="48.0dip"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap|enterAlwaysCollapsed">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -38,8 +38,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
                         android:fitsSystemWindows="true"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/img_original_bg_sleep" />
+                        android:scaleType="centerCrop" />
 
                 </RelativeLayout>
 
@@ -54,8 +53,7 @@
 
                     <RelativeLayout
                         android:layout_width="fill_parent"
-                        android:layout_height="48.0dip"
-                        android:layout_marginTop="3.0dip">
+                        android:layout_height="48.0dip">
 
                         <ImageView
                             android:id="@id/base_iv_scene_back"
@@ -146,26 +144,27 @@
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
+
+        <FrameLayout
             android:layout_alignParentBottom="true"
+            android:id="@id/bottom_btn_wraper_2"
+            android:layout_width="fill_parent"
+            android:layout_height="60.0dip"
             android:layout_gravity="bottom"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin">
+            android:background="@color/white"
+            android:visibility="visible">
 
             <Button
+                android:onClick="excute"
                 android:id="@+id/hand_add"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="8dp"
-                android:layout_weight="1"
-                android:background="@drawable/ic_button_bg"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="328.0dip"
+                android:layout_height="40.0dip"
+                android:layout_gravity="center"
+                android:background="@drawable/selector_add_device_scan_btn_new"
                 android:text="@string/edit_mode_button_execute"
                 android:textColor="@color/colorPrimary"
-                android:textSize="16sp" />
-        </LinearLayout>
+                android:textSize="15.0sp" />
+        </FrameLayout>
     </android.support.design.widget.CoordinatorLayout>
 </layout>

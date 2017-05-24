@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Environment;
+import android.support.multidex.MultiDex;
+import android.support.multidex.MultiDexApplication;
 
 
 import com.squareup.leakcanary.LeakCanary;
@@ -27,7 +29,7 @@ import static net.suntrans.suntranssmarthome.BuildConfig.ENABLE_DEBUG;
  * Created by Looney on 2017/2/20.
  */
 
-public class App extends Application {
+public class App extends MultiDexApplication {
     public static Application getApplication() {
         return application;
     }
@@ -44,12 +46,12 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            // This process is dedicated to LeakCanary for heap analysis.
-            // You should not init your app in this process.
-            return;
-        }
-        LeakCanary.install(this);
+//        if (LeakCanary.isInAnalyzerProcess(this)) {
+//            // This process is dedicated to LeakCanary for heap analysis.
+//            // You should not init your app in this process.
+//            return;
+//        }
+//        LeakCanary.install(this);
         application = this;
 //        new Thread(){//copy assets目录下的开关信息数据库
 //            @Override
@@ -173,11 +175,12 @@ public class App extends Application {
         /***** 统一初始化Bugly产品，包含Beta *****/
         Bugly.init(this, APP_ID, false, strategy);
     }
-//    /** * 分割 Dex 支持 * @param base */
-//    @Override
-//    protected void attachBaseContext(Context base) {
-//        super.attachBaseContext(base);
-//        MultiDex.install(this);
-//    }
+
+    /** * 分割 Dex 支持 * @param base */
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
 
 }

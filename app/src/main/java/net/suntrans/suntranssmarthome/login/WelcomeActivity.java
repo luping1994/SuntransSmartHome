@@ -5,16 +5,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import net.suntrans.suntranssmarthome.App;
 import net.suntrans.suntranssmarthome.R;
 import net.suntrans.suntranssmarthome.base.BasedActivity;
 import net.suntrans.suntranssmarthome.homepage.MainActivity;
 import net.suntrans.suntranssmarthome.utils.LogUtil;
+import net.suntrans.suntranssmarthome.utils.UiUtils;
 
 import java.util.List;
 
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 
 /**
@@ -23,6 +29,7 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 public class WelcomeActivity extends BasedActivity implements EasyPermissions.PermissionCallbacks {
     private static final int CAMERA_AND_STORAGE = 100;
+    private static final String TAG = "WelcomeActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,18 +41,23 @@ public class WelcomeActivity extends BasedActivity implements EasyPermissions.Pe
     }
 
     private void init() {
-        check();
-//        if (EasyPermissions.hasPermissions(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-//            LogUtil.i("有权限");
-//            check();
-//        } else {
-//            LogUtil.i("没有权限");
-//
-//            EasyPermissions.requestPermissions(this, "", CAMERA_AND_STORAGE
-//                    , Manifest.permission.WRITE_EXTERNAL_STORAGE);
-//        }
+        locationAndContactsTask();
     }
 
+    private static final int RC_CAMARE_STORAGE_PERM = 124;
+
+    @AfterPermissionGranted(RC_CAMARE_STORAGE_PERM)
+    public void locationAndContactsTask() {
+        String[] perms = { Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
+        if (EasyPermissions.hasPermissions(this, perms)) {
+            LogUtil.i("有权限");
+            check();
+        } else {
+            // Ask for both permissions
+            EasyPermissions.requestPermissions(this, getString(R.string.rationale_camera),
+                    RC_CAMARE_STORAGE_PERM, perms);
+        }
+    }
     private void check() {
         try {
             String access_token = App.getSharedPreferences().getString("access_token", "-1");
@@ -98,24 +110,37 @@ public class WelcomeActivity extends BasedActivity implements EasyPermissions.Pe
 
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        // Forward results to EasyPermissions
+        // EasyPermissions handles the request result.
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
     }
 
-
     @Override
     public void onPermissionsGranted(int requestCode, List<String> perms) {
-        LogUtil.i("权限不通过");
-        finish();
-//        check();
+        Log.d(TAG, "onPermissionsGranted:" + requestCode + ":" + perms.size());
     }
 
     @Override
     public void onPermissionsDenied(int requestCode, List<String> perms) {
-        LogUtil.i("权限通过");
+        LogUtil.i(TAG, "权限禁用了:" + requestCode + ":" + perms.size());
+        UiUtils.showToast("禁用权限将使得部分功能不可用");
         check();
+        // (Optional) Check whether the user denied any permissions and checked "NEVER ASK AGAIN."
+        // This will display a dialog directing them to enable the permission in app settings.
+//        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+//            new AppSettingsDialog.Builder(this).build().show();
+//        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == AppSettingsDialog.DEFAULT_SETTINGS_REQ_CODE) {
+            LogUtil.i("activityresult");
+        }else {
+        }
     }
 }

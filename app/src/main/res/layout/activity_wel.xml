@@ -3,14 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#ecedf1"
+    android:background="@drawable/uz_splash_bg"
     android:fitsSystemWindows="true"
 
     android:orientation="vertical">
-    <android.support.v7.widget.AppCompatImageView
-        android:layout_centerInParent="true"
-        android:contentDescription="@string/app_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/logo" />
+
 </RelativeLayout>

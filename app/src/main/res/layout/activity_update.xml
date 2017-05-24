@@ -11,23 +11,92 @@
         android:layout_height="wrap_content">
 
         <android.support.v7.widget.Toolbar
-            app:navigationIcon="@drawable/ic_arrow_back_white_18dp"
-
             android:fitsSystemWindows="true"
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/actionbarheight"
-            android:background="?attr/colorPrimary"
+            android:background="?attr/colorPrimaryDark"
             app:theme="@style/Toolbar"
             app:titleTextAppearance="@style/Toolbar.TitleText"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
-    <LinearLayout
-        android:background="@color/bgcolor"
+    <RelativeLayout
+        android:background="#ecedf1"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_below="@+id/header"
+            android:id="@+id/ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_ll_login"
+            android:orientation="vertical">
+
+            <net.suntrans.suntranssmarthome.widget.EditView
+                android:id="@+id/oldpass"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@null"
+                android:hint="@string/tips_oldpass"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+            <!--</android.support.design.widget.TextInputLayout>-->
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/secondtextcolor" />
+
+
+            <net.suntrans.suntranssmarthome.widget.EditView
+                android:id="@+id/newpass"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@null"
+                android:inputType="textPassword"
+                android:hint="@string/tips_newpass"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/secondtextcolor" />
+
+
+            <net.suntrans.suntranssmarthome.widget.EditView
+                android:id="@+id/repass"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@null"
+                android:hint="@string/tips_repass"
+                android:inputType="textPassword"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+        </LinearLayout>
+        <Button
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:id="@+id/commit"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_bt_login"
+            android:text="@string/queding"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:layout_below="@+id/ll"
+            />
+    </RelativeLayout>
 </LinearLayout>

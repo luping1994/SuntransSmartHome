@@ -23,6 +23,8 @@ import com.trello.rxlifecycle.components.support.RxFragment;
 
 import net.suntrans.suntranssmarthome.R;
 import net.suntrans.suntranssmarthome.api.RetrofitHelper;
+import net.suntrans.suntranssmarthome.homepage.myhome.bean.HomeRoomResult;
+import net.suntrans.suntranssmarthome.homepage.myhome.detail.RoomDetailActivity_new;
 import net.suntrans.suntranssmarthome.homepage.myhome.edit.EditRoomActivity;
 import net.suntrans.suntranssmarthome.homepage.myhome.detail.RoomDetailActivity;
 import net.suntrans.suntranssmarthome.utils.LogUtil;
@@ -69,6 +71,7 @@ public class HouseFragment extends RxFragment {
             }
         });
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
+        recyclerView.setNestedScrollingEnabled(true);
         adapter = new RoomAdapter(R.layout.item_scene1, roomDatas);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
@@ -76,7 +79,7 @@ public class HouseFragment extends RxFragment {
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent = new Intent(getActivity(), RoomDetailActivity.class);
+                Intent intent = new Intent(getActivity(), RoomDetailActivity_new.class);
                 intent.putExtra("house_id", roomDatas.get(position).id);
                 intent.putExtra("name", roomDatas.get(position).name);
                 intent.putExtra("imgurl",roomDatas.get(position).img);
@@ -131,6 +134,7 @@ public class HouseFragment extends RxFragment {
                             if (homeSceneResult.status.equals("1")) {
                                 roomDatas.clear();
                                 roomDatas.addAll(homeSceneResult.result.rows);
+                                LogUtil.i("图片url为："+homeSceneResult.result.rows.get(0).img);
                                 adapter.notifyDataSetChanged();
                                 handler.removeCallbacksAndMessages(null);
                                 refreshLayout.setRefreshing(false);

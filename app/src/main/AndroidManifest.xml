@@ -40,7 +40,6 @@
         android:name=".App"
         android:theme="@style/AppTheme">
         <activity android:name=".login.LoginActivity">
-
         </activity>
         <activity android:name=".homepage.MainActivity" />
         <activity android:name=".homepage.personal.detail.SuggestionActivity" />
@@ -79,5 +78,20 @@
         </activity>
         <activity android:name=".homepage.myhome.edit.EditRoomActivity" />
         <activity android:name=".homepage.myhome.detail.ModifyINActivity" />
+        <activity android:name=".homepage.myhome.detail.EnvDetailActivity" />
+        <activity android:name=".homepage.personal.detail.DeviceManagerActivity" />
+        <activity android:name=".homepage.myhome.edit.EditLinkageActivity" />
+        <activity android:name=".homepage.myhome.add.AddLinkageActivity" />
+        <activity android:name=".homepage.devicemain.DeviceMainSettingActivity" />
+        <activity android:name=".homepage.devicemain.ChooseDeviceTypeActivity" />
+        <activity android:name=".homepage.devicemain.ChooseDeviceRoomActivity" />
+        <activity android:name=".homepage.myhome.edit.SenceDevGroupActivity" />
+        <activity android:name=".homepage.myhome.edit.AddSenceDevGrpActivity" />
+        <activity android:name=".homepage.myhome.edit.LinkageGroupActivity" />
+        <activity android:name=".homepage.myhome.edit.AddSenceLinkGrpActivity" />
+        <activity android:name=".homepage.myhome.edit.ChooseLinkageConActivity" />
+        <activity android:name=".homepage.myhome.edit.AddRoomDevGrpActivity" />
+        <activity android:name=".homepage.myhome.edit.RoomDevGroupActivity" />
+        <activity android:name=".homepage.myhome.detail.RoomDetailActivity_new" />
     </application>
 </manifest>

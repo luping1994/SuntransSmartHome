@@ -30,7 +30,7 @@
                 app:contentScrim="?colorPrimary"
                 app:expandedTitleMarginEnd="64.0dip"
                 app:expandedTitleMarginStart="48.0dip"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap|enterAlwaysCollapsed">
 
                 <RelativeLayout
                     android:layout_width="match_parent"

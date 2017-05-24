@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">三川智能家居系统</string>
+    <string name="app_name">三川智控</string>
 
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
@@ -11,18 +11,21 @@
     <string name="create_account">注册账户</string>
     <string name="nav_myhome">我家</string>
     <string name="nav_device">设备</string>
+    <string name="nav_room">房间</string>
     <string name="nav_find">商城</string>
     <string name="nav_user">我的</string>
     <string name="main_mine_">我的</string>
     <string name="problems_and_suggestions">问题与建议</string>
     <string name="settings_device_updata_manager">升级管理</string>
     <string name="settings_about">关于</string>
+    <string name="settings_device">设备管理</string>
     <string name="settings_faq">使用帮助</string>
     <string name="settings">设置</string>
     <string name="title_suggestion">问题与建议</string>
     <string name="title_about">关于</string>
     <string name="title_helpactivity">使用帮助</string>
     <string name="title_updateactivity">升级管理</string>
+    <string name="title_modify_pass">修改密码</string>
     <string name="title_setting_activity">设置</string>
     <string name="myhome">我的家</string>
 
@@ -88,4 +91,17 @@
     <string name="delete_room">删除房间</string>
     <string name="delete_scene">删除</string>
     <string name="tips_hit_again">再按一次退出</string>
+    <string name="tips_newpass">请输入新密码</string>
+    <string name="tips_oldpass">请输入旧密码</string>
+    <string name="tips_repass">确认新密码</string>
+
+
+    <string name="rationale_camera">需要拍照和读取存储卡权限,否则部分功能无法正常运行</string>
+    <string name="title_devices_manager">设备管理</string>
+    <string name="title_link">联动编辑</string>
+    <string name="title_add_link">添加联动</string>
+    <string name="title_dev_group">设备组合</string>
+    <string name="title_add_dev_group">添加设备组合项</string>
+    <string name="title_linkage_group">联动组合</string>
+
 </resources>

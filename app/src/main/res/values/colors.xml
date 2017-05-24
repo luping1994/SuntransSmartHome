@@ -23,4 +23,5 @@
     <color name="add_device_scan_normal">#ff007dff</color>
     <color name="backgroud_halving_line_1">#fff2f2f2</color>
     <color name="scene_temp_color">#ff007dff</color>
+    <color name="envcolor">#393a3f</color>
 </resources>

@@ -35,6 +35,8 @@
                 android:layout_height="wrap_content">
 
                 <android.support.v7.widget.Toolbar
+                    app:navigationIcon="@drawable/back_selector_new"
+                    app:titleTextAppearance="@style/Toolbar.TitleText"
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/actionbarheight"
@@ -43,13 +45,14 @@
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                     app:theme="@style/Toolbar">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center|left"
-                        android:text="@string/main_devices_"
-                        android:textColor="@color/white"
-                        android:textSize="16sp" />
+                    <!--<TextView-->
+                        <!---->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:gravity="center|left"-->
+                        <!--android:text="@string/main_devices_"-->
+                        <!--android:textColor="@color/white"-->
+                        <!--android:textSize="16sp" />-->
                 </android.support.v7.widget.Toolbar>
             </android.support.design.widget.AppBarLayout>
         </LinearLayout>

@@ -95,4 +95,9 @@ public class PersonalPresenter implements PersonalContract.Presenter {
     public void onLoginOut(){
         mView.onLoginOut();
     }
+
+    @Override
+    public void openDeviceManagerPage() {
+        mView.openDeviceManagerUI();
+    }
 }

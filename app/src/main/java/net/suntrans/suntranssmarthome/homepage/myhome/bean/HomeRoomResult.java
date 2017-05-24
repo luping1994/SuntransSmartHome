@@ -1,4 +1,4 @@
-package net.suntrans.suntranssmarthome.homepage.myhome;
+package net.suntrans.suntranssmarthome.homepage.myhome.bean;
 
 import android.databinding.BaseObservable;
 
@@ -16,7 +16,7 @@ public class HomeRoomResult {
         public List<Room> rows;
     }
 
-    public static class Room extends BaseObservable {
+    public static class Room {
         public String id;
         public String user_id;
         public String name;
@@ -24,6 +24,10 @@ public class HomeRoomResult {
         public String timer;
         public String sort;
         public String status;
+        public boolean isChecked;
 
+        public Room() {
+            this.isChecked = false;
+        }
     }
 }

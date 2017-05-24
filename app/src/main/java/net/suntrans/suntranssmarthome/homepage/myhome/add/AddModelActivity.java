@@ -1,17 +1,25 @@
 package net.suntrans.suntranssmarthome.homepage.myhome.add;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetDialog;
+import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import net.suntrans.suntranssmarthome.BuildConfig;
 import net.suntrans.suntranssmarthome.R;
 import net.suntrans.suntranssmarthome.api.RetrofitHelper;
 import net.suntrans.suntranssmarthome.base.BasedActivity;
@@ -24,24 +32,31 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.AppSettingsDialog;
+import pub.devrel.easypermissions.EasyPermissions;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+import static com.tencent.bugly.crashreport.crash.c.i;
+
 /**
  * Created by Looney on 2017/4/26.
  */
 
-public class AddModelActivity extends BasedActivity implements AddContract.View {
+public class AddModelActivity extends BasedActivity implements AddContract.View, EasyPermissions.PermissionCallbacks {
 
     private static final int REQUEST_CODE_CHOOSE = 101;
     private static final int CAPTURE_RESULT = 102;
     private static final int CUT_OK = 103;
+    private static final String TAG = "AddModelActivity";
     private ActivityAddModeBinding binding;
     private AddPresenter presenter;
     private ImageView imageView;
@@ -84,7 +99,11 @@ public class AddModelActivity extends BasedActivity implements AddContract.View 
     }
 
     private void upLoad(final String name) {
-        String path = UiUtils.getRealFilePath(this, imageUri);
+        LogUtil.i(imageUri.toString());
+        String path = "";
+        path = Environment.getExternalStorageDirectory() + "/suntrans/temp.jpg";
+
+        LogUtil.i(path);
         File file = new File(path);
         RequestBody imageBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         MultipartBody.Part imageBodyPart = MultipartBody.Part.createFormData("imgfile", file.getName(), imageBody);
@@ -158,50 +177,8 @@ public class AddModelActivity extends BasedActivity implements AddContract.View 
 
     @Override
     public void onOpenGallery() {
-        final BottomSheetDialog dialog = new BottomSheetDialog(this);
-        View view = getLayoutInflater().inflate(R.layout.dialog_choose_pic, null, false);
-        dialog.setContentView(view);
-        view.findViewById(R.id.paizhao).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent, CAPTURE_RESULT);
-                dialog.dismiss();
-            }
-        });
-        view.findViewById(R.id.tuku).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //打开图库
-                Intent intent = new Intent(
-                        Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent, REQUEST_CODE_CHOOSE);
-                dialog.dismiss();
+        camaraAndStrogetask();
 
-//                Matisse.from(AddModelActivity.this)
-//                        .choose(MimeType.of(MimeType.JPEG, MimeType.PNG))
-//                        .countable(true)
-//                        .maxSelectable(1)
-////                        .addFilter(new GifSizeFilter(UiUtils.getDisplaySize(AddModelActivity.this)[0], UiUtils.dip2px(216), 5 * Filter.K * Filter.K))
-//                        .gridExpectedSize(UiUtils.getDisplaySize(getApplicationContext())[0] / 3)
-//                        .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
-//                        .capture(true)
-//                        .captureStrategy(new CaptureStrategy(true, "net.suntrans.suntranssmarthome.xml.provider_paths"))
-//                        .thumbnailScale(0.5f)
-//                        .imageEngine(new GlideEngine())
-//                        .forResult(REQUEST_CODE_CHOOSE);
-            }
-        });
-
-        view.findViewById(R.id.canel).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
-        LogUtil.i("openGallery");
     }
 
 //    List<Uri> mSelected;
@@ -245,7 +222,7 @@ public class AddModelActivity extends BasedActivity implements AddContract.View 
                 }
             }
 
-            cropImageUri(uri, 200, 100, CUT_OK);
+            cropImageUri(uri, UiUtils.dip2px(100), UiUtils.dip2px(100), CUT_OK);
 
 
         }
@@ -278,13 +255,17 @@ public class AddModelActivity extends BasedActivity implements AddContract.View 
                             e.printStackTrace();
                         }
                     }
-                    uri = Uri.fromFile(tempFile);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        uri = FileProvider.getUriForFile(getApplicationContext(), "net.suntrans.suntranssmarthome.fileProvider", tempFile);
+                    } else {
+                        uri = Uri.fromFile(tempFile);
+                    }
                 } else {
                     UiUtils.showToast("没有储存卡");
                 }
             }
 
-            cropImageUri(uri, 200, 100, CUT_OK);
+            cropImageUri(uri, UiUtils.dip2px(100), UiUtils.dip2px(100), CUT_OK);
         }
         if (requestCode == CUT_OK && resultCode == RESULT_OK) {
             Uri uri = imageUri;
@@ -310,12 +291,15 @@ public class AddModelActivity extends BasedActivity implements AddContract.View 
             LogUtil.i("裁剪失败");
             imageUri = null;
         }
+        if (requestCode == AppSettingsDialog.DEFAULT_SETTINGS_REQ_CODE) {
+            // Do something after user returned from app settings screen, like showing a Toast.
+        } else {
+        }
     }
 
     String imgId;
 
 
-    private static final String IMAGE_FILE_LOCATION = "file:///sdcard/temp.jpg";//temp file
     Uri imageUri = null;
     private File path = new File(Environment.getExternalStorageDirectory(), "suntrans");
 
@@ -328,14 +312,14 @@ public class AddModelActivity extends BasedActivity implements AddContract.View 
 
         intent.putExtra("crop", "true");
 
-        intent.putExtra("aspectX", 2);
+        intent.putExtra("aspectX", 1);
 
         intent.putExtra("aspectY", 1);
 
-//        intent.putExtra("data","uri");
-        intent.putExtra("outputX", outputX);
+//        intent.putra("data","uri");
+        intent.putExtra("outputX", UiUtils.dip2px(100));
 
-        intent.putExtra("outputY", outputY);
+        intent.putExtra("outputY", UiUtils.dip2px(100));
 
         intent.putExtra("scale", true);
 
@@ -352,17 +336,103 @@ public class AddModelActivity extends BasedActivity implements AddContract.View 
         if (file.exists()) {
             file.delete();
         }
-//        try {
-//            file.createNewFile();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         imageUri = null;
-        imageUri = Uri.fromFile(file);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            imageUri = FileProvider.getUriForFile(getApplicationContext(), "net.suntrans.suntranssmarthome.fileProvider", file);
+        } else {
+            imageUri = Uri.fromFile(file);
+        }
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-//        intent.putExtra("noFaceDetection", true); // no face detection
 
+
+        LogUtil.i(imageUri.toString());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            List<ResolveInfo> resInfoList = getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+            for (ResolveInfo resolveInfo : resInfoList) {
+                String packageName = resolveInfo.activityInfo.packageName;
+                grantUriPermission(packageName, imageUri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            }
+        }
         startActivityForResult(intent, requestCode);
+    }
+
+    private static final int RC_CAMARE_STORAGE_PERM = 124;
+
+    @AfterPermissionGranted(RC_CAMARE_STORAGE_PERM)
+    public void camaraAndStrogetask() {
+        String[] perms = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
+        if (EasyPermissions.hasPermissions(this, perms)) {
+            openButtomDialog();
+        } else {
+            // Ask for both permissions
+            EasyPermissions.requestPermissions(this, getString(R.string.rationale_camera),
+                    RC_CAMARE_STORAGE_PERM, perms);
+        }
+    }
+
+    private void openButtomDialog() {
+        final BottomSheetDialog dialog = new BottomSheetDialog(this);
+        View view = getLayoutInflater().inflate(R.layout.dialog_choose_pic, null, false);
+        dialog.setContentView(view);
+        view.findViewById(R.id.paizhao).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, CAPTURE_RESULT);
+                dialog.dismiss();
+            }
+        });
+        view.findViewById(R.id.tuku).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //打开图库
+                Intent intent = new Intent(
+                        Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, REQUEST_CODE_CHOOSE);
+                dialog.dismiss();
+
+            }
+        });
+
+        view.findViewById(R.id.canel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+        LogUtil.i("openGallery");
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+        LogUtil.i(TAG, "onPermissionsGranted:" + requestCode + ":" + perms.size());
 
     }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+        UiUtils.showToast("无法获取相机和存储权限");
+        // (Optional) Check whether the user denied any permissions and checked "NEVER ASK AGAIN."
+        // This will display a dialog directing them to enable the permission in app settings.
+        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+            new AppSettingsDialog.Builder(this).build().show();
+        }
+    }
+
+
 }

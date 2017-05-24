@@ -1,8 +1,8 @@
 package net.suntrans.suntranssmarthome.homepage.device;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -11,12 +11,15 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,12 +38,10 @@ import net.suntrans.suntranssmarthome.Config;
 import net.suntrans.suntranssmarthome.R;
 import net.suntrans.suntranssmarthome.api.RetrofitHelper;
 import net.suntrans.suntranssmarthome.databinding.FragmentDevicesBinding;
-import net.suntrans.suntranssmarthome.databinding.ItemDeviceBinding;
 import net.suntrans.suntranssmarthome.homepage.device.add.AddDeviceActivity;
 import net.suntrans.suntranssmarthome.homepage.device.sensus.SensusDetailActivity;
 import net.suntrans.suntranssmarthome.homepage.device.switchs.SwitchControlActivity;
 import net.suntrans.suntranssmarthome.utils.LogUtil;
-import net.suntrans.suntranssmarthome.utils.StatusBarCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,8 +49,6 @@ import java.util.List;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-
-import android.content.Context;
 
 /**
  * Created by Looney on 2017/4/20.
@@ -76,20 +75,17 @@ public class DevicesFragment extends RxFragment {
 
         Toolbar toolbar = binding.toolbar;
         ((RxAppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-
-//        ActionBar ab = ((RxAppCompatActivity) getActivity()).getSupportActionBar();
-//        ab.setDisplayHomeAsUpEnabled(false);
-//        ab.setDisplayShowHomeEnabled(false);
-//        ab.setDisplayShowTitleEnabled(false);
-        toolbar.setTitle("");
-        toolbar.inflateMenu(R.menu.menu_devices_add);
+        ActionBar ab = ((RxAppCompatActivity) getActivity()).getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
+        ab.setDisplayShowTitleEnabled(true);
+        ab.setTitle("设备管理");
 //        LogUtil.e(TAG, "toolbar is inflateMenu");
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
-            int statebarHeight = StatusBarCompat.getStatusBarHeight(getActivity());
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, statebarHeight);
-            binding.statusBarFix.setLayoutParams(layoutParams);
-
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
+//            int statebarHeight = StatusBarCompat.getStatusBarHeight(getActivity());
+//            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, statebarHeight);
+//            binding.statusBarFix.setLayoutParams(layoutParams);
+//
+//        }
         return binding.getRoot();
     }
 
@@ -115,6 +111,13 @@ public class DevicesFragment extends RxFragment {
     }
 
     Handler handler = new Handler();
+
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_devices_add,menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
 
     @Override
     public void onResume() {
@@ -198,6 +201,7 @@ public class DevicesFragment extends RxFragment {
                         }
                         intent.putExtra("name", datas.get(getAdapterPosition()).title);
                         intent.putExtra("subname", datas.get(getAdapterPosition()).name);
+                        LogUtil.i(datas.get(getAdapterPosition()).id+","+datas.get(getAdapterPosition()).title+","+datas.get(getAdapterPosition()).name);
                         Pair toolbarParticipants =
                                 new Pair<>(root, ViewCompat.getTransitionName(root));
                         ActivityOptionsCompat transitionActivityOptions =
