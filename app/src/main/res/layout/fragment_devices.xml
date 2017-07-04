@@ -8,11 +8,11 @@
 
         <variable
             name="deviceinfo"
-            type="net.suntrans.suntranssmarthome.homepage.device.DeviceInfoResult" />
+            type="net.suntrans.smarthome.bean.DeviceInfoResult" />
 
         <variable
             name="actionHandler"
-            type="net.suntrans.suntranssmarthome.homepage.device.DeviceContract.Presenter" />
+            type="net.suntrans.smarthome.model.DeviceContract.Presenter" />
     </data>
 
     <LinearLayout
@@ -60,7 +60,7 @@
         <View style="@style/line_below_navigation_bar" />
 
 
-        <net.suntrans.suntranssmarthome.widget.ScrollChildSwipeRefreshLayout
+        <net.suntrans.smarthome.widget.ScrollChildSwipeRefreshLayout
             android:id="@+id/refreshlayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -101,7 +101,7 @@
                     </android.support.v7.widget.RecyclerView>
                 </FrameLayout>
             </LinearLayout>
-        </net.suntrans.suntranssmarthome.widget.ScrollChildSwipeRefreshLayout>
+        </net.suntrans.smarthome.widget.ScrollChildSwipeRefreshLayout>
 
     </LinearLayout>
 </layout>

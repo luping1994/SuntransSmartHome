@@ -8,6 +8,7 @@
     android:orientation="vertical">
 
     <ImageView
+        android:transitionName="@string/transition_imageView"
         android:scaleType="fitXY"
         android:id="@+id/imageView"
         android:layout_width="48dp"

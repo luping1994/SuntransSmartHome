@@ -8,8 +8,8 @@ android {
         applicationId "net.suntrans.suntranssmarthome"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        versionCode 7
+        versionName "1.0.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true//这行
 
@@ -52,6 +52,21 @@ android {
             abortOnError false
         }
     }
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            def fileName
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                if (variant.buildType.name.equals('release')) {
+                    fileName = "net.suntrans.smarthomev1_${defaultConfig.versionName}_${defaultConfig.versionCode}.apk"
+                } else if (variant.buildType.name.equals('debug')) {
+                    fileName = "net.suntrans.smarthome_${defaultConfig.versionName}_${defaultConfig.versionCode}_debug.apk"
+                }
+                output.outputFile = new File(outputFile.parent, fileName)
+            }
+        }
+    }
+
 }
 
 dependencies {
@@ -59,20 +74,19 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:support-v4:25.1.1'
-    compile 'com.android.support:appcompat-v7:25.1.1'
-    compile 'com.android.support:design:25.1.1'
+    compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:design:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:cardview-v7:25.1.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.android.support:cardview-v7:25.3.1'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'io.reactivex:rxjava:1.1.6'
     compile 'com.trello:rxlifecycle-components:1.0'
     compile 'com.squareup.retrofit2:retrofit:2.2.0'
-    compile 'com.tencent.bugly:crashreport_upgrade:latest.release'
+    //    compile 'com.tencent.bugly:crashreport_upgrade:latest.release'
     compile 'pub.devrel:easypermissions:0.3.1'
     compile 'com.androidadvance:topsnackbar:1.1.1'
     compile 'io.fogcloud.sdk:easylink:0.2.5'
@@ -83,13 +97,18 @@ dependencies {
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
     compile 'com.zhihu.android:matisse:0.4.3'
-    compile 'com.android.support:palette-v7:25.1.1'
+    compile 'com.android.support:palette-v7:25.3.1'
     compile 'com.alibaba:fastjson:1.1.56.android'
     //    compile 'in.srain.cube:ultra-ptr:1.0.11'
     compile 'pub.devrel:easypermissions:0.4.0'
     compile project(':zxing-android-embedded')
     compile 'com.android.support:multidex:1.0.0'
     compile 'com.contrarywind:Android-PickerView:3.2.5'
+    compile 'com.pgyersdk:sdk:2.5.6'
+    compile 'me.weyye.hipermission:library:1.0.3'
+    compile files('libs/Msc.jar')
+    compile files('libs/Sunflower.jar')
+
 }
 repositories {
     mavenCentral()

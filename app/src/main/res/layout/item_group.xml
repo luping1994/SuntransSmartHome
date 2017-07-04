@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root"
     android:layout_width="match_parent"
-    android:layout_height="64dp"
+    android:layout_height="50dp"
     android:background="#efefef"
     android:gravity="center_vertical"
     android:orientation="horizontal"
@@ -13,6 +13,7 @@
 
 
     <ImageView
+        android:visibility="gone"
         android:id="@+id/imageView"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -59,10 +60,10 @@
         android:focusable="false" />
 
     <TextView
-
+        android:id="@+id/count"
         android:layout_marginRight="8dp"
         android:textSize="16sp"
-        android:text="3"
+        android:text="--"
         android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

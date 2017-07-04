@@ -13,7 +13,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin">
 
-        <net.suntrans.suntranssmarthome.widget.CircleImageView
+        <net.suntrans.smarthome.widget.CircleImageView
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="#d4e4ae"

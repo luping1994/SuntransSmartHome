@@ -11,8 +11,7 @@
         android:layout_height="wrap_content">
 
         <android.support.v7.widget.Toolbar
-            app:navigationIcon="@drawable/ic_arrow_back_white_18dp"
-
+            app:navigationIcon="@drawable/back_selector_new"
             android:fitsSystemWindows="true"
             android:id="@+id/toolbar"
             android:layout_width="match_parent"

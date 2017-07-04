@@ -4,7 +4,7 @@
     <data>
         <variable
             name="channel"
-            type="net.suntrans.suntranssmarthome.homepage.device.switchs.ChannelResult.Channel"/>
+            type="net.suntrans.smarthome.bean.ChannelResult.Channel"/>
         <!--<import type="String"/>-->
     </data>
 
@@ -60,7 +60,7 @@
                     android:textSize="14sp" />
             </LinearLayout>
 
-            <net.suntrans.suntranssmarthome.widget.SwitchButton
+            <net.suntrans.smarthome.widget.SwitchButton
                 app:kswThumbDrawable="@drawable/switch_top_circle"
                 app:kswBackDrawable="@drawable/switch_bottom_white"
                 android:id="@+id/switchButton"

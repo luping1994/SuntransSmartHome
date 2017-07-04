@@ -6,11 +6,11 @@
 
         <variable
             name="user"
-            type="net.suntrans.suntranssmarthome.homepage.personal.UserInfo.User" />
+            type="net.suntrans.smarthome.bean.UserInfo.User" />
 
         <variable
             name="actionHandler"
-            type="net.suntrans.suntranssmarthome.homepage.personal.PersonalContract.Presenter" />
+            type="net.suntrans.smarthome.model.personal.PersonalContract.Presenter" />
     </data>
 
     <LinearLayout

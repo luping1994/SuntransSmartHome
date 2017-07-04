@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<net.suntrans.suntranssmarthome.widget.ScrollChildSwipeRefreshLayout
+<net.suntrans.smarthome.widget.ScrollChildSwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/refreshlayout"
     android:layout_width="match_parent"
@@ -15,5 +15,5 @@
 
       </android.support.v7.widget.RecyclerView>
   </RelativeLayout>
-</net.suntrans.suntranssmarthome.widget.ScrollChildSwipeRefreshLayout>
+</net.suntrans.smarthome.widget.ScrollChildSwipeRefreshLayout>
 

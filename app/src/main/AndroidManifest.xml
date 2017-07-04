@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="net.suntrans.suntranssmarthome">
+    package="net.suntrans.smarthome">
     <!--允许程序打开网络套接字-->
     <uses-permission android:name="android.permission.INTERNET" />
     <!--允许程序设置内置sd卡的写权限-->
@@ -21,9 +21,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!--用于写入缓存数据到扩展存储卡-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!--用于申请调用A-GPS模块-->
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
 
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -32,66 +30,120 @@
     <uses-permission android:name="android.permission.READ_LOGS" />
     <!--保存资源到SD卡-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!--获取手机录音机使用权限，听写、识别、语义理解需要用到此权限 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <application
+        android:name="net.suntrans.smarthome.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:name=".App"
         android:theme="@style/AppTheme">
-        <activity android:name=".login.LoginActivity">
-        </activity>
-        <activity android:name=".homepage.MainActivity" />
-        <activity android:name=".homepage.personal.detail.SuggestionActivity" />
-        <activity android:name=".homepage.personal.detail.AboutActivity" />
-        <activity android:name=".homepage.personal.detail.HelpActivity" />
-        <activity android:name=".homepage.personal.detail.UpdateActivity" />
-        <activity android:name=".homepage.personal.detail.SettingActivity" />
-        <activity android:name=".homepage.device.add.AddDeviceActivity" />
-        <activity android:name=".homepage.device.switchs.SwitchControlActivity" />
+        <meta-data
+            android:name="PGYER_APPID"
+            android:value="8fcb4e44bc0c86c640078297e9b562b0"></meta-data>
+
+        <activity android:name="net.suntrans.smarthome.login.LoginActivity"></activity>
+        <activity android:name="net.suntrans.smarthome.MainActivity" />
+        <activity android:name="net.suntrans.smarthome.activity.perc.SuggestionActivity" />
+        <activity android:name="net.suntrans.smarthome.activity.perc.AboutActivity" />
+        <activity android:name="net.suntrans.smarthome.activity.perc.HelpActivity" />
+        <activity android:name="net.suntrans.smarthome.activity.perc.ModifyPassActivity" />
+        <activity android:name="net.suntrans.smarthome.activity.perc.SettingActivity" />
+        <activity android:name="net.suntrans.smarthome.activity.perc.detail.AddDeviceActivity" />
+        <activity android:name="net.suntrans.smarthome.activity.perc.detail.SwitchControlActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="net.suntrans.suntranssmarthome.fileProvider"
+            android:authorities="net.suntrans.smarthome.fileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+
         <activity
-            android:name="com.tencent.bugly.beta.ui.BetaActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|locale"
-            android:theme="@android:style/Theme.Translucent" />
-        <activity android:name=".homepage.device.sensus.SensusDetailActivity" />
-        <activity android:name=".homepage.myhome.add.AddModelActivity" />
-        <activity android:name=".homepage.device.sensus.SensusSettingActivity" />
-        <activity android:name=".homepage.myhome.edit.EditSenceActivity" />
-        <activity android:name=".homepage.myhome.detail.SenceDetailActivity" />
-        <activity android:name=".homepage.myhome.detail.RoomDetailActivity" />
-        <activity android:name=".login.WelcomeActivity">
+            android:name="net.suntrans.smarthome.activity.perc.detail.SensusDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="net.suntrans.smarthome.activity.mh.AddModelActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="net.suntrans.smarthome.activity.perc.detail.SensusSettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="net.suntrans.smarthome.activity.mh.EditSenceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="net.suntrans.smarthome.activity.mh.SenceDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="net.suntrans.smarthome.login.WelcomeActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".homepage.myhome.edit.EditRoomActivity" />
-        <activity android:name=".homepage.myhome.detail.ModifyINActivity" />
-        <activity android:name=".homepage.myhome.detail.EnvDetailActivity" />
-        <activity android:name=".homepage.personal.detail.DeviceManagerActivity" />
-        <activity android:name=".homepage.myhome.edit.EditLinkageActivity" />
-        <activity android:name=".homepage.myhome.add.AddLinkageActivity" />
-        <activity android:name=".homepage.devicemain.DeviceMainSettingActivity" />
-        <activity android:name=".homepage.devicemain.ChooseDeviceTypeActivity" />
-        <activity android:name=".homepage.devicemain.ChooseDeviceRoomActivity" />
-        <activity android:name=".homepage.myhome.edit.SenceDevGroupActivity" />
-        <activity android:name=".homepage.myhome.edit.AddSenceDevGrpActivity" />
-        <activity android:name=".homepage.myhome.edit.LinkageGroupActivity" />
-        <activity android:name=".homepage.myhome.edit.AddSenceLinkGrpActivity" />
-        <activity android:name=".homepage.myhome.edit.ChooseLinkageConActivity" />
-        <activity android:name=".homepage.myhome.edit.AddRoomDevGrpActivity" />
-        <activity android:name=".homepage.myhome.edit.RoomDevGroupActivity" />
-        <activity android:name=".homepage.myhome.detail.RoomDetailActivity_new" />
+        <activity
+            android:name="net.suntrans.smarthome.activity.room.EditRoomActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="net.suntrans.smarthome.activity.ModifyINActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="net.suntrans.smarthome.activity.mh.EnvDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="net.suntrans.smarthome.activity.perc.DeviceManagerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="net.suntrans.smarthome.activity.mh.EditLinkageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="net.suntrans.smarthome.activity.mh.AddLinkageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="net.suntrans.smarthome.activity.mh.DeviceMainSettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="net.suntrans.smarthome.activity.mh.ChooseDeviceTypeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="net.suntrans.smarthome.activity.mh.ChooseDeviceRoomActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="net.suntrans.smarthome.activity.mh.SenceDevGroupActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="net.suntrans.smarthome.activity.mh.AddSenceDevGrpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="net.suntrans.smarthome.activity.mh.LinkageGroupActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="net.suntrans.smarthome.activity.mh.AddSenceLinkGrpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="net.suntrans.smarthome.activity.mh.ChooseLinkageConActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="net.suntrans.smarthome.activity.room.AddRoomDevGrpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="net.suntrans.smarthome.activity.mh.RoomDevGroupActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="net.suntrans.smarthome.activity.room.RoomDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="net.suntrans.smarthome.activity.mh.ChooseLinkageResultActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name="net.suntrans.smarthome.activity.mh.SpeechActivity" />
+
+        <service android:name="net.suntrans.smarthome.websocket.WebSocketService" />
     </application>
 </manifest>

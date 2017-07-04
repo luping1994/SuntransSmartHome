@@ -5,7 +5,7 @@
 
         <variable
             name="info"
-            type="net.suntrans.suntranssmarthome.homepage.device.sensus.SensusResult.Sensus" />
+            type="net.suntrans.smarthome.bean.SensusResult.Sensus" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -38,7 +38,7 @@
         </android.support.v7.widget.Toolbar>
 
 
-        <net.suntrans.suntranssmarthome.widget.ScrollChildSwipeRefreshLayout
+        <net.suntrans.smarthome.widget.ScrollChildSwipeRefreshLayout
            android:id="@+id/refreshlayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -65,7 +65,7 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="15dip"
                             android:scaleType="fitCenter"
-                            android:src="@mipmap/ic_launcher" />
+                            android:src="@drawable/time" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -106,7 +106,7 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="15dip"
                             android:scaleType="fitCenter"
-                            android:src="@mipmap/ic_launcher" />
+                            android:src="@drawable/ic_pm" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -118,13 +118,14 @@
                             android:textSize="15sp" />
 
                         <TextView
+                            android:id="@+id/textView"
                             android:layout_width="0dip"
                             android:layout_height="fill_parent"
                             android:layout_marginRight="15dip"
                             android:layout_weight="1"
                             android:gravity="center|right"
                             android:maxLines="1"
-                            android:text="@{info.pm1}"
+                            android:text='@{info.pm1==null?"--":info.pm1+"ppm"}'
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -146,7 +147,7 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="15dip"
                             android:scaleType="fitCenter"
-                            android:src="@mipmap/ic_launcher" />
+                            android:src="@drawable/ic_pm" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -164,7 +165,7 @@
                             android:layout_weight="1"
                             android:gravity="center|right"
                             android:maxLines="1"
-                            android:text="@{info.pm10}"
+                            android:text='@{info.pm10==null?"--":info.pm10+"ppm"}'
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -186,7 +187,7 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="15dip"
                             android:scaleType="fitCenter"
-                            android:src="@mipmap/ic_launcher" />
+                            android:src="@drawable/ic_pm" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -204,7 +205,7 @@
                             android:layout_weight="1"
                             android:gravity="center|right"
                             android:maxLines="1"
-                            android:text="@{info.pm25}"
+                            android:text='@{info.pm25==null?"--":info.pm25+"ppm"}'
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -227,7 +228,7 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="15dip"
                             android:scaleType="fitCenter"
-                            android:src="@mipmap/ic_launcher" />
+                            android:src="@drawable/ic_smoke" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -245,7 +246,7 @@
                             android:layout_weight="1"
                             android:gravity="center|right"
                             android:maxLines="1"
-                            android:text="@{info.jiaquan}"
+                            android:text='@{info.jiaquan==null?"--":info.jiaquan+"ppm"}'
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -267,7 +268,7 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="15dip"
                             android:scaleType="fitCenter"
-                            android:src="@mipmap/ic_launcher" />
+                            android:src="@drawable/ic_smoke" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -285,7 +286,7 @@
                             android:layout_weight="1"
                             android:gravity="center|right"
                             android:maxLines="1"
-                            android:text="@{info.yanwu}"
+                            android:text='@{info.yanwu==null?"--":info.yanwu+"ppm"}'
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -307,7 +308,7 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="15dip"
                             android:scaleType="fitCenter"
-                            android:src="@mipmap/ic_launcher" />
+                            android:src="@drawable/ic_temp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -325,12 +326,13 @@
                             android:layout_weight="1"
                             android:gravity="center|right"
                             android:maxLines="1"
-                            android:text='@{info.wendu}'
+                            android:text='@{info.wendu==null?"--":info.wendu+"°C"}'
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
 
                     <ImageView
+
                         style="@style/line_horizontal_middle_gray"
                         android:layout_marginLeft="13.0dip"
                         android:layout_marginRight="13.0dip" />
@@ -347,7 +349,7 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="15dip"
                             android:scaleType="fitCenter"
-                            android:src="@mipmap/ic_launcher" />
+                            android:src="@drawable/ic_humidity" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -365,7 +367,7 @@
                             android:layout_weight="1"
                             android:gravity="center|right"
                             android:maxLines="1"
-                            android:text='@{info.shidu}'
+                            android:text='@{info.shidu==null?"--":info.shidu+"%"}'
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -387,7 +389,7 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="15dip"
                             android:scaleType="fitCenter"
-                            android:src="@mipmap/ic_launcher" />
+                            android:src="@drawable/ic_peopleinfo" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -405,7 +407,7 @@
                             android:layout_weight="1"
                             android:gravity="center|right"
                             android:maxLines="1"
-                            android:text='@{info.renyuan}'
+                            android:text='@{info.renyuan==null?"--":info.renyuan.equals("1")?"有人":"没人"}'
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -428,7 +430,7 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="15dip"
                             android:scaleType="fitCenter"
-                            android:src="@mipmap/ic_launcher" />
+                            android:src="@drawable/ic_gradient" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -446,7 +448,7 @@
                             android:layout_weight="1"
                             android:gravity="center|right"
                             android:maxLines="1"
-                            android:text="@{info.x_zhou}"
+                            android:text='@{info.x_zhou==null?"--":info.x_zhou+"°"}'
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -468,7 +470,7 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="15dip"
                             android:scaleType="fitCenter"
-                            android:src="@mipmap/ic_launcher" />
+                            android:src="@drawable/ic_gradient" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -486,7 +488,7 @@
                             android:layout_weight="1"
                             android:gravity="center|right"
                             android:maxLines="1"
-                            android:text="@{info.y_zhou}"
+                            android:text='@{info.y_zhou==null?"--":info.y_zhou+"°"}'
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -508,7 +510,7 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="15dip"
                             android:scaleType="fitCenter"
-                            android:src="@mipmap/ic_launcher" />
+                            android:src="@drawable/ic_gradient" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -526,7 +528,7 @@
                             android:layout_weight="1"
                             android:gravity="center|right"
                             android:maxLines="1"
-                            android:text="@{info.z_zhou}"
+                            android:text='@{info.z_zhou==null?"--":info.z_zhou+"°"}'
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -537,6 +539,6 @@
                         android:layout_marginRight="13.0dip" />
                 </LinearLayout>
             </android.support.v4.widget.NestedScrollView>
-        </net.suntrans.suntranssmarthome.widget.ScrollChildSwipeRefreshLayout>
+        </net.suntrans.smarthome.widget.ScrollChildSwipeRefreshLayout>
     </LinearLayout>
 </layout>

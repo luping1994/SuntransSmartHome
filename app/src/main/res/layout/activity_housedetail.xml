@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools">
+<layout>
 
 
     <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -34,6 +34,7 @@
 
 
                     <ImageView
+                        android:transitionName="@string/transition_imageView"
                         android:id="@+id/mode_img"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
@@ -56,7 +57,7 @@
                         android:layout_height="48.0dip">
 
                         <ImageView
-                            android:id="@id/base_iv_scene_back"
+                            android:id="@+id/base_iv_scene_back"
                             android:layout_width="30.0dip"
                             android:layout_height="30.0dip"
                             android:layout_centerVertical="true"
@@ -70,7 +71,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="18.0dip"
-                            android:layout_toRightOf="@id/base_iv_scene_back"
+                            android:layout_toRightOf="@+id/base_iv_scene_back"
                             android:text=""
                             android:textColor="@color/white"
                             android:textSize="18.0sp" />
@@ -135,7 +136,7 @@
                         android:id="@+id/recyclerview"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:visibility="gone">
+                       >
 
                     </android.support.v7.widget.RecyclerView>
                 </RelativeLayout>
@@ -156,7 +157,7 @@
 
             <Button
                 android:onClick="excute"
-                android:id="@+id/hand_add"
+                android:id="@+id/excute"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="328.0dip"
                 android:layout_height="40.0dip"

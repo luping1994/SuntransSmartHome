@@ -7,10 +7,7 @@
         app:showAsAction="never"
         android:id="@+id/sense"
         android:title="添加场景" />
-    <item
-        android:id="@+id/room"
-        android:title="添加房间"
-        app:showAsAction="never" />
+
     <item
         android:id="@+id/liandong"
         android:title="新增联动"

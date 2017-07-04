@@ -114,6 +114,7 @@
             android:layout_height="1dp" />
 
         <RelativeLayout
+            android:visibility="gone"
             android:id="@+id/shebei"
             android:layout_marginTop="@dimen/activity_horizontal_margin"
             android:layout_width="match_parent"
@@ -163,6 +164,7 @@
             android:layout_height="1dp" />
 
         <RelativeLayout
+            android:layout_marginTop="20dp"
             android:id="@+id/rizhi"
             android:layout_width="match_parent"
             android:layout_height="50dp"

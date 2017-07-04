@@ -17,6 +17,7 @@
             android:layout_height="@dimen/actionbarheight"
             android:background="?attr/colorPrimaryDark"
             app:theme="@style/Toolbar"
+            app:navigationIcon="@drawable/back_selector_new"
             app:titleTextAppearance="@style/Toolbar.TitleText"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
@@ -36,7 +37,7 @@
             android:background="@drawable/bg_ll_login"
             android:orientation="vertical">
 
-            <net.suntrans.suntranssmarthome.widget.EditView
+            <net.suntrans.smarthome.widget.EditView
                 android:id="@+id/oldpass"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
@@ -55,7 +56,7 @@
                 android:background="@color/secondtextcolor" />
 
 
-            <net.suntrans.suntranssmarthome.widget.EditView
+            <net.suntrans.smarthome.widget.EditView
                 android:id="@+id/newpass"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
@@ -73,7 +74,7 @@
                 android:background="@color/secondtextcolor" />
 
 
-            <net.suntrans.suntranssmarthome.widget.EditView
+            <net.suntrans.smarthome.widget.EditView
                 android:id="@+id/repass"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"

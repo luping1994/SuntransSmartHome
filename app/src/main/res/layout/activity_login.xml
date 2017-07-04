@@ -4,10 +4,10 @@
     <data>
         <variable
             name="user"
-            type="net.suntrans.suntranssmarthome.login.LoginModel"/>
+            type="net.suntrans.smarthome.login.LoginModel"/>
         <variable
             name="actionHandler"
-            type="net.suntrans.suntranssmarthome.login.LoginPresenter"/>
+            type="net.suntrans.smarthome.login.LoginPresenter"/>
     </data>
     <RelativeLayout
         android:fitsSystemWindows="true"
@@ -35,10 +35,11 @@
                 <android.support.v7.widget.AppCompatImageView
                     android:contentDescription="@string/app_name"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="150dp"
                     app:srcCompat="@drawable/logo" />
                 <TextView
-                    android:visibility="visible"
+
+                    android:visibility="gone"
                     android:textColor="@color/title"
                     android:textStyle="italic"
                     android:textSize="20sp"
@@ -58,7 +59,7 @@
                 android:background="@drawable/bg_ll_login"
                 android:orientation="vertical">
 
-                <net.suntrans.suntranssmarthome.widget.EditView
+                <net.suntrans.smarthome.widget.EditView
                     android:text="@={user.username}"
                     android:id="@+id/edit_account"
                     android:layout_width="match_parent"
@@ -78,7 +79,7 @@
                     android:background="@color/secondtextcolor" />
 
 
-                <net.suntrans.suntranssmarthome.widget.EditView
+                <net.suntrans.smarthome.widget.EditView
                     android:text="@={user.password}"
                     android:id="@+id/edit_password"
                     android:layout_width="match_parent"

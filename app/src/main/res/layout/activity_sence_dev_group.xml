@@ -36,7 +36,7 @@
             android:layout_width="fill_parent"
             android:layout_height="60.0dip"
             android:layout_gravity="bottom"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <Button
                 android:onClick="commit"

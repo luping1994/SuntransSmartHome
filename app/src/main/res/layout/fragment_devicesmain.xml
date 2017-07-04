@@ -7,45 +7,45 @@
     android:background="@color/colorPrimaryDark"
     android:orientation="vertical">
 
-    <View
-        android:id="@+id/status_bar_fix"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="#00000000" />
+    <!--<View-->
+        <!--android:id="@+id/status_bar_fix"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:background="#00000000" />-->
 
-    <LinearLayout
-        android:id="@+id/root"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <!--<LinearLayout-->
+        <!--android:id="@+id/root"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
 
-        <android.support.design.widget.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <!--<android.support.design.widget.AppBarLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/actionbarheight"
-                android:background="?attr/colorPrimary"
-                android:fitsSystemWindows="false"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:theme="@style/Toolbar">
+            <!--<android.support.v7.widget.Toolbar-->
+                <!--android:id="@+id/toolbar"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/actionbarheight"-->
+                <!--android:background="?attr/colorPrimary"-->
+                <!--android:fitsSystemWindows="false"-->
+                <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light"-->
+                <!--app:theme="@style/Toolbar">-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center|left"
-                    android:text="@string/main_devices_"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
-            </android.support.v7.widget.Toolbar>
-        </android.support.design.widget.AppBarLayout>
-    </LinearLayout>
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:gravity="center|left"-->
+                    <!--android:text="@string/main_devices_"-->
+                    <!--android:textColor="@color/white"-->
+                    <!--android:textSize="16sp" />-->
+            <!--</android.support.v7.widget.Toolbar>-->
+        <!--</android.support.design.widget.AppBarLayout>-->
+    <!--</LinearLayout>-->
 
-    <View style="@style/line_below_navigation_bar" />
+    <!--<View style="@style/line_below_navigation_bar" />-->
 
 
-    <net.suntrans.suntranssmarthome.widget.ScrollChildSwipeRefreshLayout
+    <net.suntrans.smarthome.widget.ScrollChildSwipeRefreshLayout
         android:id="@+id/refreshlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -57,6 +57,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="28dp"
                 android:gravity="center_vertical"
@@ -70,9 +71,9 @@
                 android:layout_height="match_parent">
 
                 <TextView
+                    android:id="@+id/tips"
                     android:layout_width="match_parent"
                     android:layout_height="84dp"
-                    android:background="@color/white"
                     android:gravity="center"
                     android:text="您还没有任何设备哟!"
                     android:visibility="gone" />
@@ -85,6 +86,6 @@
                 </android.support.v7.widget.RecyclerView>
             </FrameLayout>
         </LinearLayout>
-    </net.suntrans.suntranssmarthome.widget.ScrollChildSwipeRefreshLayout>
+    </net.suntrans.smarthome.widget.ScrollChildSwipeRefreshLayout>
 
 </LinearLayout>

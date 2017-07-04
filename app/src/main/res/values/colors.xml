@@ -7,6 +7,9 @@
     <color name="colorPrimary">#007dff</color>
     <color name="colorPrimaryDark">#007dff</color>
     <color name="colorAccent">#FF4081</color>
+    <!--<color name="colorPrimary">#2979ff</color>-->
+    <!--<color name="colorPrimaryDark">#2196f3</color>-->
+    <!--<color name="colorAccent">#FF4081</color>-->
 
     <color name="bg_welcome">#fbfbfb</color>
     <color name="black">#000000</color>

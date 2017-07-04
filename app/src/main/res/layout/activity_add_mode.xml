@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools">
+<layout>
 
     <data>
 
         <variable
             name="actionHandler"
-            type="net.suntrans.suntranssmarthome.homepage.myhome.add.AddContract.Presenter" />
+            type="net.suntrans.smarthome.model.add.AddContract.Presenter" />
     </data>
 
     <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"

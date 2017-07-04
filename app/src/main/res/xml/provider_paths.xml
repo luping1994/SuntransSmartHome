@@ -11,4 +11,10 @@
     <external-path
         name="suntrans_photo"
         path="" />
+    <external-path
+        name="files_root"
+        path="Android/data/com/pgyersdk" />
+    <external-path
+        name="external_storage_root"
+        path="." />
 </paths>

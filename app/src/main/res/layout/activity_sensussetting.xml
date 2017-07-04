@@ -5,11 +5,11 @@
 
         <variable
             name="param"
-            type="net.suntrans.suntranssmarthome.homepage.device.sensus.SensusSettingResult.Param" />
+            type="net.suntrans.smarthome.bean.SensusSettingResult.Param" />
 
         <variable
             name="command"
-            type="net.suntrans.suntranssmarthome.homepage.device.sensus.SensusSettingResult.Commmand" />
+            type="net.suntrans.smarthome.bean.SensusSettingResult.Commmand" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -40,7 +40,7 @@
                 android:transitionName="@string/item_toolbar_name" />
         </android.support.v7.widget.Toolbar>
 
-        <net.suntrans.suntranssmarthome.widget.ScrollChildSwipeRefreshLayout
+        <net.suntrans.smarthome.widget.ScrollChildSwipeRefreshLayout
             android:id="@+id/refreshlayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -99,7 +99,7 @@
                                 android:textSize="15sp" />
                         </LinearLayout>
 
-                        <net.suntrans.suntranssmarthome.widget.SwitchButton
+                        <net.suntrans.smarthome.widget.SwitchButton
                             android:checked='@{command.wendu}'
                             android:id="@+id/switchButton_wendu"
                             android:layout_width="wrap_content"
@@ -160,7 +160,7 @@
                                 android:textSize="15sp" />
                         </LinearLayout>
 
-                        <net.suntrans.suntranssmarthome.widget.SwitchButton
+                        <net.suntrans.smarthome.widget.SwitchButton
                             android:id="@+id/switchButton_yanwu"
                             android:checked='@{command.yanwu}'
 
@@ -222,7 +222,7 @@
                                 android:textSize="15sp" />
                         </LinearLayout>
 
-                        <net.suntrans.suntranssmarthome.widget.SwitchButton
+                        <net.suntrans.smarthome.widget.SwitchButton
                             android:checked='@{command.jiaquan}'
 
                             android:id="@+id/switchButton_jiaquan"
@@ -284,7 +284,7 @@
                                 android:textSize="15sp" />
                         </LinearLayout>
 
-                        <net.suntrans.suntranssmarthome.widget.SwitchButton
+                        <net.suntrans.smarthome.widget.SwitchButton
                             android:checked='@{command.pm25}'
 
                             android:id="@+id/switchButton_pm25"
@@ -347,7 +347,7 @@
                                 android:textSize="15sp" />
                         </LinearLayout>
 
-                        <net.suntrans.suntranssmarthome.widget.SwitchButton
+                        <net.suntrans.smarthome.widget.SwitchButton
                             android:checked='@{command.zhengdong}'
 
                             android:id="@+id/switchButton_zhengdong"
@@ -402,7 +402,7 @@
                                 android:textSize="15sp" />
                         </LinearLayout>
 
-                        <net.suntrans.suntranssmarthome.widget.SwitchButton
+                        <net.suntrans.smarthome.widget.SwitchButton
                             android:checked='@{command.renyuan}'
 
                             android:id="@+id/switchButton_renyuan"
@@ -425,6 +425,6 @@
                         android:layout_marginRight="13.0dip" />
                 </LinearLayout>
             </android.support.v4.widget.NestedScrollView>
-        </net.suntrans.suntranssmarthome.widget.ScrollChildSwipeRefreshLayout>
+        </net.suntrans.smarthome.widget.ScrollChildSwipeRefreshLayout>
     </LinearLayout>
 </layout>

@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools">
-
+<layout>
     <data>
-
         <variable
             name="info"
-            type="net.suntrans.suntranssmarthome.homepage.device.sensus.SensusResult.Sensus" />
-
+            type="net.suntrans.smarthome.bean.SensusResult.Sensus" />
     </data>
 
     <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -46,14 +43,15 @@
                         android:fitsSystemWindows="true"
                         android:scaleType="centerCrop"
                         android:src="@drawable/img_homepage" />
+
                     <TextView
-                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                        android:layout_above="@+id/wendu_ll"
-                        android:text="ST HOME"
-                        android:textSize="30sp"
-                        android:textColor="@color/white"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_above="@+id/wendu_ll"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:text="ST HOME"
+                        android:textColor="@color/white"
+                        android:textSize="30sp" />
 
                     <LinearLayout
                         android:id="@+id/wendu_ll"
@@ -74,6 +72,7 @@
                             android:id="@+id/wendu"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
+                            android:layout_marginLeft="2dp"
                             android:gravity="center_vertical"
                             android:text='@{info.wendu}'
                             android:textColor="@color/white"
@@ -96,6 +95,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
+                            android:layout_marginLeft="2dp"
                             android:gravity="center_vertical"
                             android:text='@{info.shidu+"%"}'
                             android:textColor="@color/white"
@@ -167,12 +167,12 @@
 
                         <TextView
                             android:id="@+id/title"
-                            android:alpha="0"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
                             android:layout_marginLeft="18.0dip"
                             android:layout_toRightOf="@id/base_iv_scene_back"
+                            android:alpha="0"
                             android:text="ST HOME"
                             android:textColor="@color/white"
                             android:textSize="16.0sp"
