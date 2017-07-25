@@ -94,6 +94,7 @@ public class SenceDetailActivity extends BasedActivity implements View.OnClickLi
         binding.title.setText(title);
         binding.edit.setOnClickListener(this);
         imgurl = getIntent().getStringExtra("imgurl");
+
         Glide.with(this)
                 .load(imgurl)
                 .placeholder(R.drawable.img_original_bg_sleep)
@@ -159,7 +160,7 @@ public class SenceDetailActivity extends BasedActivity implements View.OnClickLi
     public void excute(View view) {
         long time = System.currentTimeMillis();
         if (time - lastTime>INTERVAL){
-            System.out.println("sb");
+//            System.out.println("sb");
             lastTime =time;
             JSONObject jsonObject = new JSONObject();
             try {
@@ -201,13 +202,14 @@ public class SenceDetailActivity extends BasedActivity implements View.OnClickLi
                 state.setTextColor(getResources().getColor(R.color.colorAccent));
 
             ImageView imageView = helper.getView(R.id.img);
-
-            Glide.with(SenceDetailActivity.this)
-                    .load(item.img)
-                    .crossFade()
-                    .centerCrop()
-                    .placeholder(R.drawable.ic_light)
-                    .into(imageView);
+            imageView.setVisibility(View.GONE);
+//
+//            Glide.with(SenceDetailActivity.this)
+//                    .load(item.img)
+//                    .crossFade()
+//                    .centerCrop()
+//                    .placeholder(R.drawable.ic_light)
+//                    .into(imageView);
         }
     }
 

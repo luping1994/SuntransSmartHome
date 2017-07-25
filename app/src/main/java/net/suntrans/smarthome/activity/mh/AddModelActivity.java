@@ -272,7 +272,7 @@ public class AddModelActivity extends BasedActivity implements AddContract.View,
                         }
                     }
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        uri = FileProvider.getUriForFile(getApplicationContext(), "net.suntrans.suntranssmarthome.fileProvider", tempFile);
+                        uri = FileProvider.getUriForFile(getApplicationContext(), "net.suntrans.smarthome.fileProvider", tempFile);
                     } else {
                         uri = Uri.fromFile(tempFile);
                     }

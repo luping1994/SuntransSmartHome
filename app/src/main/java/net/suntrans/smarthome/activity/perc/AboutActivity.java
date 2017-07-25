@@ -24,6 +24,7 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
+import net.suntrans.smarthome.BuildConfig;
 import net.suntrans.smarthome.R;
 import net.suntrans.smarthome.base.BasedActivity;
 import net.suntrans.smarthome.utils.UiUtils;
@@ -38,6 +39,7 @@ import java.io.IOException;
  */
 
 public class AboutActivity extends BasedActivity {
+    private TextView guangwang;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,32 +58,19 @@ public class AboutActivity extends BasedActivity {
     }
 
     private void initView() {
-        PackageManager manager = getApplication().getPackageManager();
-        PackageInfo info = null;
-        try {
-            info = manager.getPackageInfo(getApplication().getPackageName(),0);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        String versions = info.versionName;
-        TextView version = (TextView) findViewById(R.id.version);
-        ImageView erweima = (ImageView) findViewById(R.id.erweima);
-        version .setText("版本号:"+versions);
-        final Bitmap bitmap = encodeAsBitmap("https://www.pgyer.com/DiiB");
-        erweima.setImageBitmap(bitmap);
-        erweima.setOnClickListener(new View.OnClickListener() {
+        guangwang = (TextView) findViewById(R.id.guangwang);
+        guangwang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(AboutActivity.this);
-                builder.setItems(new String[]{"保存到本地"}, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        saveImage(bitmap);
-                        dialog.dismiss();
-                    }
-                }).create().show();
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                Uri content_url = Uri.parse("http://www.suntrans.net/");
+                intent.setData(content_url);
+                startActivity(intent);
             }
         });
+        TextView textView = (TextView) findViewById(R.id.version);
+        textView .setText("版本号:"+ BuildConfig.VERSION_NAME);
     }
 
     @Override
@@ -97,7 +86,7 @@ public class AboutActivity extends BasedActivity {
                 finish();
                 return true;
             case R.id.share:
-                Uri uri = Uri.parse("https://www.pgyer.com/DiiB");
+                Uri uri = Uri.parse("https://www.pgyer.com/DPTD");
                 share(uri,"分享",AboutActivity.this);
                 return true;
         }

@@ -70,6 +70,7 @@ public class DeviceMainFragment extends RxFragment {
 
 
     private Subscription subscribe;
+    private Observable<AllDeviceResult> getDataObj;
 
     public static DeviceMainFragment newInstance() {
         return new DeviceMainFragment();
@@ -129,6 +130,9 @@ public class DeviceMainFragment extends RxFragment {
                 getData();
             }
         });
+        refreshLayout.setNestedScrollingEnabled(true);
+
+//        refreshLayout.setDistanceToTriggerSync(100);
         dialog = new LoadingDialog(getContext(), R.style.loading_dialog);
         dialog.setCancelable(false);
         mHandler = new MyHandler();
@@ -162,11 +166,14 @@ public class DeviceMainFragment extends RxFragment {
         try {
             JSONObject jsonObject = new JSONObject(msg1);
             String code = jsonObject.getString("code");
+            String device = jsonObject.getString("device");
+//            System.out.println(device);
+            if (!device.equals(Config.STSLC_6) && !device.equals(Config.STSLC_10))
+                return;
             if (code.equals("200")) {
                 JSONObject result = jsonObject.getJSONObject("result");
                 int channel = result.getInt("channel");
                 int command = result.getInt("command");
-                String device = result.getString("device");
                 String addr = result.getString("addr");
                 Map<String, String> map = ParseCMD.check((short) channel, (short) command);
 
@@ -305,7 +312,7 @@ public class DeviceMainFragment extends RxFragment {
 
             private void sendCmd(int position) {
                 mHandler.sendEmptyMessage(MSG_START);
-                mHandler.sendMessageDelayed(Message.obtain(mHandler, MSG_CON_FAILED, "请求失败,请检查你的网络"), 2000);
+                mHandler.sendMessageDelayed(Message.obtain(mHandler, MSG_CON_FAILED, "设备不在线"), 2000);
                 final JSONObject jsonObject = new JSONObject();
                 try {
                     jsonObject.put("device", datas.get(position).vtype);
@@ -371,36 +378,40 @@ public class DeviceMainFragment extends RxFragment {
     private List<AllDeviceResult.ChannelInfo> datas = new ArrayList<>();
 
     public void getData() {
-        RetrofitHelper.getApi().getAllDevice()
-                .compose(this.<AllDeviceResult>bindUntilEvent(FragmentEvent.DESTROY_VIEW))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<AllDeviceResult>() {
-                    @Override
-                    public void onCompleted() {
+        if (getDataObj == null){
+            getDataObj = RetrofitHelper.getApi().getAllDevice()
+                    .compose(this.<AllDeviceResult>bindUntilEvent(FragmentEvent.DESTROY_VIEW))
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread());
+        }
 
-                    }
+        getDataObj.subscribe(new Subscriber<AllDeviceResult>() {
+            @Override
+            public void onCompleted() {
 
-                    @Override
-                    public void onError(Throwable e) {
-                        e.printStackTrace();
-                        if (refreshLayout != null) {
-                            refreshLayout.setRefreshing(false);
-                        }
-                    }
+            }
 
-                    @Override
-                    public void onNext(AllDeviceResult result) {
-                        if (refreshLayout != null) {
-                            refreshLayout.setRefreshing(false);
-                        }
-                        if (result != null) {
-                            datas.clear();
-                            datas.addAll(result.channel.result);
-                            adapter.notifyDataSetChanged();
-                        }
-                    }
-                });
+            @Override
+            public void onError(Throwable e) {
+                e.printStackTrace();
+                if (refreshLayout != null) {
+                    refreshLayout.setRefreshing(false);
+                }
+            }
+
+            @Override
+            public void onNext(AllDeviceResult result) {
+                if (refreshLayout != null) {
+                    refreshLayout.setRefreshing(false);
+                }
+                if (result != null) {
+                    datas.clear();
+                    datas.addAll(result.channel.result);
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        });
+
     }
 
 
@@ -419,8 +430,8 @@ public class DeviceMainFragment extends RxFragment {
     public void onDestroy() {
         getActivity().unbindService(connection);
         mHandler.removeCallbacksAndMessages(null);
-        if (subscribe!=null){
-            if (!subscribe.isUnsubscribed()){
+        if (subscribe != null) {
+            if (!subscribe.isUnsubscribed()) {
                 subscribe.unsubscribe();
             }
         }

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="GradeBar">
+        <attr name="barPadding" format="dimension"/>
+        <attr name="gradeNumber" format="integer"/>
+        <attr name="textArray" format="reference"/>
+        <attr name="enable" format="boolean"/>
+    </declare-styleable>
+</resources>

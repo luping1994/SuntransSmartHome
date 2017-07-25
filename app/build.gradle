@@ -5,11 +5,11 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
-        applicationId "net.suntrans.suntranssmarthome"
+        applicationId "net.suntrans.smarthome"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 7
-        versionName "1.0.2"
+        versionCode 22
+        versionName "1.0.9"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true//这行
 
@@ -23,7 +23,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "boolean", "ENABLE_DEBUG", "false"
-
         }
         debug {
 
@@ -104,11 +103,11 @@ dependencies {
     compile project(':zxing-android-embedded')
     compile 'com.android.support:multidex:1.0.0'
     compile 'com.contrarywind:Android-PickerView:3.2.5'
-    compile 'com.pgyersdk:sdk:2.5.6'
+//    compile 'com.pgyersdk:sdk:2.5.6'
     compile 'me.weyye.hipermission:library:1.0.3'
     compile files('libs/Msc.jar')
     compile files('libs/Sunflower.jar')
-
+    compile 'com.tencent.bugly:crashreport_upgrade:latest.release'
 }
 repositories {
     mavenCentral()

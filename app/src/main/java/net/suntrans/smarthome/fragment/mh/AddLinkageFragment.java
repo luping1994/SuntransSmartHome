@@ -119,7 +119,7 @@ public class AddLinkageFragment extends Fragment implements View.OnClickListener
             }
         }
         if (resultCode == 103 && requestCode == 102) {
-            System.out.println("我被执行了");
+//            System.out.println("我被执行了");
             String[] datas = data.getStringArrayExtra("data");
             for (int i = 0; i < datas.length; i++) {
                 String s = "";

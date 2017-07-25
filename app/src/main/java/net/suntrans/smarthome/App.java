@@ -7,8 +7,8 @@ import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 
 import com.iflytek.cloud.SpeechUtility;
-import com.pgyersdk.crash.PgyCrashManager;
 import com.squareup.leakcanary.LeakCanary;
+import com.tencent.bugly.Bugly;
 
 import net.suntrans.smarthome.utils.LogUtil;
 
@@ -17,8 +17,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
-import static net.suntrans.smarthome.BuildConfig.ENABLE_DEBUG;
 
 
 /**
@@ -51,7 +49,6 @@ public class App extends MultiDexApplication {
         LeakCanary.install(this);
         application = this;
         SpeechUtility.createUtility(App.this, "appid=" + getString(R.string.app_id));
-
 //        new Thread(){//copy assets目录下的开关信息数据库
 //            @Override
 //            public void run() {
@@ -62,9 +59,9 @@ public class App extends MultiDexApplication {
 //                }
 //            }
 //        }.start();
-        if (!ENABLE_DEBUG)
-            PgyCrashManager.register(this);
-
+//        if (!ENABLE_DEBUG)
+//            PgyCrashManager.register(this);
+        Bugly.init(getApplicationContext(), "6ec9742d2e", false);
     }
 
 
@@ -128,5 +125,4 @@ public class App extends MultiDexApplication {
         super.attachBaseContext(base);
         MultiDex.install(this);
     }
-
 }

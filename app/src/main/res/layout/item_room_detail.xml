@@ -51,12 +51,23 @@
                 android:textSize="14sp" />
         </LinearLayout>
 
-        <android.support.v7.widget.AppCompatCheckBox
-            android:gravity="center|right"
-            android:clickable="false"
-            android:id="@+id/checkbox"
+          <android.support.v7.widget.AppCompatCheckBox
+              android:gravity="center|right"
+              android:clickable="false"
+              android:id="@+id/checkbox"
+              android:layout_alignParentRight="true"
+              style="@style/CustomCheckBoxTheme"
+              android:layout_width="wrap_content"
+              android:layout_height="match_parent" />
+
+        <TextView
+            android:layout_marginRight="16dp"
+            android:id="@+id/go"
+            android:gravity="center"
+            android:text="GO"
+            android:textColor="#000000"
+            android:textSize="18sp"
             android:layout_alignParentRight="true"
-            style="@style/CustomCheckBoxTheme"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
     </RelativeLayout>

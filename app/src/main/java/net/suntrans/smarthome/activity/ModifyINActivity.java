@@ -313,7 +313,7 @@ public class ModifyINActivity extends BasedActivity implements View.OnClickListe
                         }
                     }
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        uri = FileProvider.getUriForFile(getApplicationContext(), "net.suntrans.suntranssmarthome.fileProvider", tempFile);
+                        uri = FileProvider.getUriForFile(getApplicationContext(), "net.suntrans.smarthome.fileProvider", tempFile);
                     } else {
                         uri = Uri.fromFile(tempFile);
                     }
@@ -356,16 +356,17 @@ public class ModifyINActivity extends BasedActivity implements View.OnClickListe
 
         intent.putExtra("crop", "true");
 
-        intent.putExtra("aspectX", 1);
-
-        intent.putExtra("aspectY", 1);
-
-//        intent.putExtra("data","uri");
-        intent.putExtra("outputX", outputX);
-
-        intent.putExtra("outputY", outputY);
 
         intent.putExtra("scale", true);
+
+        intent.putExtra("aspectX", 16);
+
+        intent.putExtra("aspectY", 9);
+
+//        intent.putra("data","uri");
+        intent.putExtra("outputX", 1080);
+
+        intent.putExtra("outputY", UiUtils.dip2px(100));
 
 //        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
 

@@ -17,6 +17,8 @@ import net.suntrans.smarthome.utils.RxBus;
 
 import okhttp3.WebSocket;
 
+import static com.iflytek.sunflower.config.b.s;
+
 /**
  * Created by Looney on 2017/5/27.
  */
@@ -60,7 +62,6 @@ public class WebSocketService extends Service implements WebSocketWrapper.onRece
 
     @Override
     public void onMessage(String s) {
-        LogUtil.i("webservice收到：" + s);
         CmdMsg msg = new CmdMsg();
         msg.status=1;
         msg.msg=s;
@@ -70,13 +71,20 @@ public class WebSocketService extends Service implements WebSocketWrapper.onRece
     @Override
     public void onFailure(Throwable t) {
         t.printStackTrace();
+        CmdMsg msg = new CmdMsg();
+        msg.status=0;
+        msg.msg="连接服务器失败";
+        RxBus.getInstance().post(msg);
     }
 
 
 
     @Override
     public void onOpen() {
-        LogUtil.i("连接websocket服务器成功!");
+        CmdMsg msg = new CmdMsg();
+        msg.status=0;
+        msg.msg="通讯成功";
+        RxBus.getInstance().post(msg);
     }
 
     @Override

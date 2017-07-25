@@ -132,10 +132,10 @@ public class MyHomeFragment2 extends RxFragment {
                     UiUtils.showToast("无法获取环境信息");
                     return;
                 }
-                Intent intent = new Intent(getActivity(), EnvDetailActivity.class);
-                intent.putExtra("info", info);
-                startActivity(intent);
-                getActivity().overridePendingTransition(android.support.v7.appcompat.R.anim.abc_slide_in_bottom, 0);
+//                Intent intent = new Intent(getActivity(), EnvDetailActivity.class);
+//                intent.putExtra("info", info);
+//                startActivity(intent);
+//                getActivity().overridePendingTransition(0, 0);
 
             }
         });

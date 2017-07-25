@@ -151,7 +151,7 @@ public class AddSenceDevGrpActivity extends BasedActivity {
                             if (data.size() != 0) {
                                 int count = 0;
                                 for (AddSCResult result : data) {
-                                    System.out.println(result.result);
+//                                    System.out.println(result.result);
                                     if (result.result.equals("成功"))
                                         count++;
                                 }

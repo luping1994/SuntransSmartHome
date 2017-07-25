@@ -42,14 +42,14 @@
                         android:layout_height="fill_parent"
                         android:fitsSystemWindows="true"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/img_homepage" />
+                        android:src="@drawable/material_design_3" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_above="@+id/wendu_ll"
                         android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                        android:text="ST HOME"
+                        android:text="智慧家居"
                         android:textColor="@color/white"
                         android:textSize="30sp" />
 
@@ -173,7 +173,7 @@
                             android:layout_marginLeft="18.0dip"
                             android:layout_toRightOf="@id/base_iv_scene_back"
                             android:alpha="0"
-                            android:text="ST HOME"
+                            android:text="智慧家居"
                             android:textColor="@color/white"
                             android:textSize="16.0sp"
                             android:visibility="visible" />

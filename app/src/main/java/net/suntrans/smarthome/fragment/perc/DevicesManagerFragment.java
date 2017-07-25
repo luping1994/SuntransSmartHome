@@ -3,6 +3,7 @@ package net.suntrans.smarthome.fragment.perc;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -175,6 +176,7 @@ public class DevicesManagerFragment extends RxFragment {
             ImageView imageView;
             TextView title;
             TextView name;
+            TextView isonline;
             LinearLayout root;
             public ViewHolder(View itemView) {
                 super(itemView);
@@ -182,6 +184,7 @@ public class DevicesManagerFragment extends RxFragment {
                 imageView = (ImageView) itemView.findViewById(R.id.imageView);
                 title = (TextView) itemView.findViewById(R.id.title);
                 name = (TextView) itemView.findViewById(R.id.name);
+                isonline = (TextView) itemView.findViewById(R.id.isonline);
                 itemView.findViewById(R.id.root).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -222,6 +225,13 @@ public class DevicesManagerFragment extends RxFragment {
                         .into(imageView);
                 title.setText(datas.get(position).name);
                 name.setText(datas.get(position).title);
+                if (datas.get(position).is_online.equals("0")){
+                    isonline.setText("(不在线)");
+                    isonline.setTextColor(Color.RED);
+                }else if (datas.get(position).is_online.equals("1")){
+                    isonline.setText("(在线)");
+                    isonline.setTextColor(Color.GREEN);
+                }
             }
         }
     }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">三川智控</string>
+    <string name="app_name">三川智慧家居</string>
 
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
@@ -12,6 +12,7 @@
     <string name="nav_myhome">我家</string>
     <string name="nav_device">设备</string>
     <string name="nav_room">房间</string>
+    <string name="nav_area">区域</string>
     <string name="nav_find">商城</string>
     <string name="nav_user">我的</string>
     <string name="main_mine_">我的</string>
@@ -137,9 +138,21 @@
     <string name="sensus_waring_config">报警配置</string>
     <string name="tips_device_offline">设备不在线</string>
     <string name="tips_please_wait">请稍后...</string>
-    <string name="tips_network_failed">请求失败,请检查你的网络</string>
+    <string name="tips_network_failed">失败,请稍后再试</string>
     <string name="no_named">未命名</string>
     <string name="tips_modify_failed">修改失败</string>
     <string name="tips_account_is_empty">账号为不能为空</string>
+    <string name="company_name">Copyright © 1993-2017 Suntrans. All rights reserved.</string>
+
+    <string-array name="textarray">
+        <item>1级</item>
+        <item>2级</item>
+        <item>3级</item>
+        <item>4级</item>
+        <item>5级</item>
+        <item>6级</item>
+        <item>7级</item>
+        <item>8级</item>
+    </string-array>
 
 </resources>

@@ -17,6 +17,7 @@ import okio.ByteString;
 
 public final class SenderWebSocket extends WebSocketListener {
     private final String url = "ws://us.suntrans.net:6300";
+//    private final String url = "ws://192.168.0.100:6300";
 
 //    private final String url = "ws://q1.suntrans.net:8200";
 //    private final String url = "ws://wanhua.suntrans.net:9201";
@@ -67,7 +68,7 @@ public final class SenderWebSocket extends WebSocketListener {
     @Override
     public void onClosing(WebSocket webSocket, int code, String reason) {
         super.onClosing(webSocket, code, reason);
-        System.out.println(code);
+//        System.out.println(code);
     }
 
     /**

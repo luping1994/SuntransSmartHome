@@ -1,6 +1,7 @@
 package net.suntrans.smarthome;
 
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Build;
@@ -17,8 +18,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.pgyersdk.update.PgyUpdateManager;
-
 import net.suntrans.smarthome.activity.mh.SpeechActivity;
 import net.suntrans.smarthome.base.BasedActivity;
 import net.suntrans.smarthome.fragment.mh.MyHomeFragment2;
@@ -33,14 +32,12 @@ import net.suntrans.smarthome.websocket.WebSocketService;
 import static android.support.design.widget.TabLayout.GRAVITY_FILL;
 import static android.support.design.widget.TabLayout.MODE_FIXED;
 
-import android.content.Context;
-
 /**
  * Created by Looney on 2017/4/19.
  */
 
 public class MainActivity extends BasedActivity implements View.OnClickListener {
-    private final int[] TAB_TITLES = new int[]{R.string.nav_myhome, R.string.nav_room, R.string.nav_find, R.string.nav_user};
+    private final int[] TAB_TITLES = new int[]{R.string.nav_myhome, R.string.nav_area, R.string.nav_find, R.string.nav_user};
     private final int[] TAB_IMGS = new int[]{R.drawable.select_home, R.drawable.selector_devices, R.drawable.selector_find, R.drawable.selector_user};
     private TabLayout tabLayout;
 
@@ -84,24 +81,25 @@ public class MainActivity extends BasedActivity implements View.OnClickListener 
             }
         });
         initFragment();
-        PgyUpdateManager.register(this, "net.suntrans.suntranssmarthome.fileProvider");
+//        PgyUpdateManager.register(this, "net.suntrans.smarthome.fileProvider");
 
 
         Intent intent = new Intent();
         intent.setClass(this, WebSocketService.class);
         bindService(intent, connection, Context.BIND_AUTO_CREATE);
+
     }
 
 
     private ServiceConnection connection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            System.out.println("绑定成功");
+//            System.out.println("绑定成功");
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            System.out.println("绑定失败");
+//            System.out.println("绑定失败");
         }
     };
 
@@ -184,7 +182,7 @@ public class MainActivity extends BasedActivity implements View.OnClickListener 
 
     @Override
     protected void onDestroy() {
-        PgyUpdateManager.unregister();
+//        PgyUpdateManager.unregister();
         unbindService(connection);
         super.onDestroy();
     }

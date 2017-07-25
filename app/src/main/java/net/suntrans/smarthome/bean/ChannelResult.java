@@ -25,6 +25,9 @@ public class ChannelResult {
         private String img;
         private String addr;
 
+        private String status;
+        private String updated_at;
+
         public String getAddr() {
             return addr;
         }
@@ -60,8 +63,6 @@ public class ChannelResult {
             this.img = img;
         }
 
-        private String status;
-        private String updated_at;
 
         @Override
         public String toString() {

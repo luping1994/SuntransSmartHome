@@ -33,6 +33,7 @@ import net.suntrans.smarthome.activity.mh.EditSenceActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -47,6 +48,7 @@ public class SenceFragment extends RxFragment {
     private List<HomeSceneResult.Scene> datas;
     private MyAdapter adapter;
     private SwipeRefreshLayout refreshLayout;
+    private Observable<HomeSceneResult> getDataOb;
 
     @Nullable
     @Override
@@ -86,7 +88,7 @@ public class SenceFragment extends RxFragment {
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                View imageView =  view.findViewById(R.id.imageView);
+                View imageView = view.findViewById(R.id.imageView);
 
                 Pair<View, String> pair
                         = new Pair<>(imageView, ViewCompat.getTransitionName(imageView));
@@ -97,7 +99,7 @@ public class SenceFragment extends RxFragment {
                 intent.putExtra("id", datas.get(position).id);
 
                 ActivityOptionsCompat transitionActivityOptions =
-                        ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),pair);
+                        ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), pair);
 
                 ActivityCompat.startActivity(
                         getActivity(), intent, transitionActivityOptions.toBundle());
@@ -108,37 +110,37 @@ public class SenceFragment extends RxFragment {
     }
 
     private void getSceneData() {
-        RetrofitHelper.getApi().getHomeScene()
-                .compose(this.<HomeSceneResult>bindUntilEvent(FragmentEvent.DESTROY_VIEW))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<HomeSceneResult>() {
-                    @Override
-                    public void onCompleted() {
+        if (getDataOb == null)
+            getDataOb = RetrofitHelper.getApi().getHomeScene()
+                    .compose(this.<HomeSceneResult>bindUntilEvent(FragmentEvent.DESTROY_VIEW))
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread());
+        getDataOb.subscribe(new Subscriber<HomeSceneResult>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                e.printStackTrace();
+                handler.sendEmptyMessage(0);
+            }
+
+            @Override
+            public void onNext(HomeSceneResult homeSceneResult) {
+                if (homeSceneResult != null) {
+                    if (homeSceneResult.status.equals("1")) {
+                        datas.clear();
+                        datas.addAll(homeSceneResult.result.rows);
+                        adapter.notifyDataSetChanged();
+                        handler.removeCallbacksAndMessages(null);
+                        refreshLayout.setRefreshing(false);
 
                     }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        e.printStackTrace();
-                        handler.sendEmptyMessage(0);
-                    }
-
-                    @Override
-                    public void onNext(HomeSceneResult homeSceneResult) {
-                        if (homeSceneResult != null) {
-                            if (homeSceneResult.status.equals("1")) {
-
-                                datas.clear();
-                                datas.addAll(homeSceneResult.result.rows);
-                                adapter.notifyDataSetChanged();
-                                handler.removeCallbacksAndMessages(null);
-                                refreshLayout.setRefreshing(false);
-
-                            }
-                        }
-                    }
-                });
+                }
+            }
+        });
     }
 
     class MyAdapter extends BaseQuickAdapter<HomeSceneResult.Scene, BaseViewHolder> {

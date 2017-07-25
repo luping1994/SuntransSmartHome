@@ -21,6 +21,27 @@ public class ChannelResultNewSun {
         private String addr;
         private String vtype;
         private String img_url;
+        private String device_type;
+        private String xenon_addr;
+        private String number;
+        private String status;
+        private String updated_at;
+
+        public String getDevice_type() {
+            return device_type;
+        }
+
+        public void setDevice_type(String device_type) {
+            this.device_type = device_type;
+        }
+
+        public String getXenon_addr() {
+            return xenon_addr;
+        }
+
+        public void setXenon_addr(String xenon_addr) {
+            this.xenon_addr = xenon_addr;
+        }
 
         public String getImg_url() {
             return img_url;
@@ -45,12 +66,6 @@ public class ChannelResultNewSun {
         public void setAddr(String addr) {
             this.addr = addr;
         }
-
-
-
-        private String number;
-        private String status;
-        private String updated_at;
 
         @Override
         public String toString() {

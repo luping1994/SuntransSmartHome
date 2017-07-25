@@ -42,17 +42,17 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="PGYER_APPID"
-            android:value="8fcb4e44bc0c86c640078297e9b562b0"></meta-data>
+            android:value="b76297b2457c9d3ccadb4a720c56543f"></meta-data>
 
-        <activity android:name="net.suntrans.smarthome.login.LoginActivity"></activity>
-        <activity android:name="net.suntrans.smarthome.MainActivity" />
-        <activity android:name="net.suntrans.smarthome.activity.perc.SuggestionActivity" />
-        <activity android:name="net.suntrans.smarthome.activity.perc.AboutActivity" />
-        <activity android:name="net.suntrans.smarthome.activity.perc.HelpActivity" />
-        <activity android:name="net.suntrans.smarthome.activity.perc.ModifyPassActivity" />
-        <activity android:name="net.suntrans.smarthome.activity.perc.SettingActivity" />
-        <activity android:name="net.suntrans.smarthome.activity.perc.detail.AddDeviceActivity" />
-        <activity android:name="net.suntrans.smarthome.activity.perc.detail.SwitchControlActivity" />
+        <activity android:name="net.suntrans.smarthome.login.LoginActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="net.suntrans.smarthome.MainActivity" android:screenOrientation="portrait"/>
+        <activity android:name="net.suntrans.smarthome.activity.perc.SuggestionActivity" android:screenOrientation="portrait"/>
+        <activity android:name="net.suntrans.smarthome.activity.perc.AboutActivity" android:screenOrientation="portrait"/>
+        <activity android:name="net.suntrans.smarthome.activity.perc.HelpActivity" android:screenOrientation="portrait"/>
+        <activity android:name="net.suntrans.smarthome.activity.perc.ModifyPassActivity" android:screenOrientation="portrait"/>
+        <activity android:name="net.suntrans.smarthome.activity.perc.SettingActivity" android:screenOrientation="portrait"/>
+        <activity android:name="net.suntrans.smarthome.activity.perc.detail.AddDeviceActivity" android:screenOrientation="portrait"/>
+        <activity android:name="net.suntrans.smarthome.activity.perc.detail.SwitchControlActivity" android:screenOrientation="portrait"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -143,7 +143,15 @@
             android:name="net.suntrans.smarthome.activity.mh.ChooseLinkageResultActivity"
             android:screenOrientation="portrait" />
         <activity android:name="net.suntrans.smarthome.activity.mh.SpeechActivity" />
+        <activity android:name=".login.GuideActivity" />
+        <activity android:name=".activity.room.XenonActivity" />
 
         <service android:name="net.suntrans.smarthome.websocket.WebSocketService" />
+        <service android:name="net.suntrans.smarthome.websocket.WebSocketService2" />
+
+        <activity
+            android:name="com.tencent.bugly.beta.ui.BetaActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|locale"
+            android:theme="@android:style/Theme.Translucent" />
     </application>
 </manifest>

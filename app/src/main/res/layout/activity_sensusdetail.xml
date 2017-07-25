@@ -27,516 +27,103 @@
             app:theme="@style/Toolbar">
 
             <TextView
-                android:transitionName="@string/item_toolbar_name"
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center|left"
                 android:text="@string/main_devices_"
                 android:textColor="@color/white"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:transitionName="@string/item_toolbar_name" />
         </android.support.v7.widget.Toolbar>
 
 
         <net.suntrans.smarthome.widget.ScrollChildSwipeRefreshLayout
-           android:id="@+id/refreshlayout"
+            android:id="@+id/refreshlayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <android.support.v4.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/bgcolor">
 
                 <LinearLayout
+                    android:id="@+id/rootLL"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="40dp"
+                    <RelativeLayout
+                        android:paddingRight="@dimen/activity_horizontal_margin"
+                        android:paddingLeft="@dimen/activity_horizontal_margin"
+                        android:layout_marginTop="@dimen/activity_horizontal_margin"
                         android:background="@color/white"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="24dip"
-                            android:layout_height="24dip"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="15dip"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/time" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="45dip"
-                            android:layout_marginLeft="10dip"
-                            android:gravity="center|left"
-                            android:text="最后更新时间"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="15sp" />
-
-                        <TextView
-                            android:layout_width="0dip"
-                            android:layout_height="fill_parent"
-                            android:layout_marginRight="15dip"
-                            android:layout_weight="1"
-                            android:gravity="center|right"
-                            android:maxLines="1"
-                            android:text="@{info.created_at}"
-                            android:textColor="@color/black"
-                            android:textSize="15sp" />
-                    </LinearLayout>
-
-                    <ImageView
-                        style="@style/line_horizontal_middle_gray"
-                        android:layout_marginLeft="13.0dip"
-                        android:layout_marginRight="13.0dip" />
-
-                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="40dp"
-                        android:background="@color/white"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="24dip"
-                            android:layout_height="24dip"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="15dip"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/ic_pm" />
-
+                        android:layout_height="50dp">
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="45dip"
-                            android:layout_marginLeft="10dip"
-                            android:gravity="center|left"
-                            android:text="PM1"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="15sp" />
-
-                        <TextView
-                            android:id="@+id/textView"
-                            android:layout_width="0dip"
-                            android:layout_height="fill_parent"
-                            android:layout_marginRight="15dip"
-                            android:layout_weight="1"
-                            android:gravity="center|right"
-                            android:maxLines="1"
-                            android:text='@{info.pm1==null?"--":info.pm1+"ppm"}'
                             android:textColor="@color/black"
-                            android:textSize="15sp" />
-                    </LinearLayout>
+                            android:textSize="17sp"
+                            android:text="时间"
+                            android:gravity="center|left"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" />
 
-                    <ImageView
-                        style="@style/line_horizontal_middle_gray"
-                        android:layout_marginLeft="13.0dip"
-                        android:layout_marginRight="13.0dip" />
-
-                    <LinearLayout
+                        <TextView
+                            android:layout_alignParentRight="true"
+                            android:id="@+id/time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center|right"
+                            android:text="2017年7月18日 14:27"
+                            android:textSize="17sp" />
+                    </RelativeLayout>
+                    <TextView
+                        android:paddingLeft="@dimen/activity_horizontal_margin"
+                        android:gravity="center_vertical"
+                        android:text="室内环境"
+                        android:textSize="15sp"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="@color/white"
-                        android:orientation="horizontal">
+                        android:layout_height="30dp" />
+                    <include layout="@layout/item_sensor" />
 
-                        <ImageView
-                            android:layout_width="24dip"
-                            android:layout_height="24dip"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="15dip"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/ic_pm" />
+                    <include layout="@layout/item_sensor" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="45dip"
-                            android:layout_marginLeft="10dip"
-                            android:gravity="center|left"
-                            android:text="PM10"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="15sp" />
+                    <include layout="@layout/item_sensor" />
 
-                        <TextView
-                            android:layout_width="0dip"
-                            android:layout_height="fill_parent"
-                            android:layout_marginRight="15dip"
-                            android:layout_weight="1"
-                            android:gravity="center|right"
-                            android:maxLines="1"
-                            android:text='@{info.pm10==null?"--":info.pm10+"ppm"}'
-                            android:textColor="@color/black"
-                            android:textSize="15sp" />
-                    </LinearLayout>
+                    <include layout="@layout/item_sensor" />
 
-                    <ImageView
-                        style="@style/line_horizontal_middle_gray"
-                        android:layout_marginLeft="13.0dip"
-                        android:layout_marginRight="13.0dip" />
-
-                    <LinearLayout
+                    <include layout="@layout/item_sensor" />
+                    <TextView
+                        android:paddingLeft="@dimen/activity_horizontal_margin"
+                        android:gravity="center_vertical"
+                        android:text="空气质量"
+                        android:textSize="15sp"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="@color/white"
-                        android:orientation="horizontal">
+                        android:layout_height="30dp" />
+                    <include layout="@layout/item_sensor" />
 
-                        <ImageView
-                            android:layout_width="24dip"
-                            android:layout_height="24dip"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="15dip"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/ic_pm" />
+                    <include layout="@layout/item_sensor" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="45dip"
-                            android:layout_marginLeft="10dip"
-                            android:gravity="center|left"
-                            android:text="PM25"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="15sp" />
+                    <include layout="@layout/item_sensor" />
 
-                        <TextView
-                            android:layout_width="0dip"
-                            android:layout_height="fill_parent"
-                            android:layout_marginRight="15dip"
-                            android:layout_weight="1"
-                            android:gravity="center|right"
-                            android:maxLines="1"
-                            android:text='@{info.pm25==null?"--":info.pm25+"ppm"}'
-                            android:textColor="@color/black"
-                            android:textSize="15sp" />
-                    </LinearLayout>
+                    <include layout="@layout/item_sensor" />
 
-                    <ImageView
-                        style="@style/line_horizontal_middle_gray"
-                        android:layout_marginLeft="13.0dip"
-                        android:layout_marginRight="13.0dip" />
-
-                    <LinearLayout
+                    <include layout="@layout/item_sensor" />
+                    <TextView
+                        android:paddingLeft="@dimen/activity_horizontal_margin"
+                        android:gravity="center_vertical"
+                        android:text="姿态信息"
+                        android:textSize="15sp"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="40dp"
-                        android:background="@color/white"
-                        android:orientation="horizontal">
+                        android:layout_height="30dp" />
 
-                        <ImageView
-                            android:layout_width="24dip"
-                            android:layout_height="24dip"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="15dip"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/ic_smoke" />
+                    <include layout="@layout/item_sensor" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="45dip"
-                            android:layout_marginLeft="10dip"
-                            android:gravity="center|left"
-                            android:text="甲醛"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="15sp" />
+                    <include layout="@layout/item_sensor" />
 
-                        <TextView
-                            android:layout_width="0dip"
-                            android:layout_height="fill_parent"
-                            android:layout_marginRight="15dip"
-                            android:layout_weight="1"
-                            android:gravity="center|right"
-                            android:maxLines="1"
-                            android:text='@{info.jiaquan==null?"--":info.jiaquan+"ppm"}'
-                            android:textColor="@color/black"
-                            android:textSize="15sp" />
-                    </LinearLayout>
-
-                    <ImageView
-                        style="@style/line_horizontal_middle_gray"
-                        android:layout_marginLeft="13.0dip"
-                        android:layout_marginRight="13.0dip" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="@color/white"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="24dip"
-                            android:layout_height="24dip"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="15dip"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/ic_smoke" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="45dip"
-                            android:layout_marginLeft="10dip"
-                            android:gravity="center|left"
-                            android:text="烟雾"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="15sp" />
-
-                        <TextView
-                            android:layout_width="0dip"
-                            android:layout_height="fill_parent"
-                            android:layout_marginRight="15dip"
-                            android:layout_weight="1"
-                            android:gravity="center|right"
-                            android:maxLines="1"
-                            android:text='@{info.yanwu==null?"--":info.yanwu+"ppm"}'
-                            android:textColor="@color/black"
-                            android:textSize="15sp" />
-                    </LinearLayout>
-
-                    <ImageView
-                        style="@style/line_horizontal_middle_gray"
-                        android:layout_marginLeft="13.0dip"
-                        android:layout_marginRight="13.0dip" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="@color/white"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="24dip"
-                            android:layout_height="24dip"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="15dip"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/ic_temp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="45dip"
-                            android:layout_marginLeft="10dip"
-                            android:gravity="center|left"
-                            android:text="温度"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="15sp" />
-
-                        <TextView
-                            android:layout_width="0dip"
-                            android:layout_height="fill_parent"
-                            android:layout_marginRight="15dip"
-                            android:layout_weight="1"
-                            android:gravity="center|right"
-                            android:maxLines="1"
-                            android:text='@{info.wendu==null?"--":info.wendu+"°C"}'
-                            android:textColor="@color/black"
-                            android:textSize="15sp" />
-                    </LinearLayout>
-
-                    <ImageView
-
-                        style="@style/line_horizontal_middle_gray"
-                        android:layout_marginLeft="13.0dip"
-                        android:layout_marginRight="13.0dip" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="@color/white"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="24dip"
-                            android:layout_height="24dip"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="15dip"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/ic_humidity" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="45dip"
-                            android:layout_marginLeft="10dip"
-                            android:gravity="center|left"
-                            android:text="湿度"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="15sp" />
-
-                        <TextView
-                            android:layout_width="0dip"
-                            android:layout_height="fill_parent"
-                            android:layout_marginRight="15dip"
-                            android:layout_weight="1"
-                            android:gravity="center|right"
-                            android:maxLines="1"
-                            android:text='@{info.shidu==null?"--":info.shidu+"%"}'
-                            android:textColor="@color/black"
-                            android:textSize="15sp" />
-                    </LinearLayout>
-
-                    <ImageView
-                        style="@style/line_horizontal_middle_gray"
-                        android:layout_marginLeft="13.0dip"
-                        android:layout_marginRight="13.0dip" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="@color/white"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="24dip"
-                            android:layout_height="24dip"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="15dip"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/ic_peopleinfo" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="45dip"
-                            android:layout_marginLeft="10dip"
-                            android:gravity="center|left"
-                            android:text="人员"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="15sp" />
-
-                        <TextView
-                            android:layout_width="0dip"
-                            android:layout_height="fill_parent"
-                            android:layout_marginRight="15dip"
-                            android:layout_weight="1"
-                            android:gravity="center|right"
-                            android:maxLines="1"
-                            android:text='@{info.renyuan==null?"--":info.renyuan.equals("1")?"有人":"没人"}'
-                            android:textColor="@color/black"
-                            android:textSize="15sp" />
-                    </LinearLayout>
-
-                    <ImageView
-                        style="@style/line_horizontal_middle_gray"
-                        android:layout_marginLeft="13.0dip"
-                        android:layout_marginRight="13.0dip" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="40dp"
-                        android:background="@color/white"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="24dip"
-                            android:layout_height="24dip"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="15dip"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/ic_gradient" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="45dip"
-                            android:layout_marginLeft="10dip"
-                            android:gravity="center|left"
-                            android:text="X轴倾斜角"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="15sp" />
-
-                        <TextView
-                            android:layout_width="0dip"
-                            android:layout_height="fill_parent"
-                            android:layout_marginRight="15dip"
-                            android:layout_weight="1"
-                            android:gravity="center|right"
-                            android:maxLines="1"
-                            android:text='@{info.x_zhou==null?"--":info.x_zhou+"°"}'
-                            android:textColor="@color/black"
-                            android:textSize="15sp" />
-                    </LinearLayout>
-
-                    <ImageView
-                        style="@style/line_horizontal_middle_gray"
-                        android:layout_marginLeft="13.0dip"
-                        android:layout_marginRight="13.0dip" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="@color/white"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="24dip"
-                            android:layout_height="24dip"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="15dip"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/ic_gradient" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="45dip"
-                            android:layout_marginLeft="10dip"
-                            android:gravity="center|left"
-                            android:text="Y轴倾斜角"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="15sp" />
-
-                        <TextView
-                            android:layout_width="0dip"
-                            android:layout_height="fill_parent"
-                            android:layout_marginRight="15dip"
-                            android:layout_weight="1"
-                            android:gravity="center|right"
-                            android:maxLines="1"
-                            android:text='@{info.y_zhou==null?"--":info.y_zhou+"°"}'
-                            android:textColor="@color/black"
-                            android:textSize="15sp" />
-                    </LinearLayout>
-
-                    <ImageView
-                        style="@style/line_horizontal_middle_gray"
-                        android:layout_marginLeft="13.0dip"
-                        android:layout_marginRight="13.0dip" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="@color/white"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="24dip"
-                            android:layout_height="24dip"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="15dip"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/ic_gradient" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="45dip"
-                            android:layout_marginLeft="10dip"
-                            android:gravity="center|left"
-                            android:text="Z轴倾斜角"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="15sp" />
-
-                        <TextView
-                            android:layout_width="0dip"
-                            android:layout_height="fill_parent"
-                            android:layout_marginRight="15dip"
-                            android:layout_weight="1"
-                            android:gravity="center|right"
-                            android:maxLines="1"
-                            android:text='@{info.z_zhou==null?"--":info.z_zhou+"°"}'
-                            android:textColor="@color/black"
-                            android:textSize="15sp" />
-                    </LinearLayout>
-
-                    <ImageView
-                        style="@style/line_horizontal_middle_gray"
-                        android:layout_marginLeft="13.0dip"
-                        android:layout_marginRight="13.0dip" />
+                    <include layout="@layout/item_sensor" />
+                    <include layout="@layout/item_sensor" />
                 </LinearLayout>
             </android.support.v4.widget.NestedScrollView>
         </net.suntrans.smarthome.widget.ScrollChildSwipeRefreshLayout>

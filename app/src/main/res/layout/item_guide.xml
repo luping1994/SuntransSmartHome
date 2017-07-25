@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:src="@drawable/guide_3"
+        android:id="@+id/img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <Button
+        android:visibility="gone"
+        android:textSize="12sp"
+        android:id="@+id/bt"
+        android:clickable="false"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:textColor="@color/white"
+        android:background="@drawable/button_bg"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:layout_alignParentBottom="true"
+        android:text="开启智能生活"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

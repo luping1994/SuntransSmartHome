@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:background="#222222"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:background="@android:color/transparent"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionbarheight"
+        app:contentInsetLeft="0.0dip"
+        app:contentInsetStart="0.0dip"
+        app:layout_collapseMode="pin"
+        app:navigationIcon="@drawable/back_selector_new"
+        app:popupTheme="@style/Scene_Pop_AppTheme"
+        app:theme="@style/ToolBarTheme">
+
+    </android.support.v7.widget.Toolbar>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:fitsSystemWindows="true"
+        android:layout_height="match_parent"
+        android:background="#222222">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/llDianyuan"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackground">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="电源:"
+                    android:textColor="@color/white" />
+
+
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/dianyuan"
+                    style="@style/CustomCheckBoxTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:clickable="false"
+                    android:gravity="center|right" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llXianqideng"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackground">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:text="氙气灯开关:"
+                    android:textColor="@color/white" />
+
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/xianqideng"
+                    style="@style/CustomCheckBoxTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:clickable="false"
+                    android:gravity="center|right" />
+            </LinearLayout>
+        </LinearLayout>
+        <!--<android.support.v7.widget.AppCompat-->
+        <!--style="@style/CustomCheckBoxTheme"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_above="@+id/tips"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginBottom="4dp"-->
+        <!--android:layout_marginTop="4dp"-->
+        <!--android:background="@drawable/circle" />-->
+
+        <TextView
+            android:id="@+id/grade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/bar"
+            android:gravity="center"
+            android:text="5"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
+
+        <net.suntrans.smarthome.widget.GradeBar
+            android:id="@+id/bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            app:gradeNumber="8" />
+    </RelativeLayout>
+
+</LinearLayout>
+
+

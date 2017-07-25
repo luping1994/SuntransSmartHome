@@ -29,10 +29,13 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.trello.rxlifecycle.android.FragmentEvent;
 import com.trello.rxlifecycle.components.support.RxFragment;
+import com.zhihu.matisse.internal.utils.UIUtils;
 
 import net.suntrans.smarthome.App;
+import net.suntrans.smarthome.Config;
 import net.suntrans.smarthome.R;
 import net.suntrans.smarthome.activity.perc.detail.AddDeviceActivity;
+import net.suntrans.smarthome.activity.room.XenonActivity;
 import net.suntrans.smarthome.api.RetrofitHelper;
 import net.suntrans.smarthome.bean.AddSCResult;
 import net.suntrans.smarthome.bean.ChannelResultNewSun;
@@ -116,9 +119,7 @@ public class RoomDetailFragment extends RxFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
 
-        Intent intent = new Intent();
-        intent.setClass(getActivity(), WebSocketService.class);
-        getActivity().bindService(intent, connection, Context.BIND_AUTO_CREATE);
+
 
         adapter = new DevicesAdapter();
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
@@ -161,25 +162,32 @@ public class RoomDetailFragment extends RxFragment {
                     public void onNext(CmdMsg cmdMsg) {
                         if (cmdMsg.status == 1) {
                             parseMsg(cmdMsg.msg);
+                        }else {
+                            UiUtils.showToast(cmdMsg.msg);
                         }
                     }
                 });
+
+        Intent intent = new Intent();
+        intent.setClass(getActivity(), WebSocketService.class);
+        getActivity().bindService(intent, connection, Context.BIND_AUTO_CREATE);
     }
 
     private void parseMsg(String msg1) {
         try {
             JSONObject jsonObject = new JSONObject(msg1);
             String code = jsonObject.getString("code");
+            String device = jsonObject.getString("device");
+            if (!device.equals(Config.STSLC_6) && !device.equals(Config.STSLC_10))
+                return;
             if (code.equals("200")) {
                 JSONObject result = jsonObject.getJSONObject("result");
                 int channel = result.getInt("channel");
                 int command = result.getInt("command");
-                String device = result.getString("device");
                 String addr = result.getString("addr");
                 Map<String, String> map = ParseCMD.check((short) channel, (short) command);
 
                 for (int i = 0; i < datas.size(); i++) {
-//                    System.out.println("addr="+datas.get(i).getAddr());
                     if (datas.get(i).getAddr().equals(addr)) {
                         for (Map.Entry<String, String> entry : map.entrySet()) {
                             String number = entry.getKey();
@@ -218,6 +226,10 @@ public class RoomDetailFragment extends RxFragment {
 
                 mHandler.removeMessages(MSG_CON_FAILED);
                 mHandler.sendMessage(Message.obtain(mHandler, MSG_CON_FAILED, msg));
+            } else if (code.equals("403")) {
+                mHandler.removeMessages(MSG_CON_FAILED);
+                mHandler.sendMessage(Message.obtain(mHandler, MSG_CON_FAILED, "设备不在线"));
+
             }
 
         } catch (JSONException e) {
@@ -270,6 +282,7 @@ public class RoomDetailFragment extends RxFragment {
             ImageView imageView;
             TextView area;
             TextView name;
+            TextView go;
             RelativeLayout root;
             AppCompatCheckBox checkbox;
 
@@ -277,13 +290,32 @@ public class RoomDetailFragment extends RxFragment {
                 super(itemView);
                 area = (TextView) itemView.findViewById(R.id.area);
                 name = (TextView) itemView.findViewById(R.id.name);
+                go = (TextView) itemView.findViewById(R.id.go);
                 imageView = (ImageView) itemView.findViewById(R.id.imageView);
                 root = (RelativeLayout) itemView.findViewById(R.id.root);
                 checkbox = (AppCompatCheckBox) itemView.findViewById(R.id.checkbox);
                 root.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        sendCmd(getAdapterPosition());
+                        if (datas.get(getAdapterPosition()).getVtype() != null) {
+                            if (datas.get(getAdapterPosition()).getDevice_type().equals("3")) {
+                                Intent intent = new Intent(getActivity(), XenonActivity.class);
+                                intent.putExtra("xenonAddr", datas.get(getAdapterPosition()).getXenon_addr());
+                                intent.putExtra("vtype", datas.get(getAdapterPosition()).getVtype());
+                                intent.putExtra("number", datas.get(getAdapterPosition()).getNumber());
+                                intent.putExtra("addr", datas.get(getAdapterPosition()).getAddr());
+                                intent.putExtra("status", datas.get(getAdapterPosition()).getStatus());
+                                intent.putExtra("channel_id", datas.get(getAdapterPosition()).getId());
+                                intent.putExtra("name", datas.get(getAdapterPosition()).getName());
+                                startActivity(intent);
+                            } else {
+                                sendCmd(getAdapterPosition());
+
+                            }
+                        } else {
+
+                            sendCmd(getAdapterPosition());
+                        }
                     }
                 });
                 root.setOnLongClickListener(new View.OnLongClickListener() {
@@ -304,13 +336,32 @@ public class RoomDetailFragment extends RxFragment {
                         .centerCrop()
                         .into(imageView);
                 name.setText(datas.get(position).getName());
-                checkbox.setChecked(datas.get(position).getStatus().equals("1") ? true : false);
-                area.setText("暂无数据");
+
+                if (datas.get(position).getDevice_type() != null) {
+                    if (datas.get(position).getDevice_type().equals("3")) {
+                        checkbox.setVisibility(View.GONE);
+                        go.setVisibility(View.VISIBLE);
+                    } else {
+                        checkbox.setVisibility(View.VISIBLE);
+                        go.setVisibility(View.INVISIBLE);
+
+                        checkbox.setChecked(datas.get(position).getStatus().equals("1") ? true : false);
+//                        area.setText("暂无数据");
+                    }
+                } else {
+                    checkbox.setVisibility(View.VISIBLE);
+                    go.setVisibility(View.INVISIBLE);
+
+                    checkbox.setChecked(datas.get(position).getStatus().equals("1") ? true : false);
+//                    area.setText("暂无数据");
+                }
+
             }
 
             private void sendCmd(int position) {
+
                 mHandler.sendEmptyMessage(MSG_START);
-                mHandler.sendMessageDelayed(Message.obtain(mHandler, MSG_CON_FAILED, "请求失败,请检查你的网络"), 2000);
+                mHandler.sendMessageDelayed(Message.obtain(mHandler, MSG_CON_FAILED, "设备不在线"), 2000);
                 final JSONObject jsonObject = new JSONObject();
                 try {
                     jsonObject.put("device", datas.get(position).getVtype());
@@ -323,7 +374,7 @@ public class RoomDetailFragment extends RxFragment {
                     jsonObject.put("command", datas.get(position).getStatus().equals("1") ? 0 : 1);
 
                     binder.sendOrder(jsonObject.toString());
-                    LogUtil.i("DeviceMainFragment", jsonObject.toString());
+//                    LogUtil.i("DeviceMainFragment", jsonObject.toString());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -391,6 +442,7 @@ public class RoomDetailFragment extends RxFragment {
     private static final int MSG_CON_SUCCESS = 1;
     private static final int MSG_CON_FAILED = 2;
 
+
     private class MyHandler extends Handler {
 
         @Override
@@ -406,6 +458,7 @@ public class RoomDetailFragment extends RxFragment {
                     break;
                 case MSG_CON_FAILED:
                     dialog.setWaitText((String) msg.obj);
+                    UiUtils.showToast((String) msg.obj);
 //                    adapter.notifyDataSetChanged();
                     mHandler.sendEmptyMessageDelayed(MSG_CON_SUCCESS, 500);
                     break;
@@ -464,12 +517,10 @@ public class RoomDetailFragment extends RxFragment {
     }
 
     private void deleteRoomChannel(String channel_id) {
-        if (deleteObv == null) {
-            deleteObv = RetrofitHelper.getApi().deleteRoomChannel(channel_id)
-                    .compose(this.<List<AddSCResult>>bindUntilEvent(FragmentEvent.DESTROY_VIEW))
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io());
-        }
+        deleteObv = RetrofitHelper.getApi().deleteRoomChannel(channel_id)
+                .compose(this.<List<AddSCResult>>bindUntilEvent(FragmentEvent.DESTROY_VIEW))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io());
 
         deleteObv.subscribe(new Subscriber<List<AddSCResult>>() {
             @Override
@@ -497,12 +548,10 @@ public class RoomDetailFragment extends RxFragment {
     }
 
     private void modifyChannel(String name, String img_id, String channel_id) {
-        if (null == modifyObv) {
-            modifyObv = RetrofitHelper.getApi().upDateChannel(channel_id, img_id, name)
-                    .compose(this.<CreateModelResult>bindUntilEvent(FragmentEvent.DESTROY_VIEW))
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread());
-        }
+        modifyObv = RetrofitHelper.getApi().upDateChannel(channel_id, img_id, name)
+                .compose(this.<CreateModelResult>bindUntilEvent(FragmentEvent.DESTROY_VIEW))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
         modifyObv.subscribe(new Subscriber<CreateModelResult>() {
             @Override
             public void onCompleted() {

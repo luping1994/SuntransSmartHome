@@ -1,10 +1,14 @@
 package net.suntrans.smarthome.activity.perc.detail;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
@@ -22,12 +26,14 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.iflytek.cloud.thirdparty.S;
 import com.trello.rxlifecycle.android.ActivityEvent;
+import com.trello.rxlifecycle.android.FragmentEvent;
 
 import net.suntrans.smarthome.App;
 import net.suntrans.smarthome.Config;
 import net.suntrans.smarthome.R;
 import net.suntrans.smarthome.api.RetrofitHelper;
 import net.suntrans.smarthome.base.BasedActivity;
+import net.suntrans.smarthome.bean.CmdMsg;
 import net.suntrans.smarthome.bean.ConResult;
 import net.suntrans.smarthome.bean.CreateModelResult;
 import net.suntrans.smarthome.databinding.ActivitySwitchconBinding;
@@ -35,8 +41,10 @@ import net.suntrans.smarthome.databinding.ItemChannelConBinding;
 import net.suntrans.smarthome.bean.ChannelResult;
 import net.suntrans.smarthome.utils.LogUtil;
 import net.suntrans.smarthome.utils.ParseCMD;
+import net.suntrans.smarthome.utils.RxBus;
 import net.suntrans.smarthome.utils.UiUtils;
 import net.suntrans.smarthome.websocket.SenderWebSocket;
+import net.suntrans.smarthome.websocket.WebSocketService;
 import net.suntrans.smarthome.widget.LoadingDialog;
 import net.suntrans.smarthome.widget.SwitchButton;
 
@@ -60,8 +68,7 @@ import static net.suntrans.smarthome.R.id.msg;
  * Created by Looney on 2017/4/24.
  */
 
-public class SwitchControlActivity extends BasedActivity implements SenderWebSocket.onReceiveListener {
-
+public class SwitchControlActivity extends BasedActivity {
     private ActivitySwitchconBinding binding;
     private RecyclerView recyclerView;
     private SwipeRefreshLayout refreshLayout;
@@ -71,10 +78,20 @@ public class SwitchControlActivity extends BasedActivity implements SenderWebSoc
     private Myadapter adapter;
     private LoadingDialog dialog;
     private String name;
-    SenderWebSocket socket;
     private String subname;
     private String device;
     private String userid;
+    private WebSocketService.ibinder binder;
+    private ServiceConnection connection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            binder = (WebSocketService.ibinder) service;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,8 +100,7 @@ public class SwitchControlActivity extends BasedActivity implements SenderWebSoc
     }
 
     private void init() {
-        socket = new SenderWebSocket();
-        socket.connect();
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_switchcon);
         devId = getIntent().getStringExtra("dev_id");
         type = getIntent().getStringExtra("type");
@@ -100,7 +116,6 @@ public class SwitchControlActivity extends BasedActivity implements SenderWebSoc
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowTitleEnabled(true);
 
-        ;
 //        binding.title.setText(name);
         recyclerView = binding.recyclerview;
         refreshLayout = binding.refreshlayout;
@@ -110,9 +125,8 @@ public class SwitchControlActivity extends BasedActivity implements SenderWebSoc
             @Override
             public void onSwitchClickListener(int position, SwitchButton compat) {
                 handler.sendEmptyMessage(MSG_START);
-                handler.sendMessageDelayed(Message.obtain(handler, MSG_CON_FAILED, getString(R.string.tips_network_failed)), 2000);
+                handler.sendMessageDelayed(Message.obtain(handler, MSG_CON_FAILED, "设备不在线"), 2000);
                 boolean isChecked = compat.isChecked();
-                LogUtil.i(position + "," + isChecked);
                 if (datas.size() != 0) {
                     final JSONObject jsonObject = new JSONObject();
                     try {
@@ -128,8 +142,8 @@ public class SwitchControlActivity extends BasedActivity implements SenderWebSoc
                     new Thread() {
                         @Override
                         public void run() {
-                            if (socket != null)
-                                socket.sendMessage(jsonObject.toString());
+                            if (binder != null)
+                                binder.sendOrder(jsonObject.toString());
                             LogUtil.i(jsonObject.toString());
                         }
                     }.start();
@@ -150,7 +164,34 @@ public class SwitchControlActivity extends BasedActivity implements SenderWebSoc
         });
         dialog = new LoadingDialog(this, R.style.loading_dialog);
         dialog.setCancelable(false);
-        socket.setOnReceiveListener(this);
+        RxBus.getInstance().toObserverable(CmdMsg.class)
+                .compose(this.<CmdMsg>bindUntilEvent(ActivityEvent.DESTROY))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<CmdMsg>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onNext(CmdMsg cmdMsg) {
+                        if (cmdMsg.status == 1) {
+                            onMessage(cmdMsg.msg);
+                        } else {
+                            UiUtils.showToast(cmdMsg.msg);
+                        }
+                    }
+                });
+
+        Intent intent = new Intent();
+        intent.setClass(this, WebSocketService.class);
+        bindService(intent, connection, Context.BIND_AUTO_CREATE);
+
 
     }
 
@@ -178,20 +219,21 @@ public class SwitchControlActivity extends BasedActivity implements SenderWebSoc
         super.onResume();
     }
 
-    @Override
     public void onMessage(String msg1) {
-        LogUtil.i(msg1);
+        LogUtil.i("SwitchControlActivity",msg1);
         // {"code":200,"result":{"channel":1,"command":0,"device":"14000000"}}
         try {
             JSONObject jsonObject = new JSONObject(msg1);
             String code = jsonObject.getString("code");
+            String device = jsonObject.getString("device");
+            if (!device.equals(Config.STSLC_6) && !device.equals(Config.STSLC_10))
+                return;
             if (code.equals("200")) {
 //                String channel_id = jsonObject.getString("channel_id");
 //                String status = jsonObject.getString("status");
                 JSONObject result = jsonObject.getJSONObject("result");
                 int channel = result.getInt("channel");
                 int command = result.getInt("command");
-                String device = result.getString("device");
                 String addr = result.getString("addr");
                 Map<String, String> map = ParseCMD.check((short) channel, (short) command);
 
@@ -223,16 +265,6 @@ public class SwitchControlActivity extends BasedActivity implements SenderWebSoc
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void onFailure(Throwable t) {
-        t.printStackTrace();
-    }
-
-    @Override
-    public void onOpen() {
-
     }
 
 
@@ -271,13 +303,13 @@ public class SwitchControlActivity extends BasedActivity implements SenderWebSoc
 
             public void setBind(final ItemChannelConBinding bind) {
                 this.bind = bind;
-                bind.root.setOnClickListener(new View.OnClickListener() {
+                bind.root.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
-                    public void onClick(View v) {
-                        LogUtil.i("我被点击了");
+                    public boolean onLongClick(View v) {
                         if (listener != null) {
                             listener.onChannelClickListener(getAdapterPosition(), bind.name);
                         }
+                        return true;
                     }
                 });
             }
@@ -377,6 +409,7 @@ public class SwitchControlActivity extends BasedActivity implements SenderWebSoc
                     break;
                 case MSG_CON_FAILED:
                     dialog.setWaitText((String) msg.obj);
+                    UiUtils.showToast("设备不在线");
 //                    adapter.notifyDataSetChanged();
                     handler.sendEmptyMessageDelayed(MSG_CON_SUCCESS, 500);
                     break;
@@ -387,7 +420,7 @@ public class SwitchControlActivity extends BasedActivity implements SenderWebSoc
     @Override
     protected void onDestroy() {
         handler.removeCallbacksAndMessages(null);
-        socket.closeWebSocket();
+        unbindService(connection);
         super.onDestroy();
     }
 

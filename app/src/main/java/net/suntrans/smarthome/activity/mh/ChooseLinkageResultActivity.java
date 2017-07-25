@@ -123,7 +123,7 @@ public class ChooseLinkageResultActivity extends BasedActivity {
             Intent intent = new Intent();
             intent.putExtra("data", strings);
             setResult(103, intent);
-            System.out.println("size=" + s.size());
+//            System.out.println("size=" + s.size());
             finish();
         }
         return super.onOptionsItemSelected(item);

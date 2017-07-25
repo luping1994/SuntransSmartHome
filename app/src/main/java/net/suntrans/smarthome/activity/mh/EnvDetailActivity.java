@@ -9,6 +9,8 @@ import net.suntrans.smarthome.base.BasedActivity;
 import net.suntrans.smarthome.bean.SensusResult;
 import net.suntrans.smarthome.fragment.mh.Env_fragment;
 
+import static com.iflytek.sunflower.config.a.m;
+
 /**
  * Created by Looney on 2017/5/15.
  */
@@ -35,6 +37,6 @@ public class EnvDetailActivity extends BasedActivity {
     @Override
     public void finish() {
         super.finish();
-        overridePendingTransition(0, android.support.v7.appcompat.R.anim.abc_slide_out_bottom);
+        overridePendingTransition(0, 0);
     }
 }

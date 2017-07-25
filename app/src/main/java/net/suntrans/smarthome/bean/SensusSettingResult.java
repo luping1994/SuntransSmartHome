@@ -1,5 +1,8 @@
 package net.suntrans.smarthome.bean;
 
+import android.databinding.BaseObservable;
+import android.databinding.Bindable;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -11,6 +14,15 @@ public class SensusSettingResult {
     private String code;
     private Param param;
     private String command;
+    private String device;
+
+    public String getDevice() {
+        return device;
+    }
+
+    public void setDevice(String device) {
+        this.device = device;
+    }
 
     public String getMsg() {
         return msg;
@@ -55,54 +67,76 @@ public class SensusSettingResult {
         this.command = command;
     }
 
-    public static class Param {
-        private String v1 = "0";
-        private String v2 = "0";
-        private String v3 = "0";
-        private String v4 = "0";
-        private String v5 = "0";
+    public static class Param extends BaseObservable {
 
-        public String getV1() {
+
+        private double v1 = 0;
+
+        private double v2 = 0;
+
+        private double v3 = 0;
+        private double v4 = 0;
+        private double v5 = 0;
+
+        @Bindable
+        public double getV1() {
             return v1;
         }
 
-        public void setV1(String v1) {
+        public void setV1(double v1) {
             this.v1 = v1;
         }
 
-        public String getV2() {
+        @Bindable
+        public double getV2() {
             return v2;
         }
 
-        public void setV2(String v2) {
+        public void setV2(double v2) {
             this.v2 = v2;
         }
 
-        public String getV3() {
+        @Bindable
+        public double getV3() {
             return v3;
         }
 
-        public void setV3(String v3) {
+        public void setV3(double v3) {
             this.v3 = v3;
         }
 
-        public String getV4() {
+        @Bindable
+        public double getV4() {
             return v4;
         }
 
-        public void setV4(String v4) {
+        public void setV4(double v4) {
             this.v4 = v4;
         }
 
-        public String getV5() {
+        @Bindable
+        public double getV5() {
             return v5;
         }
 
-        public void setV5(String v5) {
+        public void setV5(double v5) {
             this.v5 = v5;
         }
 
 
+        public JSONObject getJsonParm(){
+            JSONObject jsonObject = new JSONObject();
+            try {
+                jsonObject.put("v1", v1);
+                jsonObject.put("v2", v2);
+                jsonObject.put("v3", v3);
+                jsonObject.put("v4", v4);
+                jsonObject.put("v5", v5);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return jsonObject;
+        }
         @Override
         public String toString() {
             JSONObject jsonObject = new JSONObject();
@@ -175,27 +209,27 @@ public class SensusSettingResult {
         }
 
         public boolean getWendu() {
-            return wendu.equals("1")?true:false;
+            return wendu.equals("1") ? true : false;
         }
 
         public boolean getYanwu() {
-            return yanwu.equals("1")?true:false;
+            return yanwu.equals("1") ? true : false;
         }
 
         public boolean getZhengdong() {
-            return zhengdong.equals("1")?true:false;
+            return zhengdong.equals("1") ? true : false;
         }
 
         public boolean getPm25() {
-            return pm25.equals("1")?true:false;
+            return pm25.equals("1") ? true : false;
         }
 
         public boolean getJiaquan() {
-            return jiaquan.equals("1")?true:false;
+            return jiaquan.equals("1") ? true : false;
         }
 
         public boolean getRenyuan() {
-            return renyuan.equals("1")?true:false;
+            return renyuan.equals("1") ? true : false;
         }
     }
 }

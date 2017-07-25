@@ -27,6 +27,7 @@ import me.weyye.hipermission.PermissonItem;
 
 public class WelcomeActivity extends BasedActivity {
     private static final String TAG = "WelcomeActivity";
+    private boolean isfrist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,8 @@ public class WelcomeActivity extends BasedActivity {
         setContentView(R.layout.activity_wel);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 //        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        isfrist = App.getSharedPreferences().getBoolean("isfrist", true);
+
         init();
     }
 
@@ -41,7 +44,9 @@ public class WelcomeActivity extends BasedActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkPermission();
         } else {
+
             check();
+
         }
     }
 
@@ -62,16 +67,16 @@ public class WelcomeActivity extends BasedActivity {
             long d = (currenttime - firsttime) / 1000;
 
             if (access_token.equals("-1") || expires_in.equals("-1") || firsttime == -1l || user_id.equals("-1")) {
-                handler.sendEmptyMessageDelayed(START_LOGIN, 1800);
+                handler.sendEmptyMessageDelayed(START_LOGIN, 1000);
             } else {
                 if (d > (Long.valueOf(expires_in) - 1 * 24 * 3600)) {
-                    handler.sendEmptyMessageDelayed(START_LOGIN, 1800);
+                    handler.sendEmptyMessageDelayed(START_LOGIN, 1000);
                 } else {
-                    handler.sendEmptyMessageDelayed(START_MAIN, 1800);
+                    handler.sendEmptyMessageDelayed(START_MAIN, 1000);
                 }
             }
         } catch (Exception e) {
-            handler.sendEmptyMessageDelayed(START_LOGIN, 1800);
+            handler.sendEmptyMessageDelayed(START_LOGIN, 1000);
             e.printStackTrace();
         }
     }
@@ -88,11 +93,15 @@ public class WelcomeActivity extends BasedActivity {
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == START_LOGIN) {
-                startActivity(new Intent(WelcomeActivity.this, LoginActivity.class));
+                    startActivity(new Intent(WelcomeActivity.this, GuideActivity.class));
+
                 finish();
             }
             if (msg.what == START_MAIN) {
-                startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
+                if (isfrist) {
+                    startActivity(new Intent(WelcomeActivity.this, GuideActivity.class));
+                } else
+                    startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
                 finish();
             }
         }

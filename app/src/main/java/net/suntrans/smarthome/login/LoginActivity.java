@@ -86,7 +86,9 @@ public class LoginActivity extends RxAppCompatActivity implements Login.View {
                             if (info.status.equals("1")) {
                                 UiUtils.showToast("登录成功");
 
-                                App.getSharedPreferences().edit().putString("user_id", info.result.user.id).commit();
+                                App.getSharedPreferences().edit().putString("user_id", info.result.user.id)
+                                       .putBoolean("isfrist",false).commit();
+
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                 finish();
                             } else {
@@ -147,6 +149,4 @@ public class LoginActivity extends RxAppCompatActivity implements Login.View {
     public void setPresenter(Login.Presenter presenter) {
 
     }
-
-
 }

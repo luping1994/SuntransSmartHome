@@ -1,8 +1,6 @@
 package net.suntrans.smarthome.utils;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -11,7 +9,8 @@ import java.util.Map;
 
 public class ParseCMD {
 
-    public  static short[] flags ={1,2,4,8,16,32,64,128,256,512};
+    public static short[] flags ={1,2,4,8,16,32,64,128,256,512};
+
 
     public static Map<String,String>  check(short channel, short command){
         Map<String,String> result = new HashMap<>();
