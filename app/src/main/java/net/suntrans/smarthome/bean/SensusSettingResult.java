@@ -11,6 +11,7 @@ import org.json.JSONObject;
  */
 
 public class SensusSettingResult {
+
     private String code;
     private Param param;
     private String command;

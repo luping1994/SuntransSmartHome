@@ -35,13 +35,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
-                android:src="@mipmap/ic_launcher"
+                android:src="@drawable/logo2"
                 android:id="@+id/erweima"
                 android:layout_centerHorizontal="true"
                 android:layout_width="96dp"
                 android:layout_height="96dp" />
             <TextView
-                android:visibility="invisible"
+                android:visibility="gone"
                 android:id="@+id/fenxiang"
                 android:layout_below="@+id/erweima"
                 android:gravity="center"
@@ -59,17 +59,19 @@
                 android:layout_height="wrap_content" />
         </RelativeLayout>
         <TextView
+
             android:layout_marginBottom="4dp"
             android:id="@+id/guangwang"
-            android:autoLink="all"
+            android:autoLink="phone"
             android:textColor="@color/blue"
             android:layout_above="@+id/name1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="官网"
+            android:text="服务热线020-6103-2072"
             android:textSize="14sp" />
         <TextView
+            android:textColor="@color/black"
             android:paddingBottom="8dp"
             android:id="@+id/name1"
             android:layout_alignParentBottom="true"

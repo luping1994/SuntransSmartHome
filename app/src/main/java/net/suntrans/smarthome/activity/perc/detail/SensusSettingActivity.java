@@ -17,6 +17,7 @@ import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -192,9 +193,11 @@ public class SensusSettingActivity extends BasedActivity implements  CompoundBut
         if (result==null||result.getParam()==null||result.getCommand()==null){
             return;
         }
-        if (!result.getDevice().equals(Config.SENSUS)){
-            return;
-        }
+//
+
+//        if (!result.getDevice().equals(Config.SENSUS)){
+//            return;
+//        }
 
         handler.removeMessages(MSG_CON_FAILED);
         handler.sendEmptyMessage(MSG_CON_SUCCESS);
@@ -204,7 +207,7 @@ public class SensusSettingActivity extends BasedActivity implements  CompoundBut
             binding.setCommand(commmand);
         } else if (result.getCode().equals("404")) {
             handler.sendMessage(Message.obtain(handler, MSG_CON_FAILED, result.getMsg()));
-            UiUtils.showMessage(findViewById(android.R.id.content), result.getMsg());
+            UiUtils.showToast("配置错误");
         }
         handler.post(new Runnable() {
             @Override
@@ -339,5 +342,14 @@ public class SensusSettingActivity extends BasedActivity implements  CompoundBut
                 .setNegativeButton(R.string.qvxiao, null);
         builder.create().show();
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home){
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

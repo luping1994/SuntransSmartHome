@@ -39,9 +39,10 @@
                 app:theme="@style/Toolbar">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_marginRight="16dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center|left"
+                    android:gravity="center"
                     android:text="@string/main_mine_"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
@@ -118,11 +119,13 @@
 
 
                     <ImageView
+                        android:visibility="gone"
                         style="@style/line_horizontal_middle_gray"
                         android:layout_marginLeft="13.0dip"
                         android:layout_marginRight="13.0dip" />
 
                     <RelativeLayout
+
                         android:id="@id/setting_problems_and_suggestions"
 
                         android:layout_width="fill_parent"
@@ -131,7 +134,7 @@
                         android:clickable="true"
                         android:gravity="center_vertical"
                         android:onClick="@{() -> actionHandler.openSuggestionsPage()}"
-                        android:visibility="visible">
+                        android:visibility="gone">
 
                         <ImageView
                             android:id="@id/aa1"
@@ -240,11 +243,13 @@
                     </RelativeLayout>
 
                     <ImageView
+                        android:visibility="gone"
                         style="@style/line_horizontal_middle_gray"
                         android:layout_marginLeft="13.0dip"
                         android:layout_marginRight="13.0dip" />
 
                     <RelativeLayout
+
                         android:id="@id/rl_faq"
                         android:layout_width="fill_parent"
 
@@ -252,7 +257,7 @@
                         android:background="?attr/selectableItemBackground"
                         android:gravity="center_vertical"
                         android:onClick="@{() -> actionHandler.openHelpPage()}"
-                        android:visibility="visible">
+                        android:visibility="gone">
 
                         <ImageView
                             android:id="@id/bb"

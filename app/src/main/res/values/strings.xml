@@ -13,7 +13,7 @@
     <string name="nav_device">设备</string>
     <string name="nav_room">房间</string>
     <string name="nav_area">区域</string>
-    <string name="nav_find">商城</string>
+    <string name="nav_find">环境</string>
     <string name="nav_user">我的</string>
     <string name="main_mine_">我的</string>
     <string name="problems_and_suggestions">问题与建议</string>
@@ -142,7 +142,7 @@
     <string name="no_named">未命名</string>
     <string name="tips_modify_failed">修改失败</string>
     <string name="tips_account_is_empty">账号为不能为空</string>
-    <string name="company_name">Copyright © 1993-2017 Suntrans. All rights reserved.</string>
+    <string name="company_name">Copyright © 2017 三川智控工程装备有限公司 版权所有</string>
 
     <string-array name="textarray">
         <item>1级</item>

@@ -17,6 +17,7 @@ import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -74,6 +75,7 @@ public class AddModelActivity extends BasedActivity implements AddContract.View,
         imageView = (ImageView) findViewById(R.id.mode_img);
         type = getIntent().getStringExtra("type");
         binding.baseTvSceneTitle.setText(type.equals("sence") ? getString(R.string.title_add_sence) : getString(R.string.title_add_room));
+        setSupportActionBar(binding.toolbar);
         dialog = new LoadingDialog(this, R.style.loading_dialog);
         dialog.setWaitText(getString(R.string.dialog_tips_creating));
         dialog.setCancelable(false);
@@ -437,7 +439,6 @@ public class AddModelActivity extends BasedActivity implements AddContract.View,
     @Override
     public void onPermissionsGranted(int requestCode, List<String> perms) {
         LogUtil.i(TAG, "onPermissionsGranted:" + requestCode + ":" + perms.size());
-
     }
 
     @Override
@@ -451,4 +452,12 @@ public class AddModelActivity extends BasedActivity implements AddContract.View,
     }
 
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home){
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

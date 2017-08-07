@@ -77,7 +77,6 @@ public class PersonalFragment extends Fragment implements PersonalContract.View 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         binding.setActionHandler(presenter);
-
     }
 
     @Override

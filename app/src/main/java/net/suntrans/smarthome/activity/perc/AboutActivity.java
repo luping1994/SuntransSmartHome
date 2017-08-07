@@ -86,7 +86,7 @@ public class AboutActivity extends BasedActivity {
                 finish();
                 return true;
             case R.id.share:
-                Uri uri = Uri.parse("https://www.pgyer.com/DPTD");
+                Uri uri = Uri.parse("https://www.pgyer.com/ST-Home");
                 share(uri,"分享",AboutActivity.this);
                 return true;
         }
@@ -140,7 +140,7 @@ public class AboutActivity extends BasedActivity {
 
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.putExtra(Intent.EXTRA_SUBJECT,"");
-        shareIntent.putExtra(Intent.EXTRA_TEXT,  "HI 推荐您使用一款软件:"+"下载地址:https://www.pgyer.com/DiiB");
+        shareIntent.putExtra(Intent.EXTRA_TEXT,  "HI 推荐您使用一款软件:"+"下载地址:https://www.pgyer.com/ST-Home");
         shareIntent.setType("text/plain");
         context.startActivity(Intent.createChooser(shareIntent, desc));
     }

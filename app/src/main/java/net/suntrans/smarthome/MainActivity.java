@@ -37,13 +37,12 @@ import static android.support.design.widget.TabLayout.MODE_FIXED;
  */
 
 public class MainActivity extends BasedActivity implements View.OnClickListener {
+
     private final int[] TAB_TITLES = new int[]{R.string.nav_myhome, R.string.nav_area, R.string.nav_find, R.string.nav_user};
     private final int[] TAB_IMGS = new int[]{R.drawable.select_home, R.drawable.selector_devices, R.drawable.selector_find, R.drawable.selector_user};
     private TabLayout tabLayout;
-
     private Fragment[] fragments;
     private ImageView speech;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
