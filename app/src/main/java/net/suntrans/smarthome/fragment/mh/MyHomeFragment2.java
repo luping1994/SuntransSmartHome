@@ -114,10 +114,10 @@ public class MyHomeFragment2 extends RxFragment {
             }
         });
 
-        DeviceMainFragment fragment = new DeviceMainFragment();
+        DeviceMainFragment fragment = DeviceMainFragment.newInstance("1");
+        DeviceMainFragment fragment3 = DeviceMainFragment.newInstance("0");
         SenceFragment fragment1 = new SenceFragment();
-        LinkageFragment fragment2 = new LinkageFragment();
-        fragments = new Fragment[]{fragment1, fragment, fragment2};
+        fragments = new Fragment[]{fragment1, fragment, fragment3};
         binding.tablayout.setTabMode(TabLayout.MODE_FIXED);
         binding.tablayout.setTabGravity(TabLayout.GRAVITY_FILL);
         PagerAdapter adapter = new PagerAdapter(getChildFragmentManager());
@@ -188,7 +188,7 @@ public class MyHomeFragment2 extends RxFragment {
 
     class PagerAdapter extends FragmentPagerAdapter {
 
-        private final String[] title = new String[]{"场景", "设备", "联动"};
+        private final String[] title = new String[]{"场景", "照明", "其他"};
 
         public PagerAdapter(FragmentManager fm) {
             super(fm);

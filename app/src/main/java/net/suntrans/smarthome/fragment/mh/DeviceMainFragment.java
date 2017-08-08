@@ -72,8 +72,12 @@ public class DeviceMainFragment extends RxFragment {
     private Subscription subscribe;
     private Observable<AllDeviceResult> getDataObj;
 
-    public static DeviceMainFragment newInstance() {
-        return new DeviceMainFragment();
+    public static DeviceMainFragment newInstance(String type) {
+        DeviceMainFragment fragment =   new DeviceMainFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("type",type);
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     private static final String TAG = "DeviceMainFragment";
@@ -85,6 +89,7 @@ public class DeviceMainFragment extends RxFragment {
     private MyHandler mHandler;
     private String userid;
 
+    private String type ;
     private WebSocketService.ibinder binder;
 
     private ServiceConnection connection = new ServiceConnection() {
@@ -110,7 +115,7 @@ public class DeviceMainFragment extends RxFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         userid = App.getSharedPreferences().getString("user_id", "-1");
-
+        type = getArguments().getString("type");
         Intent intent = new Intent();
         intent.setClass(getActivity(), WebSocketService.class);
         getActivity().bindService(intent, connection, Context.BIND_AUTO_CREATE);
@@ -394,6 +399,7 @@ public class DeviceMainFragment extends RxFragment {
             @Override
             public void onError(Throwable e) {
                 e.printStackTrace();
+                UiUtils.showToast("服务器错误");
                 if (refreshLayout != null) {
                     refreshLayout.setRefreshing(false);
                 }
@@ -406,7 +412,12 @@ public class DeviceMainFragment extends RxFragment {
                 }
                 if (result != null) {
                     datas.clear();
-                    datas.addAll(result.channel.result);
+                    for (int i=0;i<result.channel.result.size();i++){
+                        if (result.channel.result.get(i).device_type.equals(type)){
+                            datas.add(result.channel.result.get(i));
+                        }
+                    }
+//                    datas.addAll(result.channel.result);
                     adapter.notifyDataSetChanged();
                 }
             }

@@ -27,5 +27,6 @@ public class AllDeviceResult {
         public String addr;
         public String vtype;
         public String number;
+        public String device_type;
     }
 }
