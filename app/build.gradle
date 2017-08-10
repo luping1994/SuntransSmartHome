@@ -95,7 +95,7 @@ dependencies {
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
-//    compile 'com.zhihu.android:matisse:0.4.3'
+    compile 'com.zhihu.android:matisse:0.4.3'
 //    compile 'com.android.support:palette-v7:25.3.1'
     compile 'com.alibaba:fastjson:1.1.56.android'
     //    compile 'in.srain.cube:ultra-ptr:1.0.11'

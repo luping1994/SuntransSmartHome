@@ -365,9 +365,9 @@ public class ModifyINActivity extends BasedActivity implements View.OnClickListe
         intent.putExtra("aspectY", 9);
 
 //        intent.putra("data","uri");
-        intent.putExtra("outputX", 1080);
+        intent.putExtra("outputX", outputX);
 
-        intent.putExtra("outputY", UiUtils.dip2px(100));
+        intent.putExtra("outputY", outputY);
 
 //        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
 

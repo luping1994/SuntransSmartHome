@@ -34,6 +34,7 @@ import net.suntrans.smarthome.App;
 import net.suntrans.smarthome.Config;
 import net.suntrans.smarthome.R;
 import net.suntrans.smarthome.activity.perc.detail.AddDeviceActivity;
+import net.suntrans.smarthome.activity.room.AirConditionActivity;
 import net.suntrans.smarthome.activity.room.XenonActivity;
 import net.suntrans.smarthome.api.RetrofitHelper;
 import net.suntrans.smarthome.bean.AddSCResult;
@@ -118,8 +119,6 @@ public class RoomDetailFragment extends RxFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
 
-
-
         adapter = new DevicesAdapter();
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
@@ -161,7 +160,7 @@ public class RoomDetailFragment extends RxFragment {
                     public void onNext(CmdMsg cmdMsg) {
                         if (cmdMsg.status == 1) {
                             parseMsg(cmdMsg.msg);
-                        }else {
+                        } else {
                             UiUtils.showToast(cmdMsg.msg);
                         }
                     }
@@ -307,9 +306,13 @@ public class RoomDetailFragment extends RxFragment {
                                 intent.putExtra("channel_id", datas.get(getAdapterPosition()).getId());
                                 intent.putExtra("name", datas.get(getAdapterPosition()).getName());
                                 startActivity(intent);
+                            } else if (datas.get(getAdapterPosition()).getDevice_type().equals("4")) {
+                                Intent intent = new Intent(getActivity(), AirConditionActivity.class);
+                                intent.putExtra("sensus_id", datas.get(getAdapterPosition()).getSensus_id());
+                                intent.putExtra("name", datas.get(getAdapterPosition()).getName());
+                                startActivity(intent);
                             } else {
                                 sendCmd(getAdapterPosition());
-
                             }
                         } else {
 
@@ -337,7 +340,7 @@ public class RoomDetailFragment extends RxFragment {
                 name.setText(datas.get(position).getName());
 
                 if (datas.get(position).getDevice_type() != null) {
-                    if (datas.get(position).getDevice_type().equals("3")) {
+                    if (datas.get(position).getDevice_type().equals("3")||datas.get(position).getDevice_type().equals("4")) {
                         checkbox.setVisibility(View.GONE);
                         go.setVisibility(View.VISIBLE);
                     } else {

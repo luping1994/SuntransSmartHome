@@ -49,7 +49,7 @@
                         android:layout_height="wrap_content"
                         android:layout_above="@+id/wendu_ll"
                         android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                        android:text="智慧家居"
+                        android:text="三川智控"
                         android:textColor="@color/white"
                         android:textSize="30sp" />
 

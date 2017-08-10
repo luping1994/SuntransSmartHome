@@ -43,7 +43,6 @@ public class MyHomeFragment2 extends RxFragment {
 
     private static final String TAG = "MyHomeFragment";
     private FragmentMyhome2Binding binding;
-
     private Fragment[] fragments;
     private PopupMenu menu;
     private SensusResult.Sensus info;
@@ -117,7 +116,8 @@ public class MyHomeFragment2 extends RxFragment {
         DeviceMainFragment fragment = DeviceMainFragment.newInstance("1");
         DeviceMainFragment fragment3 = DeviceMainFragment.newInstance("0");
         SenceFragment fragment1 = new SenceFragment();
-        fragments = new Fragment[]{fragment1, fragment, fragment3};
+        AmeterFragment fragment4 = new AmeterFragment();
+        fragments = new Fragment[]{fragment1, fragment, fragment3,fragment4};
         binding.tablayout.setTabMode(TabLayout.MODE_FIXED);
         binding.tablayout.setTabGravity(TabLayout.GRAVITY_FILL);
         PagerAdapter adapter = new PagerAdapter(getChildFragmentManager());
@@ -201,7 +201,7 @@ public class MyHomeFragment2 extends RxFragment {
 
         @Override
         public int getCount() {
-            return 3;
+            return 4;
         }
 
         @Override

@@ -15,6 +15,7 @@ import rx.Observable;
  */
 import net.suntrans.smarthome.bean.AddSCResult;
 import net.suntrans.smarthome.bean.AllDeviceResult;
+import net.suntrans.smarthome.bean.AmeterEntity;
 import net.suntrans.smarthome.bean.ChannelEdit;
 import net.suntrans.smarthome.bean.ChannelResultNewSun;
 import net.suntrans.smarthome.bean.DeviceInfoResult;
@@ -192,4 +193,8 @@ public interface Api {
     @FormUrlEncoded
     @POST("scene/voice")
     Observable<VoiceResponse> getSceneByVoice(@Field("name") String name);
+
+
+    @POST("energy/ammeter")
+    Observable<AmeterEntity> getAmmeter();
 }

@@ -29,17 +29,21 @@ import com.trello.rxlifecycle.android.FragmentEvent;
 import com.trello.rxlifecycle.components.support.RxFragment;
 
 import net.suntrans.smarthome.R;
+import net.suntrans.smarthome.activity.ModifyINActivity;
 import net.suntrans.smarthome.activity.mh.AddModelActivity;
 import net.suntrans.smarthome.api.RetrofitHelper;
+import net.suntrans.smarthome.bean.CreateModelResult;
 import net.suntrans.smarthome.bean.HomeRoomResult;
 import net.suntrans.smarthome.activity.room.RoomDetailActivity;
 import net.suntrans.smarthome.activity.room.EditRoomActivity;
 import net.suntrans.smarthome.utils.LogUtil;
 import net.suntrans.smarthome.utils.StatusBarCompat;
+import net.suntrans.smarthome.utils.UiUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -231,19 +235,5 @@ public class RoomFragment extends RxFragment {
         super.onResume();
     }
 
-//    @Override
-//    public void setUserVisibleHint(boolean isVisibleToUser) {
-//        if (isVisibleToUser) {
-//            if (roomDatas != null) {
-//                if (roomDatas.size() == 0) {
-//                    if (refreshLayout != null)
-//                        refreshLayout.setRefreshing(true);
-//                    getRoomData();
-//                }
-//            }
-//        } else {
-//
-//        }
-//        super.setUserVisibleHint(isVisibleToUser);
-//    }
+
 }

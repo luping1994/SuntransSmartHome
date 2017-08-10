@@ -6,23 +6,17 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
-import com.iflytek.msc.MSC;
 import com.trello.rxlifecycle.android.ActivityEvent;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
@@ -38,7 +32,6 @@ import net.suntrans.smarthome.utils.RxBus;
 import net.suntrans.smarthome.utils.UiUtils;
 import net.suntrans.smarthome.websocket.WebSocketService;
 import net.suntrans.smarthome.websocket.WebSocketService2;
-import net.suntrans.smarthome.widget.GradeBar;
 import net.suntrans.smarthome.widget.LoadingDialog;
 import net.suntrans.smarthome.widget.ScrollChildSwipeRefreshLayout;
 
@@ -50,10 +43,6 @@ import java.util.Map;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
-
-import static net.suntrans.smarthome.R.id.dianyuan;
-import static net.suntrans.smarthome.R.id.grade;
-import static net.suntrans.smarthome.R.id.xianqideng;
 
 public class XenonActivity extends RxAppCompatActivity implements View.OnClickListener {
     private WebSocketService2.ibinder binder;
