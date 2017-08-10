@@ -29,7 +29,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.trello.rxlifecycle.android.FragmentEvent;
 import com.trello.rxlifecycle.components.support.RxFragment;
-import com.zhihu.matisse.internal.utils.UIUtils;
 
 import net.suntrans.smarthome.App;
 import net.suntrans.smarthome.Config;

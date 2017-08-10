@@ -15,8 +15,11 @@ import net.suntrans.smarthome.bean.CmdMsg;
 import net.suntrans.smarthome.bean.CmdMsg1;
 import net.suntrans.smarthome.utils.LogUtil;
 import net.suntrans.smarthome.utils.RxBus;
+import net.suntrans.smarthome.utils.UiUtils;
 
 import okhttp3.WebSocket;
+
+import static com.iflytek.sunflower.config.b.s;
 
 /**
  * Created by Looney on 2017/5/27.
@@ -77,7 +80,11 @@ public class WebSocketService2 extends Service implements WebSocketWrapper2.onRe
 
     @Override
     public void onOpen() {
-        LogUtil.i("连接websocket服务器成功!");
+        UiUtils.showToast("通讯成功");
+        CmdMsg1 msg = new CmdMsg1();
+        msg.status=0;
+        msg.msg="服务链接成功";
+       RxBus.getInstance().post(msg);
     }
 
     @Override

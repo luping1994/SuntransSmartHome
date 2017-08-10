@@ -5,18 +5,24 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
+import com.iflytek.msc.MSC;
 import com.trello.rxlifecycle.android.ActivityEvent;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
@@ -24,6 +30,8 @@ import net.suntrans.smarthome.Config;
 import net.suntrans.smarthome.R;
 import net.suntrans.smarthome.bean.CmdMsg;
 import net.suntrans.smarthome.bean.CmdMsg1;
+import net.suntrans.smarthome.bean.XenonData;
+import net.suntrans.smarthome.databinding.XenonBinding;
 import net.suntrans.smarthome.utils.LogUtil;
 import net.suntrans.smarthome.utils.ParseCMD;
 import net.suntrans.smarthome.utils.RxBus;
@@ -32,6 +40,7 @@ import net.suntrans.smarthome.websocket.WebSocketService;
 import net.suntrans.smarthome.websocket.WebSocketService2;
 import net.suntrans.smarthome.widget.GradeBar;
 import net.suntrans.smarthome.widget.LoadingDialog;
+import net.suntrans.smarthome.widget.ScrollChildSwipeRefreshLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,6 +50,10 @@ import java.util.Map;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
+
+import static net.suntrans.smarthome.R.id.dianyuan;
+import static net.suntrans.smarthome.R.id.grade;
+import static net.suntrans.smarthome.R.id.xianqideng;
 
 public class XenonActivity extends RxAppCompatActivity implements View.OnClickListener {
     private WebSocketService2.ibinder binder;
@@ -72,8 +85,8 @@ public class XenonActivity extends RxAppCompatActivity implements View.OnClickLi
         public void onServiceDisconnected(ComponentName name) {
         }
     };
-    private AppCompatCheckBox xianqideng;
-    private AppCompatCheckBox dianyuan;
+//    private AppCompatCheckBox xianqideng;
+//    private AppCompatCheckBox dianyuan;
     private String xenonAddr;
     private String addr;
     private String number;
@@ -82,15 +95,15 @@ public class XenonActivity extends RxAppCompatActivity implements View.OnClickLi
     private String channel_id;
     private Subscription subscribe;
     private Subscription subscribe1;
-    private GradeBar gradeBar;
-    private TextView grade;
-    private String[] grades;
+//    private GradeBar gradeBar;
+//    private TextView grade;
+//    private String[] grades;
+    private XenonBinding xenonBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.xenon);
-
+        xenonBinding = DataBindingUtil.setContentView(this, R.layout.xenon);
         Intent intent = new Intent();
         intent.setClass(this, WebSocketService2.class);
         bindService(intent, connection, Context.BIND_AUTO_CREATE);
@@ -102,8 +115,8 @@ public class XenonActivity extends RxAppCompatActivity implements View.OnClickLi
         toolbar.setTitle(getIntent().getStringExtra("name"));
         setSupportActionBar(toolbar);
 
-        xianqideng = (AppCompatCheckBox) findViewById(R.id.xianqideng);
-        dianyuan = (AppCompatCheckBox) findViewById(R.id.dianyuan);
+//        xianqideng = (AppCompatCheckBox) findViewById(R.id.xianqideng);
+//        dianyuan = (AppCompatCheckBox) findViewById(dianyuan);
         findViewById(R.id.llDianyuan).setOnClickListener(this);
         findViewById(R.id.llXianqideng).setOnClickListener(this);
 
@@ -114,10 +127,18 @@ public class XenonActivity extends RxAppCompatActivity implements View.OnClickLi
         channel_id = getIntent().getStringExtra("channel_id");
 
         if (status.equals("1")) {
-            dianyuan.setChecked(true);
+            xenonBinding. dianyuan.setChecked(true);
         } else {
-            dianyuan.setChecked(false);
+            xenonBinding. dianyuan.setChecked(false);
         }
+        final ScrollChildSwipeRefreshLayout refreshLayout = (ScrollChildSwipeRefreshLayout) findViewById(R.id.refreshlayout);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getState();
+                refreshLayout.setRefreshing(false);
+            }
+        });
 
         subscribe = RxBus.getInstance().toObserverable(CmdMsg1.class)
                 .compose(this.<CmdMsg1>bindUntilEvent(ActivityEvent.DESTROY))
@@ -137,6 +158,9 @@ public class XenonActivity extends RxAppCompatActivity implements View.OnClickLi
                     public void onNext(CmdMsg1 cmdMsg) {
                         if (cmdMsg.status == 1) {
                             parseMsg1(cmdMsg.msg);
+                        } else if (cmdMsg.msg.equals("服务链接成功")) {
+                            getState();
+                            ;
                         }
                     }
                 });
@@ -164,34 +188,34 @@ public class XenonActivity extends RxAppCompatActivity implements View.OnClickLi
                     }
                 });
 //
-        gradeBar = (GradeBar) findViewById(R.id.bar);
-        grade = (TextView) findViewById(R.id.grade);
-        grades = getResources().getStringArray(R.array.textarray);
-        gradeBar.setOnGradeChangedListener(new GradeBar.OnGradeChangedListener() {
-            @Override
-            public void onGradeChanged(int index) {
-                JSONObject jsonObject = new JSONObject();
-                try {
-                    jsonObject.put("action", "adjust");
-                    jsonObject.put("user_id", "123");
-                    jsonObject.put("addr", xenonAddr);
-                    jsonObject.put("level", index);
-                    binder.sendOrder(jsonObject.toString());
-                    showWaitDialog();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            dissMissDialog();
-                        }
-                    }, 2000);
-                } catch (Exception e) {
-                    UiUtils.showToast("错误");
-                    e.printStackTrace();
-                }
-//                System.out.println("调光等级为:" + grades[index]);
-                grade.setText(grades[index]);
-            }
-        });
+//        gradeBar = (GradeBar) findViewById(R.id.bar);
+//        grade = (TextView) findViewById(R.id.grade);
+//        grades = getResources().getStringArray(R.array.textarray);
+//        gradeBar.setOnGradeChangedListener(new GradeBar.OnGradeChangedListener() {
+//            @Override
+//            public void onGradeChanged(int index) {
+//                JSONObject jsonObject = new JSONObject();
+//                try {
+//                    jsonObject.put("action", "adjust");
+//                    jsonObject.put("user_id", "123");
+//                    jsonObject.put("addr", xenonAddr);
+//                    jsonObject.put("level", index);
+//                    binder.sendOrder(jsonObject.toString());
+//                    showWaitDialog();
+//                    handler.postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            dissMissDialog();
+//                        }
+//                    }, 2000);
+//                } catch (Exception e) {
+//                    UiUtils.showToast("错误");
+//                    e.printStackTrace();
+//                }
+////                System.out.println("调光等级为:" + grades[index]);
+//                grade.setText(grades[index]);
+//            }
+//        });
     }
 
     private void showWaitDialog() {
@@ -219,39 +243,47 @@ public class XenonActivity extends RxAppCompatActivity implements View.OnClickLi
     private void getState() {
         final JSONObject jsonObject = new JSONObject();
         final JSONObject jsonObject2 = new JSONObject();
+        final JSONObject jsonObject3 = new JSONObject();
         try {
+            jsonObject.put("device", "4700");
             jsonObject.put("action", "rlevel");
             jsonObject.put("addr", xenonAddr);
+
+
+            jsonObject2.put("device", "4700");
             jsonObject2.put("action", "rstatus");
             jsonObject2.put("addr", xenonAddr);
+
+
+            jsonObject3.put("device", "4700");
+            jsonObject3.put("action", "rdata");
+            jsonObject3.put("addr", xenonAddr);
+
             if (binder == null)
                 return;
-//            binder.sendOrder(jsonObject.toString());
-//            binder.sendOrder(jsonObject.toString());
-//            binder.sendOrder(jsonObject.toString());
+
             binder.sendOrder(jsonObject.toString());
-            handler.postDelayed(new Runnable() {
+            handler2.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    binder.sendOrder(jsonObject2.toString());
-//                    binder.sendOrder(jsonObject2.toString());
-//                    binder.sendOrder(jsonObject2.toString());
-//                    binder.sendOrder(jsonObject2.toString());
-//                    binder.sendOrder(jsonObject2.toString());
+                    binder.sendOrder(jsonObject3.toString());
 
                 }
-            }, 200);
+            }, 1000);
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
     private void parseMsg1(String msg) {
-        LogUtil.i("XenonActivity:" + msg);
         try {
             JSONObject jsonObject = new JSONObject(msg);
             int code = jsonObject.getInt("code");
             if (code == 200) {
+                String device = jsonObject.getString("device");
+                if (!device.equals("4700")) {
+                    return;
+                }
                 JSONObject result = jsonObject.getJSONObject("result");
                 String addr = result.getString("addr");
                 if (addr.equals(xenonAddr)) {
@@ -272,31 +304,42 @@ public class XenonActivity extends RxAppCompatActivity implements View.OnClickLi
 //                            grade.setText(grades[level]);
 //                        }
 //                    }else
-                if (result.has("status")) {
-                    String status = result.getString("status");
-                    xianqideng.setChecked(status.equals("1") ? true : false);
-                } else if (result.has("level")) {
-                    int level = Integer.parseInt(result.getString("level"));
-                    if (level > 0 && level <= 7) {
+                    if (result.has("status")) {
+                        String status = result.getString("status");
+                        xenonBinding.  xianqideng.setChecked(status.equals("1") ? true : false);
+                    } else if (result.has("level")) {
+                        int level = Integer.parseInt(result.getString("level"));
+                        if (level >= 0 && level <= 7) {
 
-                        gradeBar.setmCurrentIndex(level);
-                        grade.setText((level + 1) + "级");
+                            xenonBinding.  grade.setText((7-level)+"" );
+                        }
                     }
+                    if (jsonObject.getString("action").equals("rdata")){
+                        XenonData xenonData =  JSON.parseObject(msg, XenonData.class);//Weibo类在下边定义
+                        parseParmData(xenonData);
+                    }
+                    handler.removeCallbacksAndMessages(null);
+                    if (dialog != null)
+                        dialog.dismiss();
                 }
-                handler.removeCallbacksAndMessages(null);
-                dialog.dismiss();
+
+            } else {
             }
+        } catch (
+                Exception e)
 
-        } else{
+        {
+            e.printStackTrace();
         }
-    } catch(
-    Exception e)
 
-    {
-        e.printStackTrace();
     }
 
-}
+        private void parseParmData(XenonData xenonData) {
+            System.out.println(xenonData.getResult().toString());
+            xenonBinding.xianqideng.setChecked(xenonData.getResult().getStatus()==1 ? true : false);
+            xenonBinding.setInfo(xenonData.getResult());
+            xenonBinding.nenghaobi.setText(xenonData.getResult().getPO_value()/xenonData.getResult().getP_value()*100+"%");
+        }
 
     private void parseMsg(String msg1) {
         LogUtil.i("XenonActivity:" + msg1);
@@ -319,9 +362,9 @@ public class XenonActivity extends RxAppCompatActivity implements View.OnClickLi
                         String status = entry.getValue();
                         if (number1.equals(number)) {
                             if (status.equals("1")) {
-                                dianyuan.setChecked(true);
+                                xenonBinding. dianyuan.setChecked(true);
                             } else {
-                                dianyuan.setChecked(true);
+                                xenonBinding. dianyuan.setChecked(true);
                             }
                         }
                     }
@@ -351,6 +394,7 @@ public class XenonActivity extends RxAppCompatActivity implements View.OnClickLi
             unbindService(connection2);
         }
         handler.removeCallbacksAndMessages(null);
+        handler2.removeCallbacksAndMessages(null);
 
         if (!subscribe.isUnsubscribed()) {
             subscribe.unsubscribe();
@@ -368,7 +412,7 @@ public class XenonActivity extends RxAppCompatActivity implements View.OnClickLi
         switch (v.getId()) {
             case R.id.llDianyuan:
 
-                if (!dianyuan.isChecked()) {
+                if (! xenonBinding.dianyuan.isChecked()) {
                     JSONObject jsonObject = new JSONObject();
                     try {
                         jsonObject.put("device", Config.STSLC_10);
@@ -377,7 +421,7 @@ public class XenonActivity extends RxAppCompatActivity implements View.OnClickLi
 
                         jsonObject.put("channel_id", Integer.valueOf(channel_id));
 
-                        jsonObject.put("command", dianyuan.isChecked() ? 0 : 1);
+                        jsonObject.put("command",  xenonBinding.dianyuan.isChecked() ? 0 : 1);
 
                         binder2.sendOrder(jsonObject.toString());
                         showWaitDialog();
@@ -406,7 +450,7 @@ public class XenonActivity extends RxAppCompatActivity implements View.OnClickLi
 
                                         jsonObject.put("channel_id", Integer.valueOf(channel_id));
 
-                                        jsonObject.put("command", dianyuan.isChecked() ? 0 : 1);
+                                        jsonObject.put("command",  xenonBinding.dianyuan.isChecked() ? 0 : 1);
                                         binder2.sendOrder(jsonObject.toString());
                                         showWaitDialog();
                                         handler.postDelayed(new Runnable() {
@@ -427,10 +471,10 @@ public class XenonActivity extends RxAppCompatActivity implements View.OnClickLi
             case R.id.llXianqideng:
                 JSONObject jsonObject = new JSONObject();
                 try {
+                    jsonObject.put("device", "4700");
                     jsonObject.put("action", "switch");
-                    jsonObject.put("user_id", 123);
                     jsonObject.put("addr", xenonAddr);
-                    jsonObject.put("command", xianqideng.isChecked() ? 0 : 1);
+                    jsonObject.put("command",  xenonBinding.xianqideng.isChecked() ? 0 : 1);
                     binder.sendOrder(jsonObject.toString());
                     showWaitDialog();
                     handler.postDelayed(new Runnable() {
@@ -448,6 +492,7 @@ public class XenonActivity extends RxAppCompatActivity implements View.OnClickLi
     }
 
     private Handler handler = new Handler();
+    private Handler handler2 = new Handler();
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -455,5 +500,54 @@ public class XenonActivity extends RxAppCompatActivity implements View.OnClickLi
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void addLevel(View view) {
+        System.out.println("++++++++++++");
+        String level =  xenonBinding.grade.getText().toString();
+        if (TextUtils.isEmpty(level)){
+            UiUtils.showToast("无法获取调光等级");
+            return;
+        }
+        if (Integer.valueOf(level)==7){
+            UiUtils.showToast("已经是最大等级了");
+            return;
+        }
+        JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonObject.put("action", "adjust");
+                    jsonObject.put("device", "4700");
+                    jsonObject.put("addr", xenonAddr);
+                    jsonObject.put("level", 7-Integer.valueOf(level)-1);
+                    binder.sendOrder(jsonObject.toString());
+                } catch (Exception e) {
+                    UiUtils.showToast("错误");
+                    e.printStackTrace();
+                }
+    }
+
+    public void subLevel(View view) {
+        System.out.println("——————————————————");
+
+        String level =  xenonBinding.grade.getText().toString();
+        if (TextUtils.isEmpty(level)){
+            UiUtils.showToast("无法获取调光等级");
+            return;
+        }
+        if (Integer.valueOf(level)==0){
+            UiUtils.showToast("已经是最小等级了");
+            return;
+        }
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("action", "adjust");
+            jsonObject.put("device", "4700");
+            jsonObject.put("addr", xenonAddr);
+            jsonObject.put("level", 7-Integer.valueOf(level)+1);
+            binder.sendOrder(jsonObject.toString());
+        } catch (Exception e) {
+            UiUtils.showToast("错误");
+            e.printStackTrace();
+        }
     }
 }

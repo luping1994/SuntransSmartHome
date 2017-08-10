@@ -16,6 +16,7 @@
         android:title="新增联动"
         app:showAsAction="never" />
     <item
+        android:visible="false"
         android:id="@+id/setting"
         android:title="房间设置"
         app:showAsAction="never" />

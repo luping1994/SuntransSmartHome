@@ -1,6 +1,7 @@
 package net.suntrans.smarthome.api;
 
 import okhttp3.MultipartBody;
+import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 
 import retrofit2.http.Field;
@@ -32,6 +33,7 @@ import net.suntrans.smarthome.bean.VoiceResponse;
 import net.suntrans.smarthome.login.LoginResult;
 
 import java.util.List;
+import java.util.Map;
 
 public interface Api {
 
@@ -93,6 +95,10 @@ public interface Api {
                                                 @Field("name") String name);
 
     @FormUrlEncoded
+    @POST("channel/update")
+    Observable<CreateModelResult> upDateChannel(@FieldMap Map<String,String> map);
+
+    @FormUrlEncoded
     @POST("room/deleteChannel")
     Observable<List<AddSCResult>> deleteRoomChannel(@Field("channel_id") String id);
 
@@ -111,11 +117,19 @@ public interface Api {
     Observable<CreateModelResult> updateScene(@Field("name") String name, @Field("scene_id") String scene_id,
                                               @Field("img_id") String img_id);
 
+    @FormUrlEncoded
+    @POST("scene/update")
+    Observable<CreateModelResult> updateScene(@FieldMap Map<String,String> map);
+
 
     @FormUrlEncoded
     @POST("house/update")
     Observable<CreateModelResult> updateRoom(@Field("name") String name, @Field("house_id") String scene_id,
                                              @Field("img_id") String img_id);
+
+    @FormUrlEncoded
+    @POST("house/update")
+    Observable<CreateModelResult> updateRoom(@FieldMap Map<String,String> map);
 
     @FormUrlEncoded
     @POST("house/add")

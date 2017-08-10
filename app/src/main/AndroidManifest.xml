@@ -144,7 +144,7 @@
             android:screenOrientation="portrait" />
         <activity android:name="net.suntrans.smarthome.activity.mh.SpeechActivity" />
         <activity android:name=".login.GuideActivity" />
-        <activity android:name=".activity.room.XenonActivity" />
+        <activity android:name=".activity.room.XenonActivity" android:screenOrientation="portrait" />
 
         <service android:name="net.suntrans.smarthome.websocket.WebSocketService" />
         <service android:name="net.suntrans.smarthome.websocket.WebSocketService2" />

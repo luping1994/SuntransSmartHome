@@ -188,7 +188,7 @@ public class MyHomeFragment2 extends RxFragment {
 
     class PagerAdapter extends FragmentPagerAdapter {
 
-        private final String[] title = new String[]{"场景", "照明", "其他"};
+        private final String[] title = new String[]{"场景", "照明", "其他","能耗"};
 
         public PagerAdapter(FragmentManager fm) {
             super(fm);

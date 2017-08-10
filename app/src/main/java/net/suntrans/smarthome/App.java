@@ -1,10 +1,13 @@
 package net.suntrans.smarthome;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
+import android.util.Log;
 
 import com.iflytek.cloud.SpeechUtility;
 import com.squareup.leakcanary.LeakCanary;
@@ -62,6 +65,43 @@ public class App extends MultiDexApplication {
 //        if (!ENABLE_DEBUG)
 //            PgyCrashManager.register(this);
         Bugly.init(getApplicationContext(), "6ec9742d2e", false);
+        registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
+            @Override
+            public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+                Log.e("Application","onActivityCreated");
+                Log.w("Application",activity.toString());
+            }
+
+            @Override
+            public void onActivityStarted(Activity activity) {
+
+            }
+
+            @Override
+            public void onActivityResumed(Activity activity) {
+
+            }
+
+            @Override
+            public void onActivityPaused(Activity activity) {
+
+            }
+
+            @Override
+            public void onActivityStopped(Activity activity) {
+
+            }
+
+            @Override
+            public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+
+            }
+
+            @Override
+            public void onActivityDestroyed(Activity activity) {
+
+            }
+        });
     }
 
 

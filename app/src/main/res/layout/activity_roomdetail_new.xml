@@ -30,6 +30,7 @@
                 app:layout_scrollFlags="scroll|exitUntilCollapsed|snap|enterAlwaysCollapsed">
 
                 <RelativeLayout
+                    android:background="@color/white"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fitsSystemWindows="true"
@@ -38,16 +39,23 @@
                         android:transitionName="@string/transition_imageView"
                         android:id="@+id/bg"
                         android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
+                        android:layout_height="match_parent"
                         android:fitsSystemWindows="true"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/img_homepage" />
-
+                        android:scaleType="fitXY"
+                        android:src="@drawable/img_original_bg_custom" />
+                  <ImageView
+                      android:layout_marginRight="16dp"
+                      android:layout_marginBottom="16dp"
+                      android:layout_alignParentRight="true"
+                      android:layout_alignParentBottom="true"
+                      android:src="@drawable/logo3"
+                      android:layout_width="100dp"
+                      android:layout_height="20dp" />
                 </RelativeLayout>
+
 
                 <android.support.v7.widget.Toolbar
                     app:navigationIcon="@drawable/back_selector_new"
-
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/actionbarheight"
