@@ -79,6 +79,12 @@ public class AddModelActivity extends BasedActivity implements AddContract.View,
         dialog = new LoadingDialog(this, R.style.loading_dialog);
         dialog.setWaitText(getString(R.string.dialog_tips_creating));
         dialog.setCancelable(false);
+        binding.baseIvSceneBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override
@@ -452,12 +458,4 @@ public class AddModelActivity extends BasedActivity implements AddContract.View,
     }
 
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home){
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

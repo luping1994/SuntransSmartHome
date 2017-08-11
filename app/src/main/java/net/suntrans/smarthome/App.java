@@ -11,7 +11,6 @@ import android.util.Log;
 
 import com.iflytek.cloud.SpeechUtility;
 import com.squareup.leakcanary.LeakCanary;
-import com.tencent.bugly.Bugly;
 
 import net.suntrans.smarthome.utils.LogUtil;
 
@@ -64,7 +63,7 @@ public class App extends MultiDexApplication {
 //        }.start();
 //        if (!ENABLE_DEBUG)
 //            PgyCrashManager.register(this);
-        Bugly.init(getApplicationContext(), "6ec9742d2e", false);
+//        Bugly.init(getApplicationContext(), "6ec9742d2e", false);
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
             @Override
             public void onActivityCreated(Activity activity, Bundle savedInstanceState) {

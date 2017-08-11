@@ -3,22 +3,25 @@
 <layout>
 
     <data>
+
         <variable
             name="info"
-            type="net.suntrans.smarthome.bean.XenonData.ResultBean"/>
+            type="net.suntrans.smarthome.bean.XenonData.ResultBean" />
     </data>
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/root"
-        android:background="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
         android:fitsSystemWindows="true"
         android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
+
             android:layout_width="match_parent"
             android:layout_height="@dimen/actionbarheight"
             android:background="@color/colorPrimary"
@@ -27,7 +30,8 @@
             app:layout_collapseMode="pin"
             app:navigationIcon="@drawable/back_selector_new"
             app:popupTheme="@style/Scene_Pop_AppTheme"
-            app:theme="@style/ToolBarTheme">
+            app:theme="@style/ToolBarTheme"
+            app:titleTextAppearance="@style/Appbar_apperance">
 
         </android.support.v7.widget.Toolbar>
 
@@ -308,11 +312,11 @@
                     </RelativeLayout>
 
                     <RelativeLayout
-                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginTop="1dp"
-                        android:background="@color/white">
+                        android:background="@color/white"
+                        android:visibility="gone">
 
                         <TextView
                             android:layout_width="match_parent"

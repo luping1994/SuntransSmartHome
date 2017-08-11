@@ -73,18 +73,18 @@ public class SenceFragment extends RxFragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
-        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                if (view.getId() == imageView) {
-                    Intent intent = new Intent(getActivity(), EditSenceActivity.class);
-                    intent.putExtra("title", datas.get(position).name);
-                    intent.putExtra("imgurl", datas.get(position).img);
-                    intent.putExtra("id", datas.get(position).id);
-                    startActivity(intent);
-                }
-            }
-        });
+//        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+//            @Override
+//            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+//                if (view.getId() == imageView) {
+//                    Intent intent = new Intent(getActivity(), EditSenceActivity.class);
+//                    intent.putExtra("title", datas.get(position).name);
+//                    intent.putExtra("imgurl", datas.get(position).img);
+//                    intent.putExtra("id", datas.get(position).id);
+//                    startActivity(intent);
+//                }
+//            }
+//        });
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {

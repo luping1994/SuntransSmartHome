@@ -155,4 +155,11 @@
         <item>8级</item>
     </string-array>
 
+    <string-array name="model">
+        <item>制冷模式</item>
+        <item>制热模式</item>
+        <item>通风模式</item>
+        <item>除湿模式</item>
+    </string-array>
+
 </resources>

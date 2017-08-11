@@ -58,7 +58,6 @@ public class LoginActivity extends RxAppCompatActivity implements Login.View {
         App.getSharedPreferences().edit().putString("username", info.getUsername())
                 .putString("password", info.getPassword()).commit();
         getInfo();
-
     }
 
     private void getInfo() {
@@ -87,7 +86,7 @@ public class LoginActivity extends RxAppCompatActivity implements Login.View {
                                 UiUtils.showToast("登录成功");
 
                                 App.getSharedPreferences().edit().putString("user_id", info.result.user.id)
-                                       .putBoolean("isfrist",false).commit();
+                                        .putBoolean("isfrist", false).commit();
 
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                 finish();

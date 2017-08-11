@@ -128,16 +128,16 @@ public class RoomFragment extends RxFragment {
 
             }
         });
-        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent = new Intent(getActivity(), EditRoomActivity.class);
-                intent.putExtra("title", roomDatas.get(position).name);
-                intent.putExtra("imgurl", roomDatas.get(position).img);
-                intent.putExtra("id", roomDatas.get(position).id);
-                startActivity(intent);
-            }
-        });
+//        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+//            @Override
+//            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+//                Intent intent = new Intent(getActivity(), EditRoomActivity.class);
+//                intent.putExtra("title", roomDatas.get(position).name);
+//                intent.putExtra("imgurl", roomDatas.get(position).img);
+//                intent.putExtra("id", roomDatas.get(position).id);
+//                startActivity(intent);
+//            }
+//        });
 
         getRoomData();
 

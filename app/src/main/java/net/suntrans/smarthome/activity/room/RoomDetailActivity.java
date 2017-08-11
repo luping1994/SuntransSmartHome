@@ -207,7 +207,6 @@ public class RoomDetailActivity extends BasedActivity implements View.OnClickLis
                 }
             });
             builder.create().show();
-            ;
         }
     }
 
@@ -509,6 +508,7 @@ public class RoomDetailActivity extends BasedActivity implements View.OnClickLis
         Map<String,String> map = new HashMap<>();
         map.put("house_id",house_id);
         map.put("img_id",id);
+        map.put("name",name);
         RetrofitHelper.getApi().updateRoom(map)
                 .compose(this.<CreateModelResult>bindToLifecycle())
                 .subscribeOn(Schedulers.io())

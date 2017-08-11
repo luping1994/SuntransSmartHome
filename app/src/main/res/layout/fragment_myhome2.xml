@@ -41,8 +41,8 @@
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
                         android:fitsSystemWindows="true"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/img_original_bg_custom" />
+                        android:scaleType="fitXY"
+                        android:src="@drawable/home_bg" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -198,6 +198,7 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <android.support.design.widget.TabLayout
+                android:background="#e5e5e5"
                 android:id="@+id/tablayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

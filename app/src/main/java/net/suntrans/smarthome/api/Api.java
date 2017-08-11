@@ -15,7 +15,11 @@ import rx.Observable;
  */
 import net.suntrans.smarthome.bean.AddSCResult;
 import net.suntrans.smarthome.bean.AllDeviceResult;
+import net.suntrans.smarthome.bean.AmeterDetailEntity;
+import net.suntrans.smarthome.bean.AmeterDetailEntity3;
 import net.suntrans.smarthome.bean.AmeterEntity;
+import net.suntrans.smarthome.bean.Ammeter3HisEneity;
+import net.suntrans.smarthome.bean.AmmeterHisEneity;
 import net.suntrans.smarthome.bean.ChannelEdit;
 import net.suntrans.smarthome.bean.ChannelResultNewSun;
 import net.suntrans.smarthome.bean.DeviceInfoResult;
@@ -197,4 +201,21 @@ public interface Api {
 
     @POST("energy/ammeter")
     Observable<AmeterEntity> getAmmeter();
+
+    @FormUrlEncoded
+    @POST("energy/ammeterDetail")
+    Observable<AmeterDetailEntity> getAmmeterDetail(@Field("vtype") String vtype, @Field("sno") String sno);
+
+    @FormUrlEncoded
+    @POST("energy/ammeterDetail")
+    Observable<AmeterDetailEntity3> getAmmeter3Detail(@Field("vtype") String vtype, @Field("sno") String sno);
+
+
+    @FormUrlEncoded
+    @POST("energy/ammeter3Data")
+    Observable<Ammeter3HisEneity> getAmmeter3Histroy(@Field("sno") String sno, @Field("data_type") String data_type);
+
+    @FormUrlEncoded
+    @POST("energy/ammeterData")
+    Observable<AmmeterHisEneity> getAmmeterHistroy(@Field("sno") String sno, @Field("data_type") String data_type);
 }

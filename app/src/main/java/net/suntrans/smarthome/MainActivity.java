@@ -18,6 +18,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.pgyersdk.update.PgyUpdateManager;
+
 import net.suntrans.smarthome.activity.mh.SpeechActivity;
 import net.suntrans.smarthome.base.BasedActivity;
 import net.suntrans.smarthome.fragment.mh.MyHomeFragment2;
@@ -80,7 +82,7 @@ public class MainActivity extends BasedActivity implements View.OnClickListener 
             }
         });
         initFragment();
-//        PgyUpdateManager.register(this, "net.suntrans.smarthome.fileProvider");
+        PgyUpdateManager.register(this, "net.suntrans.smarthome.fileProvider");
 
 
         Intent intent = new Intent();
@@ -181,7 +183,7 @@ public class MainActivity extends BasedActivity implements View.OnClickListener 
 
     @Override
     protected void onDestroy() {
-//        PgyUpdateManager.unregister();
+        PgyUpdateManager.unregister();
         unbindService(connection);
         super.onDestroy();
     }

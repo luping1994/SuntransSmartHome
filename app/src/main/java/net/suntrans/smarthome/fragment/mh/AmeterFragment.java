@@ -26,6 +26,8 @@ import com.trello.rxlifecycle.components.support.RxFragment;
 
 import net.suntrans.smarthome.R;
 import net.suntrans.smarthome.activity.mh.EditSenceActivity;
+import net.suntrans.smarthome.activity.mh.JianceDetail3Activity;
+import net.suntrans.smarthome.activity.mh.JianceDetailActivity;
 import net.suntrans.smarthome.activity.mh.SenceDetailActivity;
 import net.suntrans.smarthome.api.RetrofitHelper;
 import net.suntrans.smarthome.bean.AmeterEntity;
@@ -78,7 +80,19 @@ public class AmeterFragment extends RxFragment {
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Intent intent = new Intent();
+                intent.putExtra("id", datas.get(position).getId());
+                intent.putExtra("vtype", datas.get(position).getVtype());
+                intent.putExtra("name", datas.get(position).getTitle());
+                intent.putExtra("sno", datas.get(position).getSno());
+                if (datas.get(position).getVtype().equals("1")) {
 
+                    intent.setClass(getActivity(), JianceDetailActivity.class);
+                } else {
+                    intent.setClass(getActivity(), JianceDetail3Activity.class);
+
+                }
+                startActivity(intent);
             }
         });
         getSceneData();
@@ -129,7 +143,7 @@ public class AmeterFragment extends RxFragment {
             helper.setText(R.id.name, item.getTitle())
                     .addOnClickListener(imageView);
             final ImageView view = helper.getView(imageView);
-
+            view.setImageResource(R.drawable.ic_dianbiao);
         }
 
 

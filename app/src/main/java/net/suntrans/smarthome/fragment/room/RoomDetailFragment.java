@@ -280,7 +280,7 @@ public class RoomDetailFragment extends RxFragment {
             ImageView imageView;
             TextView area;
             TextView name;
-            TextView go;
+            ImageView go;
             RelativeLayout root;
             AppCompatCheckBox checkbox;
 
@@ -288,7 +288,7 @@ public class RoomDetailFragment extends RxFragment {
                 super(itemView);
                 area = (TextView) itemView.findViewById(R.id.area);
                 name = (TextView) itemView.findViewById(R.id.name);
-                go = (TextView) itemView.findViewById(R.id.go);
+                go = (ImageView) itemView.findViewById(R.id.go);
                 imageView = (ImageView) itemView.findViewById(R.id.imageView);
                 root = (RelativeLayout) itemView.findViewById(R.id.root);
                 checkbox = (AppCompatCheckBox) itemView.findViewById(R.id.checkbox);
@@ -309,13 +309,17 @@ public class RoomDetailFragment extends RxFragment {
                             } else if (datas.get(getAdapterPosition()).getDevice_type().equals("4")) {
                                 Intent intent = new Intent(getActivity(), AirConditionActivity.class);
                                 intent.putExtra("sensus_id", datas.get(getAdapterPosition()).getSensus_id());
+                                intent.putExtra("status", datas.get(getAdapterPosition()).getStatus());
+                                intent.putExtra("vtype", datas.get(getAdapterPosition()).getVtype());
+                                intent.putExtra("channel_id", datas.get(getAdapterPosition()).getId());
+                                intent.putExtra("addr", datas.get(getAdapterPosition()).getAddr());
+                                intent.putExtra("number", datas.get(getAdapterPosition()).getNumber());
                                 intent.putExtra("name", datas.get(getAdapterPosition()).getName());
                                 startActivity(intent);
                             } else {
                                 sendCmd(getAdapterPosition());
                             }
                         } else {
-
                             sendCmd(getAdapterPosition());
                         }
                     }

@@ -125,7 +125,12 @@ public class XenonActivity extends RxAppCompatActivity implements View.OnClickLi
             @Override
             public void onRefresh() {
                 getState();
-                refreshLayout.setRefreshing(false);
+               handler2.postDelayed(new Runnable() {
+                   @Override
+                   public void run() {
+                       refreshLayout.setRefreshing(false);
+                   }
+               },2000);
             }
         });
 
