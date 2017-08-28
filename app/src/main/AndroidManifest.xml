@@ -149,10 +149,10 @@
         <service android:name="net.suntrans.smarthome.websocket.WebSocketService" />
         <service android:name="net.suntrans.smarthome.websocket.WebSocketService2" />
 
-        <activity
-            android:name="com.tencent.bugly.beta.ui.BetaActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|locale"
-            android:theme="@android:style/Theme.Translucent" />
+        <!--<activity-->
+            <!--android:name="com.tencent.bugly.beta.ui.BetaActivity"-->
+            <!--android:configChanges="keyboardHidden|orientation|screenSize|locale"-->
+            <!--android:theme="@android:style/Theme.Translucent" />-->
         <activity android:name=".activity.room.AirConditionActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activity.mh.HistroyDataActivity" android:screenOrientation="portrait"/>
         <activity android:name=".activity.mh.JianceDetail3Activity" android:screenOrientation="portrait"/>

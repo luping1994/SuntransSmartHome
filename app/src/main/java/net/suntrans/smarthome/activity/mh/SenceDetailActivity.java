@@ -54,6 +54,7 @@ import net.suntrans.smarthome.utils.RxBus;
 import net.suntrans.smarthome.utils.UiUtils;
 import net.suntrans.smarthome.websocket.WebSocketService;
 import net.suntrans.smarthome.widget.LoadingDialog;
+import net.suntrans.smarthome.widget.MyItemDecoration;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -156,7 +157,7 @@ public class SenceDetailActivity extends BasedActivity implements View.OnClickLi
         adapter = new MyAdapter(R.layout.item_scene_channel, datas);
         binding.recyclerview.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerview.setAdapter(adapter);
-        binding.recyclerview.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        binding.recyclerview.addItemDecoration(new MyItemDecoration());
         binding.baseIvSceneBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

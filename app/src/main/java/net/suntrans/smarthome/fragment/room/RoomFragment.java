@@ -73,7 +73,7 @@ public class RoomFragment extends RxFragment {
                 return true;
             }
         });
-        toolbar.setTitle("");
+        toolbar.setTitle("区域");
         statusBarFix = view.findViewById(R.id.status_bar_fix);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             int statebarHeight = StatusBarCompat.getStatusBarHeight(getActivity());

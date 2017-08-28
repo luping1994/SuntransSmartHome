@@ -46,6 +46,7 @@ import net.suntrans.smarthome.utils.RxBus;
 import net.suntrans.smarthome.utils.UiUtils;
 import net.suntrans.smarthome.websocket.WebSocketService;
 import net.suntrans.smarthome.widget.LoadingDialog;
+import net.suntrans.smarthome.widget.MyItemDecoration;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -126,7 +127,7 @@ public class DeviceMainFragment extends RxFragment {
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
 
-        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        recyclerView.addItemDecoration(new MyItemDecoration());
 
         refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refreshlayout);
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

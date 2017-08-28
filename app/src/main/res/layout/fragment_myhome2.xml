@@ -175,7 +175,7 @@
                             android:alpha="0"
                             android:text="智慧家居"
                             android:textColor="@color/white"
-                            android:textSize="16.0sp"
+                            android:textSize="20.0sp"
                             android:visibility="visible" />
 
                         <ImageView

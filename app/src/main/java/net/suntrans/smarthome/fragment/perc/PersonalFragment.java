@@ -53,12 +53,13 @@ public class PersonalFragment extends Fragment implements PersonalContract.View 
         setHasOptionsMenu(true);
         // Set up the toolbar.
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        toolbar.setTitle("我的");
         ((RxAppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         ActionBar ab = ((RxAppCompatActivity) getActivity()).getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(false);
         ab.setDisplayShowHomeEnabled(false);
 
-        ab.setDisplayShowTitleEnabled(false);
+        ab.setDisplayShowTitleEnabled(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             int statebarHeight = StatusBarCompat.getStatusBarHeight(getActivity());
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, statebarHeight);
