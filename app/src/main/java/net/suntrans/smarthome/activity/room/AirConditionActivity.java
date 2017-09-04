@@ -315,7 +315,7 @@ public class AirConditionActivity extends BasedActivity implements View.OnClickL
             object.put("device", "6100");
             object.put("action", "conditioner");
             object.put("user_id", Integer.valueOf(userid));
-            object.put("sensus_id", Integer.valueOf(sensus_id));
+            object.put("device_id", Integer.valueOf(sensus_id));
             object.put("mode", mode);
             object.put("temp", temp);
             binder.sendOrder(object.toString());
@@ -456,7 +456,7 @@ public class AirConditionActivity extends BasedActivity implements View.OnClickL
                     public void onNext(SixChannelParm sixChannelParm) {
                             binding.dianya.setText("电压:"+sixChannelParm.result.row.get(0).V+"V");
                             binding.dianl.setText("电流:"+sixChannelParm.result.row.get(0).I+"A");
-                            binding.gonglv.setText("功率:"+sixChannelParm.result.row.get(0).P+"w");
+                            binding.gonglv.setText("功率:"+sixChannelParm.result.row.get(0).P+"W");
                             binding.gonglvyinsu.setText("功率因数:"+sixChannelParm.result.row.get(0).PR+"");
                     }
                 });
