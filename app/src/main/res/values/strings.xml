@@ -9,7 +9,7 @@
     <string name="forgot_password">忘记密码?</string>
     <string name="login">登录</string>
     <string name="create_account">注册账户</string>
-    <string name="nav_myhome">我家</string>
+    <string name="nav_myhome">首页</string>
     <string name="nav_device">设备</string>
     <string name="nav_room">房间</string>
     <string name="nav_area">区域</string>

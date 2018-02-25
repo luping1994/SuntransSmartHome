@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "E:\\AdroidTools\\demos\\SuntransSmartHome\\zxing-android-embedded\\build\\intermediates\\res\\merged\\release\\layout\\zxing_barcode_scanner.xml",
+        "source": "E:\\AdroidTools\\demos\\SuntransSmartHome\\zxing-android-embedded\\res\\layout\\zxing_barcode_scanner.xml"
+    },
+    {
+        "merged": "E:\\AdroidTools\\demos\\SuntransSmartHome\\zxing-android-embedded\\build\\intermediates\\res\\merged\\release\\layout\\zxing_capture.xml",
+        "source": "E:\\AdroidTools\\demos\\SuntransSmartHome\\zxing-android-embedded\\res\\layout\\zxing_capture.xml"
+    }
+]

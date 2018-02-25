@@ -23,6 +23,7 @@ public class HomeRoomResult {
         public String timer;
         public String sort;
         public String status;
+        public int res_id;
         public boolean isChecked;
 
         public Room() {

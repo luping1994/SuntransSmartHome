@@ -421,6 +421,19 @@ public class RoomDetailFragment extends RxFragment {
                 }
                 if (result != null) {
                     datas.clear();
+                    result.result.get(0).setName("护理站吊灯");
+                    result.result.get(0).setDevice_type("6100");
+                    result.result.get(1).setName("护理站筒灯1");
+                    result.result.get(1).setDevice_type("6100");
+
+                    result.result.get(2).setName("护理站筒灯2");
+                    result.result.get(3).setName("护理站插座1");
+                    result.result.get(3).setDevice_type("6100");
+
+//                    result.result.get(4).setName("护理站插座2");
+//                    result.result.get(5).setName("护理站插座3");
+//                    result.result.get(6).setName("护理站插座4");
+//                    result.result.get(7).setName("护理站插座4");
                     datas.addAll(result.result);
                     adapter.notifyDataSetChanged();
 

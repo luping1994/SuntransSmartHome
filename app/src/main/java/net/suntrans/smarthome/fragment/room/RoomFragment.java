@@ -168,6 +168,32 @@ public class RoomFragment extends RxFragment {
                         if (homeSceneResult != null) {
                             if (homeSceneResult.status.equals("1")) {
                                 roomDatas.clear();
+                                homeSceneResult.result.rows.get(3).name = "手术室";
+                                homeSceneResult.result.rows.get(3).res_id = R.drawable.ic_yishenoff;
+
+                                homeSceneResult.result.rows.get(0).name = "护理站";
+                                homeSceneResult.result.rows.get(0).res_id = R.drawable.ic_hulizhan;
+
+                                homeSceneResult.result.rows.get(1).name = "医生办公室";
+                                homeSceneResult.result.rows.get(1).res_id = R.drawable.ic_yishen;
+
+                                homeSceneResult.result.rows.get(2).name = "治疗室";
+                                homeSceneResult.result.rows.get(2).res_id = R.drawable.ic_hulishi;
+
+                                homeSceneResult.result.rows.get(4).name = "205病房";
+                                homeSceneResult.result.rows.get(4).res_id = R.drawable.ic_bingfang;
+                                homeSceneResult.result.rows.get(5).name = "206病房";
+                                homeSceneResult.result.rows.get(5).res_id = R.drawable.ic_bingfang;
+
+                                homeSceneResult.result.rows.get(6).name = "207病房";
+                                homeSceneResult.result.rows.get(6).res_id = R.drawable.ic_bingfang;
+
+                                homeSceneResult.result.rows.get(7).name = "208病房";
+                                homeSceneResult.result.rows.get(7).res_id = R.drawable.ic_bingfang;
+
+                                homeSceneResult.result.rows.get(8).name = "209病房";
+                                homeSceneResult.result.rows.get(8).res_id = R.drawable.ic_bingfang;
+
                                 roomDatas.addAll(homeSceneResult.result.rows);
                                 LogUtil.i("图片url为：" + homeSceneResult.result.rows.get(0).img);
                                 adapter.notifyDataSetChanged();
@@ -200,8 +226,7 @@ public class RoomFragment extends RxFragment {
                     .addOnClickListener(R.id.imageView);
             ImageView view = helper.getView(R.id.imageView);
             Glide.with(getActivity())
-                    .load(item.img)
-                    .placeholder(R.drawable.pic_myhome_model_read)
+                    .load(item.res_id)
                     .crossFade()
                     .into(view);
         }

@@ -42,14 +42,14 @@
                         android:layout_height="fill_parent"
                         android:fitsSystemWindows="true"
                         android:scaleType="fitXY"
-                        android:src="@drawable/home_bg" />
+                        android:src="@drawable/ic_shouye" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_above="@+id/wendu_ll"
                         android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                        android:text="三川智控"
+                        android:text="智能配电"
                         android:textColor="@color/white"
                         android:textSize="30sp" />
 

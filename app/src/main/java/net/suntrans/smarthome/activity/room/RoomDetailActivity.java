@@ -121,15 +121,15 @@ public class RoomDetailActivity extends BasedActivity implements View.OnClickLis
 
         StatusBarCompat.fixKITKATbar(this, R.color.colorPrimary);
 
-        Glide.with(this)
-                .load(url)
-                .placeholder(R.drawable.img_homepage)
-                .into(binding.bg);
+//        Glide.with(this)
+//                .load(url)
+//                .placeholder(R.drawable.img_homepage)
+//                .into(binding.bg);
         setSupportActionBar(binding.toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowTitleEnabled(true);
-        binding.collapsingToolbar.setTitle(name);
+        binding.collapsingToolbar.setTitle("护理站");
         binding.bg.setOnClickListener(this);
 //        binding.collapsingToolbar.setTitle("");
 //        TextView title = (TextView) findViewById(R.id.title);

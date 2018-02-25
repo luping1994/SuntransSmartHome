@@ -132,6 +132,17 @@ public class SenceFragment extends RxFragment {
                 if (homeSceneResult != null) {
                     if (homeSceneResult.status.equals("1")) {
                         datas.clear();
+                        homeSceneResult.result.rows.get(0).name="早餐模式";
+                        homeSceneResult.result.rows.get(0).res_id=R.drawable.ic_zaocan;
+                        homeSceneResult.result.rows.get(1).name="查房模式";
+                        homeSceneResult.result.rows.get(1).res_id=R.drawable.ic_chafan;
+
+                        homeSceneResult.result.rows.get(2).name="午休模式";
+                        homeSceneResult.result.rows.get(2).res_id=R.drawable.ic_wuxiu;
+
+                        homeSceneResult.result.rows.get(3).name="值班模式";
+                        homeSceneResult.result.rows.get(3).res_id=R.drawable.ic_zhiban;
+
                         datas.addAll(homeSceneResult.result.rows);
                         adapter.notifyDataSetChanged();
                         handler.removeCallbacksAndMessages(null);
@@ -155,7 +166,7 @@ public class SenceFragment extends RxFragment {
                     .addOnClickListener(imageView);
             final ImageView view = helper.getView(imageView);
             Glide.with(getActivity())
-                    .load(item.img)
+                    .load(item.res_id)
                     .centerCrop()
                     .placeholder(R.drawable.pic_myhome_model_read)
                     .into(view);

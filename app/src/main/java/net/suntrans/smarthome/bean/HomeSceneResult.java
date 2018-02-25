@@ -18,6 +18,7 @@ public class HomeSceneResult {
 
     public static class Scene extends BaseObservable {
         public String id;
+        public int res_id;
         public String user_id;
         public String name;
         public String img;
