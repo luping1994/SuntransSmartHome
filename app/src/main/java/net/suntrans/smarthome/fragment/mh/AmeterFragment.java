@@ -32,6 +32,7 @@ import net.suntrans.smarthome.activity.mh.SenceDetailActivity;
 import net.suntrans.smarthome.api.RetrofitHelper;
 import net.suntrans.smarthome.bean.AmeterEntity;
 import net.suntrans.smarthome.bean.HomeSceneResult;
+import net.suntrans.smarthome.widget.MyItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,7 +76,7 @@ public class AmeterFragment extends RxFragment {
         adapter = new MyAdapter(R.layout.item_scene1, datas);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
-        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        recyclerView.addItemDecoration(new MyItemDecoration());
 
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override

@@ -31,6 +31,7 @@ import net.suntrans.smarthome.bean.SensusResult;
 import net.suntrans.smarthome.bean.HomeRoomResult;
 import net.suntrans.smarthome.bean.HomeSceneResult;
 import net.suntrans.smarthome.bean.CreateModelResult;
+import net.suntrans.smarthome.bean.SixChannelParm;
 import net.suntrans.smarthome.bean.UnbindDev;
 import net.suntrans.smarthome.bean.UpLoadImageMessage;
 import net.suntrans.smarthome.bean.UserInfo;
@@ -218,4 +219,8 @@ public interface Api {
     @FormUrlEncoded
     @POST("energy/ammeterData")
     Observable<AmmeterHisEneity> getAmmeterHistroy(@Field("sno") String sno, @Field("data_type") String data_type);
+
+    @FormUrlEncoded
+    @POST("device/slc6_detail")
+    Observable<SixChannelParm> getSixChannelPram(@Field("num") String num, @Field("dev_id") String dev_id);
 }

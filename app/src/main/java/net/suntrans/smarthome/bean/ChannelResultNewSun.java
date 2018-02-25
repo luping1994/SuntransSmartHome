@@ -26,6 +26,15 @@ public class ChannelResultNewSun {
         private String number;
         private String status;
         private String updated_at;
+        private String dev_id;
+
+        public String getDev_id() {
+            return dev_id;
+        }
+
+        public void setDev_id(String dev_id) {
+            this.dev_id = dev_id;
+        }
 
         public String getSensus_id() {
             return sensus_id;

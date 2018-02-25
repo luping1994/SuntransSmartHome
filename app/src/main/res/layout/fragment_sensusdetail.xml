@@ -24,21 +24,13 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/actionbarheight"
-
+            android:elevation="0dp"
             android:background="?attr/colorPrimary"
             android:fitsSystemWindows="false"
+            app:titleTextAppearance="@style/Toolbar.TitleText"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:theme="@style/Toolbar">
 
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center|left"
-                android:text="环境检测"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:transitionName="@string/item_toolbar_name" />
         </android.support.v7.widget.Toolbar>
 
 

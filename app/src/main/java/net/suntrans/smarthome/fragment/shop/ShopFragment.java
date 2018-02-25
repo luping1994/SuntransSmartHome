@@ -62,7 +62,6 @@ public class ShopFragment extends RxFragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sensusdetail, container, false);
 //        devId = getIntent().getStringExtra("dev_id");
 //        name = getIntent().getStringExtra("name");
-        binding.title.setText("环境检测");
         setHasOptionsMenu(true);
         return binding.getRoot();
     }
@@ -71,7 +70,8 @@ public class ShopFragment extends RxFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
         ((AppCompatActivity) getActivity()).setSupportActionBar(binding.toolbar);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+        binding.toolbar.setTitle("环境");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);//获取屏幕大小的信息
 

@@ -29,6 +29,7 @@ import net.suntrans.smarthome.api.RetrofitHelper;
 import net.suntrans.smarthome.bean.HomeSceneResult;
 import net.suntrans.smarthome.activity.mh.SenceDetailActivity;
 import net.suntrans.smarthome.activity.mh.EditSenceActivity;
+import net.suntrans.smarthome.widget.MyItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +73,7 @@ public class SenceFragment extends RxFragment {
         adapter = new MyAdapter(R.layout.item_scene1, datas);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
-        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        recyclerView.addItemDecoration(new MyItemDecoration());
 //        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
 //            @Override
 //            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {

@@ -23,7 +23,7 @@ public class RetrofitHelper {
 
 
     //public static final String BASE_URL = "http://www.suntrans.net:8956";
-    public static final String BASE_URL = "http://smarthome.suntrans.net/api.php/";
+    public static final String BASE_URL = "http://smarthome.suntrans.net:8081/api.php/";
 //    public static final String BASE_URL = "http://192.168.0.100/smart/api.php/";
 //    public static final String BASE_URL = "http://61.235.65.161/api.php/";
 

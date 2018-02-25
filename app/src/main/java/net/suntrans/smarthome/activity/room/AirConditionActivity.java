@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.databinding.DataBindingUtil;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -13,8 +12,12 @@ import android.os.IBinder;
 import net.suntrans.smarthome.App;
 import net.suntrans.smarthome.Config;
 import net.suntrans.smarthome.R;
+import net.suntrans.smarthome.activity.perc.detail.SensusDetailActivity;
+import net.suntrans.smarthome.api.RetrofitHelper;
 import net.suntrans.smarthome.base.BasedActivity;
 import net.suntrans.smarthome.bean.CmdMsg;
+import net.suntrans.smarthome.bean.SensusResult;
+import net.suntrans.smarthome.bean.SixChannelParm;
 import net.suntrans.smarthome.databinding.ActivityAirBinding;
 import net.suntrans.smarthome.utils.LogUtil;
 import net.suntrans.smarthome.utils.ParseCMD;
@@ -35,9 +38,11 @@ import org.json.JSONObject;
 
 import java.util.Map;
 
+import retrofit2.Retrofit;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Looney on 2017/8/10.
@@ -73,8 +78,9 @@ public class AirConditionActivity extends BasedActivity implements View.OnClickL
     private int temp;
     private int mode;
     private boolean on;
-    private String device_id;
+    private String sensus_id;
     private String vtype;
+    private String dev_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,8 +98,9 @@ public class AirConditionActivity extends BasedActivity implements View.OnClickL
         number = getIntent().getStringExtra("number");
         status = getIntent().getStringExtra("status");
         channel_id = getIntent().getStringExtra("channel_id");
-        device_id = getIntent().getStringExtra("sensus_id");
+        sensus_id = getIntent().getStringExtra("sensus_id");
         vtype = getIntent().getStringExtra("vtype");
+        dev_id = getIntent().getStringExtra("dev_id");
 
         temp = App.getSharedPreferences().getInt("temp", 16);
         mode = App.getSharedPreferences().getInt("mode", 1);
@@ -133,6 +140,17 @@ public class AirConditionActivity extends BasedActivity implements View.OnClickL
                         }
                     }
                 });
+        binding.more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(AirConditionActivity.this, SensusDetailActivity.class);
+                intent.putExtra("dev_id", sensus_id);
+                intent.putExtra("type", Config.SENSUS);
+                startActivity(intent);
+                overridePendingTransition(android.support.v7.appcompat.R.anim.abc_slide_in_bottom,0);
+            }
+        });
     }
 
     private void applyCloseState() {
@@ -297,7 +315,7 @@ public class AirConditionActivity extends BasedActivity implements View.OnClickL
             object.put("device", "6100");
             object.put("action", "conditioner");
             object.put("user_id", Integer.valueOf(userid));
-            object.put("device_id", Integer.valueOf(device_id));
+            object.put("device_id", Integer.valueOf(sensus_id));
             object.put("mode", mode);
             object.put("temp", temp);
             binder.sendOrder(object.toString());
@@ -377,4 +395,79 @@ public class AirConditionActivity extends BasedActivity implements View.OnClickL
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getEnvData();
+        getParm();
+    }
+
+    private void getEnvData() {
+        RetrofitHelper.getApi().getSensueDetail(sensus_id)
+                .compose(this.<SensusResult>bindUntilEvent(ActivityEvent.DESTROY))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<SensusResult>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+
+                    }
+
+                    @Override
+                    public void onNext(SensusResult sensusResult) {
+                        if (sensusResult.status.equals("1")) {
+                            if (sensusResult.result != null) {
+                                if (sensusResult.result.row != null) {
+                                    SensusResult.Sensus sensus = sensusResult.result.row;
+                                    sensus.setEva();
+                                    initView(sensus);
+                                }
+                            }
+                        }
+
+                    }
+                });
+    }
+
+    private void getParm(){
+        RetrofitHelper.getApi().getSixChannelPram(number,dev_id)
+                .compose(this.<SixChannelParm>bindToLifecycle())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<SixChannelParm>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(SixChannelParm sixChannelParm) {
+                            binding.dianya.setText("电压:"+sixChannelParm.result.row.get(0).V+"V");
+                            binding.dianl.setText("电流:"+sixChannelParm.result.row.get(0).I+"A");
+                            binding.gonglv.setText("功率:"+sixChannelParm.result.row.get(0).P+"W");
+                            binding.gonglvyinsu.setText("功率因数:"+sixChannelParm.result.row.get(0).PR+"");
+                    }
+                });
+    }
+
+    private void initView(SensusResult.Sensus sensus) {
+        binding.shineiwendu.setText("温度:"+sensus.getWendu()+"℃");
+        binding.shidu.setText("湿度:"+sensus.getShidu()+"%RH");
+        binding.pm25.setText("PM25:"+sensus.getPm25()+"ppm");
+        binding.jiaquan.setText("甲醛:"+sensus.getJiaquan()+"ppm");
+    }
 }
+
+

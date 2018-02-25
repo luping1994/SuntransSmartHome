@@ -312,6 +312,7 @@ public class RoomDetailFragment extends RxFragment {
                                 intent.putExtra("status", datas.get(getAdapterPosition()).getStatus());
                                 intent.putExtra("vtype", datas.get(getAdapterPosition()).getVtype());
                                 intent.putExtra("channel_id", datas.get(getAdapterPosition()).getId());
+                                intent.putExtra("dev_id", datas.get(getAdapterPosition()).getDev_id());
                                 intent.putExtra("addr", datas.get(getAdapterPosition()).getAddr());
                                 intent.putExtra("number", datas.get(getAdapterPosition()).getNumber());
                                 intent.putExtra("name", datas.get(getAdapterPosition()).getName());

@@ -110,7 +110,7 @@ public class JianceDetailActivity extends BasedActivity implements View.OnClickL
                         time.setText(data.result.updated_at);
                         dianya.setText(data.result.U+"V");
                         dianliu.setText(data.result.I+"A");
-                        gonglv.setText(data.result.Power+"W");
+                        gonglv.setText(data.result.Power+"kw");
                         yinsu.setText(data.result.PowerRate+"");
                         power.setText(data.result.EletricityValue+"kwh");
                     }
